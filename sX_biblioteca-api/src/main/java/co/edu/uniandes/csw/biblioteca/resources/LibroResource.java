@@ -7,10 +7,12 @@ package co.edu.uniandes.csw.biblioteca.resources;
 
 import co.edu.uniandes.csw.biblioteca.adapters.LibroDTO;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 
 /**
  *
@@ -21,9 +23,14 @@ import javax.ws.rs.Path;
 @Consumes("application/json")
 @RequestScoped
 public class LibroResource {
-    @Inject private LibroLogic libroLogic;
     
     public LibroDTO createLibro(LibroDTO libro) throws Exception{
-        
+        return libro;
+    }
+    @GET
+    @Path("{librosId: \\d+}")
+    public LibroDTO getLibro(@PathParam("librosId") Long librosId)
+    {
+       return null; 
     }
 }
