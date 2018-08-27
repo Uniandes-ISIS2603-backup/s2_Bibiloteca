@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.biblioteca.adapters;
+package co.edu.uniandes.csw.biblioteca.dtos;
+
+import co.edu.uniandes.csw.biblioteca.adapters.*;
 
 /**
  *
  * @author estudiante
  */
-public class PrestamoDTO {
+public class PrestamoDTO 
+{
     
 }

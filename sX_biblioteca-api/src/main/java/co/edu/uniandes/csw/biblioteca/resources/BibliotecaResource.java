@@ -11,4 +11,5 @@ package co.edu.uniandes.csw.biblioteca.resources;
  */
 public class BibliotecaResource {
     
+    
 }
