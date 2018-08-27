@@ -5,12 +5,16 @@
  */
 package co.edu.uniandes.csw.biblioteca.adapters;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Daniel Montoya
  */
-public class LibroDTO {
+public class LibroDTO implements Serializable{
     
+    private Long id;
+
     //Nombre del libro
     private String nombre; 
     
@@ -51,6 +55,13 @@ public class LibroDTO {
         calificacionPromedio = 0 ;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getNombre() {
         return nombre;
     }
