@@ -5,11 +5,28 @@
  */
 package co.edu.uniandes.csw.biblioteca.resources;
 
+import java.util.logging.Level;
+import javax.ws.rs.*;
+import co.edu.uniandes.csw.biblioteca.dtos.BibliotecaDTO;
+import javax.enterprise.context.RequestScoped;
+
 /**
+ * Clase que implementa el recurso "bibliotecas".
  *
- * @author estudiante
+ * @author David Saavedra
+ * @version 1.0
  */
+@Path("bibliotecas")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
+
 public class BibliotecaResource {
     
+     @POST
+    public BibliotecaDTO createBiblioteca(BibliotecaDTO biblioteca) 
+    {
+       return null;
+    }
     
 }
