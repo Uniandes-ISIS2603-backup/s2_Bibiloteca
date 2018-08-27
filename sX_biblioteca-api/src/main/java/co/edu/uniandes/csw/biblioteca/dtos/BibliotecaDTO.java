@@ -7,7 +7,7 @@ package co.edu.uniandes.csw.biblioteca.dtos;
 
 import co.edu.uniandes.csw.biblioteca.adapters.*;
 import java.io.Serializable;
-import co.edu.uniandes.csw.biblioteca.entities.*;
+
 /**
  *
  * @author estudiante
