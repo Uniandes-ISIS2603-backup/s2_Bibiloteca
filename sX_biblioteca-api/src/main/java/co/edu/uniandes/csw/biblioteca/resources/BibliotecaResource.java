@@ -26,7 +26,13 @@ public class BibliotecaResource {
      @POST
     public BibliotecaDTO createBiblioteca(BibliotecaDTO biblioteca) 
     {
-       return null;
+       return biblioteca;
     }
     
+    @GET
+    @Path("{bibliotecasId: \\d+}")
+    public BibliotecaDTO getBiblioteca(@PathParam("bibliotecasId") Long librosId)
+    {
+       return null; 
+    }
 }
