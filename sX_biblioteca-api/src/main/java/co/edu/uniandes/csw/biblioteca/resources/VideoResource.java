@@ -22,7 +22,8 @@ package co.edu.uniandes.csw.biblioteca.resources;
    }
 
    @GET
-   public VideoDTO getVideo(){
+   @Path("{videosId: \\d+}")
+   public VideoDTO getVideo(@PathParam("videosId") Long videosId){
      return null;
    }
  }
