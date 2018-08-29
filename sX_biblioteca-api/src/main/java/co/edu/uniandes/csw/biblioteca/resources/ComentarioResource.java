@@ -5,12 +5,12 @@
  */
 package co.edu.uniandes.csw.biblioteca.resources;
 
-import co.edu.uniandes.csw.biblioteca.adapters.LibroDTO;
+import co.edu.uniandes.csw.biblioteca.dtos.LibroDTO;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 
 /**
@@ -23,5 +23,6 @@ import javax.ws.rs.Path;
 @RequestScoped
 public class ComentarioResource {
      @Inject private ComentarioLogic comentarioLogic;
+     
      
 }

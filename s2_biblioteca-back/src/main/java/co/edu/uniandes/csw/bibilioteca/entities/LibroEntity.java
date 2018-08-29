@@ -3,20 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.biblioteca.dtos;
+package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author Daniel Montoya
  */
-public class LibroDTO implements Serializable{
+public class LibroEntity extends BaseEntity implements Serializable{
     
-    private Long id;
-
-    //Nombre del libro
+     //Nombre del libro
     private String nombre; 
     
     //Codigo id del libro
@@ -43,30 +44,10 @@ public class LibroDTO implements Serializable{
     //Calificacion promedio de los review
     private int calificacionPromedio;
     
-    private ArrayList<ComentarioDTO> comentarios;
-    
-    public LibroDTO (String pnombre , String pIsbn , String pAutor, String pEditorial , String pEdicion , String pIdioma, int pUnidadesDisponibles)
-    {
-        nombre = pnombre;
-        isbn = pIsbn;
-        autor = pAutor;
-        editorial = pEditorial;
-        edicion = pEdicion;
-        idioma=pIdioma;
-        unidadesDisponibles = pUnidadesDisponibles;
-        usuariosListaEspera = 0;
-        calificacionPromedio = 0 ;
-        id = Long.parseLong(isbn);
-        comentarios = new ArrayList<>();
-    }
+    @PodamExclude
+    @OneToMany(mappedBy = "book", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private ArrayList<ComentarioEntity> comentarios = new ArrayList<>();
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getNombre() {
         return nombre;
     }
@@ -139,13 +120,16 @@ public class LibroDTO implements Serializable{
         this.calificacionPromedio = calificacionPromedio;
     }
 
-    public ArrayList<ComentarioDTO> getComentarios() {
+    public ArrayList<ComentarioEntity> getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(ArrayList<ComentarioDTO> comentarios) {
+    public void setComentarios(ArrayList<ComentarioEntity> comentarios) {
         this.comentarios = comentarios;
     }
+    
+    
+    
     
     
 }

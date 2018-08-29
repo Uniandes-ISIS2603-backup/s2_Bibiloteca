@@ -5,11 +5,12 @@
  */
 package co.edu.uniandes.csw.biblioteca.resources;
 
-import co.edu.uniandes.csw.biblioteca.adapters.LibroDTO;
+import co.edu.uniandes.csw.biblioteca.dtos.LibroDTO;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -24,13 +25,27 @@ import javax.ws.rs.Produces;
 @RequestScoped
 public class LibroResource {
     
+    /**
+     * 
+     * @param libro libro de la clase DTO
+     * @return devuelve el libro creado
+     * @throws Exception 
+     */
+   @POST
     public LibroDTO createLibro(LibroDTO libro) throws Exception{
         return libro;
     }
+    
+    /**
+     * 
+     * @param librosId entra el id por parametro
+     * @return devuelve el libro que se busco por id
+     */
     @GET
     @Path("{librosId: \\d+}")
     public LibroDTO getLibro(@PathParam("librosId") Long librosId)
     {
        return null; 
     }
+    
 }

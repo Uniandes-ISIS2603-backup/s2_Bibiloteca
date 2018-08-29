@@ -3,46 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.biblioteca.dtos;
+package co.edu.uniandes.csw.bibilioteca.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author Daniel Montoya
  */
-public class ComentarioDTO {
+@Entity
+public class ComentarioEntity extends BaseEntity implements Serializable {
     
-    //Calificacion asignada al libro
-    private double numeroEstrellas; 
-    
-    //Comentario del usuario sobre el libro
-    private String texto;
-    
-    //Nombre del usuario que le puso el comentario
+    private double numeroEstrellas;
+    private String texto; 
     private String nombreUsuario;
-    
-    //Fecha en la que el comentario fue creado
     private Date fecha;
     
-    private Long id; 
-    
-    public ComentarioDTO (double pEstrellas , String pTexto , String pNombreUsuario , Date pFecha, Long pid)
-    {
-        numeroEstrellas = pEstrellas;
-        texto = pTexto;
-        nombreUsuario = pNombreUsuario;
-        fecha = pFecha;
-        id = pid;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private LibroEntity libro;
 
     public double getNumeroEstrellas() {
         return numeroEstrellas;
@@ -75,5 +59,14 @@ public class ComentarioDTO {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public LibroEntity getLibro() {
+        return libro;
+    }
+
+    public void setLibro(LibroEntity libro) {
+        this.libro = libro;
+    }
+    
     
 }
