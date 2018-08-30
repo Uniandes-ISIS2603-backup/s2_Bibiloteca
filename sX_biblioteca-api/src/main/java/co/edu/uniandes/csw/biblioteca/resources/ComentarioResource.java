@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.biblioteca.resources;
 
 import co.edu.uniandes.csw.biblioteca.dtos.ComentarioDTO;
 import co.edu.uniandes.csw.biblioteca.dtos.LibroDTO;
+import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -25,7 +26,6 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 
 public class ComentarioResource {
-<<<<<<< HEAD
     
     /**
      * Crea una nueva reseña con la informacion que se recibe en el cuerpo de la
@@ -40,9 +40,9 @@ public class ComentarioResource {
      * Error de lógica que se genera cuando ya existe la reseña.
      */    
  @POST
- public ComentarioDTO createComentario(@PathParam("libroId") Long libroId , ComentarioDTO comentario) throws Exception
+ public ComentarioDTO createComentario(@PathParam("libroId") Long libroId , ComentarioDTO comentario) throws BusinessLogicException
  {
-     return null;
+     return comentario;
  }
  
      /**
@@ -68,7 +68,7 @@ public class ComentarioResource {
   */
  @GET
  @Path("{comentarioId: \\d+}")
- public ComentarioDTO getComentario (@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws Exception{
+ public ComentarioDTO getComentario (@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException{
      return null;
  }
  
@@ -81,15 +81,10 @@ public class ComentarioResource {
  * @return JSON {@link ReviewDTO} - La reseña actualizada.
  * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
  * Error de lógica que se genera cuando ya existe la reseña.
- */
-=======
-     
-     
->>>>>>> 7317a0fed31ba88d6bdf8a5610d85097902bce86
-     
+ */    
  @PUT
  @Path("{comentarioId: \\d+}")
- public ComentarioDTO updateComentario(@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId, ComentarioDTO comentario) throws Exception {
+ public ComentarioDTO updateComentario(@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId, ComentarioDTO comentario) throws BusinessLogicException {
      return null;
  }
  
@@ -101,7 +96,7 @@ public class ComentarioResource {
      */
     @DELETE
     @Path("{reviewsId: \\d+}")
-    public void deleteReview(@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws Exception {
+    public void deleteReview(@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException {
         
     }
 }

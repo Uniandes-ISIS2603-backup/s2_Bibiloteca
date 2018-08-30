@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.biblioteca.resources;
 
 import co.edu.uniandes.csw.biblioteca.dtos.LibroDTO;
+import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
@@ -34,7 +35,7 @@ public class LibroResource {
      * @throws Exception 
      */
    @POST
-    public LibroDTO createLibro(LibroDTO libro) throws Exception{
+    public LibroDTO createLibro(LibroDTO libro) throws BusinessLogicException{
         return libro;
     }
     
@@ -45,26 +46,26 @@ public class LibroResource {
      */
     @GET
     @Path("{librosId: \\d+}")
-    public LibroDTO getLibro(@PathParam("librosId") Long librosId)
+    public LibroDTO getLibro(@PathParam("librosId") Long librosId) throws BusinessLogicException
     {
        return null; 
     }
     
     @GET
-    public List<LibroDTO> getLibros(){
+    public List<LibroDTO> getLibros()throws BusinessLogicException{
         return null;
     }
     
     @PUT
     @Path("{librosId: \\d+}")
-    public LibroDTO updateLibro(@PathParam("librosId") Long librosId, LibroDTO libro)
+    public LibroDTO updateLibro(@PathParam("librosId") Long librosId, LibroDTO libro) throws BusinessLogicException
     {
        return null; 
     }
     
     @DELETE
     @Path("{librosId: \\d+}")
-    public LibroDTO deleteLibro(@PathParam("librosId") Long librosId)
+    public LibroDTO deleteLibro(@PathParam("librosId") Long librosId) throws BusinessLogicException
     {
        return null; 
     }
