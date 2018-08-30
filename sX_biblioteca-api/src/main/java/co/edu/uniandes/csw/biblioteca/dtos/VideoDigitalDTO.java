@@ -15,52 +15,53 @@ public class VideoDigitalDTO {
     private String director;
     private String idioma;
     private Boolean subtitulos;
-    public VideoDigitalDTO(Long pId,String pNombre,String pDirector,String pIdioma,Boolean pSubtitulos)
-    {
-        id=pId;
-        nombre=pNombre;
-        director=pDirector;
-        idioma=pIdioma;
-        subtitulos=pSubtitulos;
+
+    public VideoDigitalDTO(Long id, String nombre, String director, String idioma, Boolean subtitulos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.director = director;
+        this.idioma = idioma;
+        this.subtitulos = subtitulos;
     }
-    public Long getId()
-    {
+
+    public Long getId() {
         return id;
     }
-    public String getNombre()
-    {
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
         return nombre;
     }
-    public String getDirector()
-    {
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDirector() {
         return director;
     }
-    public String getIdioma()
-    {
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public String getIdioma() {
         return idioma;
     }
-    public Boolean getSubtitulos()
-    {
+
+    public void setIdioma(String idioma) {
+        this.idioma = idioma;
+    }
+
+    public Boolean getSubtitulos() {
         return subtitulos;
     }
-    public void setId(Long pId)
-    {
-        id=pId;
+
+    public void setSubtitulos(Boolean subtitulos) {
+        this.subtitulos = subtitulos;
     }
-    public void setNombre(String pNombre)
-    {
-        nombre=pNombre;
-    }
-     public void setDirector(String pDirector)
-    {
-        director=pDirector;
-    }
-      public void setIdioma(String pIdioma)
-    {
-        idioma=pIdioma;
-    }
-       public void setSubtitulos(Boolean pSubtitulos)
-    {
-        subtitulos=pSubtitulos;
-    }
+
 }
