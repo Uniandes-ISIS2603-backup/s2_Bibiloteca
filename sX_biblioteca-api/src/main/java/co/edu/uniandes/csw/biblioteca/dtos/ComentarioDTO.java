@@ -5,7 +5,10 @@
  */
 package co.edu.uniandes.csw.biblioteca.dtos;
 
+import co.edu.uniandes.csw.bibilioteca.entities.ComentarioEntity;
 import java.util.Date;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -27,13 +30,16 @@ public class ComentarioDTO {
     
     private Long id; 
     
-    public ComentarioDTO (double pEstrellas , String pTexto , String pNombreUsuario , Date pFecha, Long pid)
+    public ComentarioDTO(){
+        
+    }
+    public ComentarioDTO (ComentarioEntity comentario)
     {
-        numeroEstrellas = pEstrellas;
-        texto = pTexto;
-        nombreUsuario = pNombreUsuario;
-        fecha = pFecha;
-        id = pid;
+        numeroEstrellas = comentario.getNumeroEstrellas();
+        texto = comentario.getTexto();
+        nombreUsuario = comentario.getNombreUsuario();
+        fecha = comentario.getFecha();
+        id = comentario.getId();
     }
 
     public Long getId() {
@@ -76,4 +82,18 @@ public class ComentarioDTO {
         this.fecha = fecha;
     }
     
+    public ComentarioEntity toEntity(){
+        ComentarioEntity comentario = new ComentarioEntity();
+        comentario.setId(this.id);
+        comentario.setNumeroEstrellas(this.numeroEstrellas);
+        comentario.setNombreUsuario(this.nombreUsuario);
+        comentario.setFecha(this.fecha);
+        comentario.setTexto(this.texto);
+      return comentario;          
+    }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }
+

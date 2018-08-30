@@ -5,8 +5,11 @@
  */
 package co.edu.uniandes.csw.biblioteca.dtos;
 
+import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -43,21 +46,21 @@ public class LibroDTO implements Serializable{
     //Calificacion promedio de los review
     private int calificacionPromedio;
     
-    private ArrayList<ComentarioDTO> comentarios;
-    
-    public LibroDTO (String pnombre , String pIsbn , String pAutor, String pEditorial , String pEdicion , String pIdioma, int pUnidadesDisponibles)
+    public LibroDTO(){
+        
+    }
+    public LibroDTO (LibroEntity libro)
     {
-        nombre = pnombre;
-        isbn = pIsbn;
-        autor = pAutor;
-        editorial = pEditorial;
-        edicion = pEdicion;
-        idioma=pIdioma;
-        unidadesDisponibles = pUnidadesDisponibles;
+        nombre = libro.getNombre();
+        isbn = libro.getIsbn();
+        autor = libro.getAutor();
+        editorial = libro.getEditorial();
+        edicion = libro.getEdicion();
+        idioma=libro.getIdioma();
+        unidadesDisponibles = libro.getUnidadesDisponibles();
         usuariosListaEspera = 0;
         calificacionPromedio = 0 ;
-        id = Long.parseLong(isbn);
-        comentarios = new ArrayList<>();
+        id = libro.getId();
     }
 
     public Long getId() {
@@ -139,13 +142,22 @@ public class LibroDTO implements Serializable{
         this.calificacionPromedio = calificacionPromedio;
     }
 
-    public ArrayList<ComentarioDTO> getComentarios() {
-        return comentarios;
+    public LibroEntity toEntity(){
+        LibroEntity libro = new LibroEntity();
+        libro.setAutor(autor);
+        libro.setCalificacionPromedio(calificacionPromedio);
+        libro.setEdicion(edicion);
+        libro.setEditorial(editorial);
+        libro.setId(id);
+        libro.setIdioma(idioma);
+        libro.setIsbn(isbn);
+        libro.setNombre(nombre);
+        libro.setUnidadesDisponibles(unidadesDisponibles);
+        libro.setUsuariosListaEspera(usuariosListaEspera);
+        return libro;
     }
-
-    public void setComentarios(ArrayList<ComentarioDTO> comentarios) {
-        this.comentarios = comentarios;
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
-    
-    
 }
