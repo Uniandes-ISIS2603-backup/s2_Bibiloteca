@@ -25,6 +25,7 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 
 public class ComentarioResource {
+<<<<<<< HEAD
     
     /**
      * Crea una nueva reseña con la informacion que se recibe en el cuerpo de la
@@ -81,6 +82,10 @@ public class ComentarioResource {
  * @throws BusinessLogicException {@link BusinessLogicExceptionMapper} -
  * Error de lógica que se genera cuando ya existe la reseña.
  */
+=======
+     
+     
+>>>>>>> 7317a0fed31ba88d6bdf8a5610d85097902bce86
      
  @PUT
  @Path("{comentarioId: \\d+}")

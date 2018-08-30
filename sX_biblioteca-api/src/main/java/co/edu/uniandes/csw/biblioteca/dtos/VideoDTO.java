@@ -1,4 +1,4 @@
-package co.edu.uniandes.csw.biblioteca.adapters;
+package co.edu.uniandes.csw.biblioteca.dtos;
 
 /**
  *
