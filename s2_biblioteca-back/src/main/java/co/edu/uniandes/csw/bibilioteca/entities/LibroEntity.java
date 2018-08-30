@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -15,6 +16,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author Daniel Montoya
  */
+@Entity
 public class LibroEntity extends BaseEntity implements Serializable{
     
      //Nombre del libro

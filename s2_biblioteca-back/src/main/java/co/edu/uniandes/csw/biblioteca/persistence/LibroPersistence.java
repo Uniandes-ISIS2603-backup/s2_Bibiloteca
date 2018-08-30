@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.biblioteca.exceptions.persistence;
+package co.edu.uniandes.csw.biblioteca.persistence;
 
 import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ public class LibroPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(LibroPersistence.class.getName());
     
-    @PersistenceContext(unitName = "BibliotecaPU");
+    @PersistenceContext(unitName = "BibliotecaPU")
     protected EntityManager em;
     
     
