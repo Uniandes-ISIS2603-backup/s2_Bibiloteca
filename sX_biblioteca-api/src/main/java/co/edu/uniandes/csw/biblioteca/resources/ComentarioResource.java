@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class ComentarioResource {
-     @Inject private ComentarioLogic comentarioLogic;
+     
      
      
 }
