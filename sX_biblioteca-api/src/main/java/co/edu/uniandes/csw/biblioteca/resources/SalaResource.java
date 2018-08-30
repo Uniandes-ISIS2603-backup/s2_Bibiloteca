@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.biblioteca.resources;
+import co.edu.uniandes.csw.biblioteca.adapters.SalaDTO;
 import javax.ws.rs.*;
 import javax.enterprise.context.RequestScoped;
 
@@ -17,7 +18,7 @@ import javax.ws.rs.Produces;
  */
 public class SalaResource {
      @POST
-    public salaDTO createSala(SalaDTO sala)
+    public SalaDTO createSala(SalaDTO sala)
     {
         return sala;
     }
