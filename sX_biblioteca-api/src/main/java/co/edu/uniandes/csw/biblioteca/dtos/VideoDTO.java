@@ -5,7 +5,7 @@ package co.edu.uniandes.csw.biblioteca.dtos;
  * @author Nicolas Alvarado
  */
 
- public class VideoDTO {
+ public class VideoDTO implements Serializable {
 
    private Long id;
    private String nombre;
@@ -14,13 +14,8 @@ package co.edu.uniandes.csw.biblioteca.dtos;
    private String idioma;
    private Boolean subtitulos;
 
-   public VideoDTO(Long pID, String pNombre, String pDirector, int pUnidades, String pIdioma, boolean pSubtitulos){
-     id = pID;
-     nombre = pNombre;
-     director = pDirector;
-     unidadesDisponibles = pUnidades;
-     idioma = pIdioma;
-     subtitulos = pSubtitulos;
+   public VideoDTO(Long pID, String pNombre, String pDirector, Integer pUnidades, String pIdioma, Boolean pSubtitulos){
+
    }
 
    public Long getId(){
