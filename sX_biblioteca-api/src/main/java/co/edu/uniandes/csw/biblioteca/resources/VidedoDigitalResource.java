@@ -22,13 +22,17 @@ import javax.ws.rs.Produces;
     @Consumes("application/json")
     @RequestScoped
 public class VidedoDigitalResource {
+        @POST
     public VideoDigitalDTO createVideoDigital(VideoDigitalDTO pVideoDigital) throws Exception{
-        return pVideoDigital;
-    }
+        return pVideoDigital;}
+    
     @GET
     @Path("{videosdigitales: \\d+}")
     public VideoDigitalDTO getVideoDigital(@PathParam("videosdigitalesId") Long videosdigitalesId)
     {
        return null; 
     }
+    
+    
 }
+    
