@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.biblioteca.dtos;
-
+import co.edu.uniandes.csw.bibilioteca.entities.VideoDigitalEntity;
 /**
  *
  * @author Juan Bautitsa
@@ -16,12 +16,12 @@ public class VideoDigitalDTO {
     private String idioma;
     private Boolean subtitulos;
 
-    public VideoDigitalDTO(Long id, String nombre, String director, String idioma, Boolean subtitulos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.director = director;
-        this.idioma = idioma;
-        this.subtitulos = subtitulos;
+    public VideoDigitalDTO(VideoDigitalEntity pVideoDigital) {
+        this.id = pVideoDigital.getId();
+        this.nombre = pVideoDigital.getNombre();
+        this.director = pVideoDigital.getDirector();
+        this.idioma = pVideoDigital.getIdioma();
+        this.subtitulos = pVideoDigital.getSubtitulos();
     }
 
     public Long getId() {
