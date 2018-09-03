@@ -1,5 +1,7 @@
 package co.edu.uniandes.csw.biblioteca.dtos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Nicolas Alvarado

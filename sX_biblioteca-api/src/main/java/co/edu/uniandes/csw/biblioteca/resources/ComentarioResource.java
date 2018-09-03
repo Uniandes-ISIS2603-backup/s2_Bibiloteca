@@ -94,8 +94,8 @@ public class ComentarioResource {
      * @param libroId El ID del libro del cual se va a eliminar la reseña.
      * @param comentarioId El ID de la reseña que se va a eliminar.
      */
-    @DELETE
-    @Path("{reviewsId: \\d+}")
+ @DELETE
+ @Path("{comentarioId: \\d+}")
     public void deleteReview(@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException {
         
     }
