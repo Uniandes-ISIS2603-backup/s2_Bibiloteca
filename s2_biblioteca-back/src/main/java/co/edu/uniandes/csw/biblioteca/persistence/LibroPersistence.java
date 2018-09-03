@@ -24,7 +24,7 @@ public class LibroPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(LibroPersistence.class.getName());
     
-    @PersistenceContext(unitName = "BibliotecaPU")
+    @PersistenceContext(unitName = "DnsPU")
     protected EntityManager em;
     
     

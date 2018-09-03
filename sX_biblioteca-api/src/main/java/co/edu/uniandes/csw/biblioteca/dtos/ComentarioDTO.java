@@ -17,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class ComentarioDTO {
     
     //Calificacion asignada al libro
-    private double numeroEstrellas; 
+    private Double numeroEstrellas; 
     
     //Comentario del usuario sobre el libro
     private String texto;
@@ -50,11 +50,11 @@ public class ComentarioDTO {
         this.id = id;
     }
 
-    public double getNumeroEstrellas() {
+    public Double getNumeroEstrellas() {
         return numeroEstrellas;
     }
 
-    public void setNumeroEstrellas(double numeroEstrellas) {
+    public void setNumeroEstrellas(Double numeroEstrellas) {
         this.numeroEstrellas = numeroEstrellas;
     }
 

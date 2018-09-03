@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.biblioteca.persistence;
 
 import co.edu.uniandes.csw.bibilioteca.entities.ComentarioEntity;
-import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,13 +16,13 @@ import javax.persistence.TypedQuery;
 
 /**
  *
- * @author estudiante
+ * @author Daniel Montoya
  */
 public class ComentarioPersistence {
         
     private static final Logger LOGGER = Logger.getLogger(LibroPersistence.class.getName());
     
-    @PersistenceContext(unitName = "BibliotecaPU")
+    @PersistenceContext(unitName = "DnsPU")
     protected EntityManager em;
     
     

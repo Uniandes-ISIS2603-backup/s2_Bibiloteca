@@ -19,7 +19,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class ComentarioEntity extends BaseEntity implements Serializable {
     
-    private double numeroEstrellas;
+    private Double numeroEstrellas;
     private String texto; 
     private String nombreUsuario;
     private Date fecha;
@@ -28,11 +28,11 @@ public class ComentarioEntity extends BaseEntity implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private LibroEntity libro;
 
-    public double getNumeroEstrellas() {
+    public Double getNumeroEstrellas() {
         return numeroEstrellas;
     }
 
-    public void setNumeroEstrellas(double numeroEstrellas) {
+    public void setNumeroEstrellas(Double numeroEstrellas) {
         this.numeroEstrellas = numeroEstrellas;
     }
 

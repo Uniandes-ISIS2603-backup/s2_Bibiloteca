@@ -38,16 +38,16 @@ public class LibroEntity extends BaseEntity implements Serializable{
     private String idioma;
     
     //Unidades que quedan disponibles del libro 
-    private int unidadesDisponibles;
+    private Integer unidadesDisponibles;
     
     //Numero de usuarios en lista de Espera
-    private int usuariosListaEspera;
+    private Integer usuariosListaEspera;
     
     //Calificacion promedio de los review
-    private int calificacionPromedio;
+    private Integer calificacionPromedio;
     
     @PodamExclude
-    @OneToMany(mappedBy = "book", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany(mappedBy = "libro", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private ArrayList<ComentarioEntity> comentarios = new ArrayList<>();
 
     public String getNombre() {
@@ -106,19 +106,19 @@ public class LibroEntity extends BaseEntity implements Serializable{
         this.unidadesDisponibles = unidadesDisponibles;
     }
 
-    public int getUsuariosListaEspera() {
+    public Integer getUsuariosListaEspera() {
         return usuariosListaEspera;
     }
 
-    public void setUsuariosListaEspera(int usuariosListaEspera) {
+    public void setUsuariosListaEspera(Integer usuariosListaEspera) {
         this.usuariosListaEspera = usuariosListaEspera;
     }
 
-    public int getCalificacionPromedio() {
+    public Integer getCalificacionPromedio() {
         return calificacionPromedio;
     }
 
-    public void setCalificacionPromedio(int calificacionPromedio) {
+    public void setCalificacionPromedio(Integer calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
 
