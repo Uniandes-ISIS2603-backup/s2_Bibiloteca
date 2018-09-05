@@ -32,8 +32,8 @@ public class ComentarioPersistenceTest {
        PodamFactory factory = new PodamFactoryImpl(); 
        ComentarioEntity nuevaEntity = factory.manufacturePojo(ComentarioEntity.class);
        ComentarioEntity resultado = comentarioPersistence.create(nuevaEntity);
-       
-       Assert.assertNotNull(nuevaEntity);
+    
+       Assert.assertNotNull(resultado);
        
        
     }
