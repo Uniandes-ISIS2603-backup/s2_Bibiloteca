@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -14,6 +15,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author Juan Bautista
  */
+@Entity
 public class VideoDigitalEntity extends BaseEntity implements Serializable {
     private Long id;
     private String nombre;
@@ -21,9 +23,7 @@ public class VideoDigitalEntity extends BaseEntity implements Serializable {
     private String idioma;
     private Boolean subtitulos;
     
-    @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private VideoDigitalEntity videodigital;
+    
 
     @Override
     public Long getId() {
@@ -67,12 +67,5 @@ public class VideoDigitalEntity extends BaseEntity implements Serializable {
         this.subtitulos = subtitulos;
     }
 
-    public VideoDigitalEntity getVideodigital() {
-        return videodigital;
-    }
-
-    public void setVideodigital(VideoDigitalEntity videodigital) {
-        this.videodigital = videodigital;
-    }
     
 }
