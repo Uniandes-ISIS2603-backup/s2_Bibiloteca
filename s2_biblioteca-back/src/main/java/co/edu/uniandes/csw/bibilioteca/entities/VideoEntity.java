@@ -11,17 +11,12 @@ import javax.persistence.*;
 @Entity
  public class VideoEntity extends BaseEntity implements Serializable {
 
-   @Id
    private Long id;
    private String nombre;
    private String director;
    private Integer unidadesDisponibles;
    private String idioma;
    private Boolean subtitulos;
-
-   public VideoEntity(Long pID, String pNombre, String pDirector, Integer pUnidades, String pIdioma, Boolean pSubtitulos){
-
-   }
 
    public Long getId(){
      return id;
