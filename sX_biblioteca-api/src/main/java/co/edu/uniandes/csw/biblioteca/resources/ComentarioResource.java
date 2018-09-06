@@ -40,7 +40,7 @@ public class ComentarioResource {
      * Error de lógica que se genera cuando ya existe la reseña.
      */    
  @POST
- public ComentarioDTO createComentario(@PathParam("libroId") Long libroId , ComentarioDTO comentario) throws BusinessLogicException
+ public ComentarioDTO createComentario(@PathParam("librosId") Long libroId , ComentarioDTO comentario) throws BusinessLogicException
  {
      return comentario;
  }
@@ -53,7 +53,7 @@ public class ComentarioResource {
      * libro. Si no hay ninguna retorna una lista vacía.
      */
  @GET
- public ComentarioDTO getComentarios(@PathParam("libroId") Long libroId)
+ public ComentarioDTO getComentarios(@PathParam("librosId") Long libroId)
  {
      return null;
  }
@@ -68,7 +68,7 @@ public class ComentarioResource {
   */
  @GET
  @Path("{comentarioId: \\d+}")
- public ComentarioDTO getComentario (@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException{
+ public ComentarioDTO getComentario (@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException{
      return null;
  }
  
@@ -84,7 +84,7 @@ public class ComentarioResource {
  */    
  @PUT
  @Path("{comentarioId: \\d+}")
- public ComentarioDTO updateComentario(@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId, ComentarioDTO comentario) throws BusinessLogicException {
+ public ComentarioDTO updateComentario(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId, ComentarioDTO comentario) throws BusinessLogicException {
      return null;
  }
  
@@ -96,7 +96,7 @@ public class ComentarioResource {
      */
  @DELETE
  @Path("{comentarioId: \\d+}")
-    public void deleteReview(@PathParam("libroId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException {
+    public void deleteReview(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException {
         
     }
 }
