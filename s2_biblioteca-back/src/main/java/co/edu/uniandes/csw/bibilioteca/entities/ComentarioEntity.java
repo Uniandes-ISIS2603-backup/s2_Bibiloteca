@@ -10,6 +10,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -22,6 +24,7 @@ public class ComentarioEntity extends BaseEntity implements Serializable {
     private Double numeroEstrellas;
     private String texto; 
     private String nombreUsuario;
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     
     @PodamExclude

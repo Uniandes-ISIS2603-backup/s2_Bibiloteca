@@ -17,7 +17,6 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class VideoDigitalEntity extends BaseEntity implements Serializable {
-    private Long id;
     private String nombre;
     private String director;
     private String idioma;
@@ -25,15 +24,7 @@ public class VideoDigitalEntity extends BaseEntity implements Serializable {
     
     
 
-    @Override
-    public Long getId() {
-        return id;
-    }
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNombre() {
         return nombre;
