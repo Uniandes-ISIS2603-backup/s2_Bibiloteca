@@ -74,4 +74,5 @@ public class ComentarioPersistence {
         LOGGER.log(Level.INFO,"Elimanando comentario con id={0}",comentarioId);
     }
     
+    
 }
