@@ -22,7 +22,7 @@ public class VideoDigitalPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(VideoDigitalPersistence.class.getName());
     
-    @PersistenceContext(unitName = "dnsBD")
+    @PersistenceContext(unitName = "DnsPU")
     protected EntityManager eman;
     
     

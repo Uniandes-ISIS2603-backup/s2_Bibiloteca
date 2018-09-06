@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Stateless
 public class VideoPersistence {
     
-    @PersistenceContext(unitName="dnsPU")
+    @PersistenceContext(unitName="DnsPU")
     protected EntityManager em;
     
     public VideoEntity create(VideoEntity video){
