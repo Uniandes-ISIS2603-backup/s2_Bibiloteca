@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.biblioteca.dtos;
 
+import co.edu.uniandes.csw.bibilioteca.entities.ServicioEntity;
 import java.io.Serializable;
 
 /**
@@ -79,6 +80,23 @@ public class ServicioDTO implements Serializable{
         this.idObjeto = idObjeto;
         this.nombreServicio = nombreServicio;
         this.descripcion = descripcion;
+    }
+    
+    
+    /**
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param servicioEntity: Es la entidad que se va a convertir a DTO
+     */
+    public ServicioDTO(ServicioEntity servicioEntity) {
+        if (servicioEntity != null) 
+        {
+            this.id = servicioEntity.getId();
+            this.idObjeto = servicioEntity.getIdObjeto();
+            this.nombreServicio = servicioEntity.getNombreServicio();
+            this.descripcion = servicioEntity.getDescripcion();
+        }
     }
     
     //__________________________________________________________________________
@@ -157,5 +175,18 @@ public class ServicioDTO implements Serializable{
         this.descripcion = descripcion;
     }
     
+     /**
+     * Convertir el DTO Servicio a Entity
+     * @return Un Entity con los valores del DTO
+     */
+    public ServicioEntity toEntity() 
+    {
+        ServicioEntity servicioEntity = new ServicioEntity();
+        servicioEntity.setId(this.id);
+        servicioEntity.setIdObjeto(this.idObjeto);
+        servicioEntity.setNombreServicio(this.nombreServicio);
+        servicioEntity.setDescripcion(this.descripcion);
+        return servicioEntity;
+    }
     
 }

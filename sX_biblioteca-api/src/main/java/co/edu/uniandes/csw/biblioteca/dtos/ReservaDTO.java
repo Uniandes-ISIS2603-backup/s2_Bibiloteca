@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.biblioteca.dtos;
 
+import co.edu.uniandes.csw.bibilioteca.entities.ReservaEntity;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -65,6 +66,20 @@ public class ReservaDTO implements Serializable {
         this.fechaReserva = fechaReserva;
     }
     
+     /**
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param reservaEntity: Es la entidad que se va a convertir a DTO
+     */
+    public ReservaDTO(ReservaEntity reservaEntity) {
+        if (reservaEntity != null) 
+        {
+            this.id = reservaEntity.getId();
+            this.fechaReserva = reservaEntity.getFechaReserva();
+        }
+    }
+    
     
     //__________________________________________________________________________
     //Metodos
@@ -102,7 +117,15 @@ public class ReservaDTO implements Serializable {
         this.fechaReserva = fechaReserva;
     }
     
-    
-    
-    
+     /**
+     * Convertir el DTO Reserva a Entity
+     * @return Un Entity con los valores del DTO
+     */
+    public ReservaEntity toEntity() 
+    {
+        ReservaEntity reservaEntity = new ReservaEntity();
+        reservaEntity.setId(this.id);
+        reservaEntity.setFechaReserva(this.fechaReserva);
+        return reservaEntity;
+    }
 }
