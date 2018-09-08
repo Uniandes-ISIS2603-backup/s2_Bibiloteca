@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.biblioteca.dtos;
 
+import co.edu.uniandes.csw.bibilioteca.entities.VideoEntity;
 import java.io.Serializable;
 
 /**
@@ -16,10 +17,28 @@ import java.io.Serializable;
    private String idioma;
    private Boolean subtitulos;
 
-   public VideoDTO(Long pID, String pNombre, String pDirector, Integer pUnidades, String pIdioma, Boolean pSubtitulos){
+  /**
+     * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
+     * la entidad que viene de argumento.
+     *
+     * @param videoEntity: Es la entidad que se va a convertir a DTO
+     */
+    public VideoDTO(VideoEntity videoEntity) {
+        
+    }
 
-   }
-
+    /**
+     * Transformar el DTO a una entidad
+     *
+     * @return La entidad que representa el libro.
+     */
+ 
+    public VideoEntity toEntity() 
+    {
+       VideoEntity bookEntity = new VideoEntity();
+       
+       return bookEntity;
+    }
    public Long getId(){
      return id;
    }

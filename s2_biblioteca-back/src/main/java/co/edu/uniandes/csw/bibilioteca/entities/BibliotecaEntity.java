@@ -3,27 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.biblioteca.dtos;
+package co.edu.uniandes.csw.bibilioteca.entities;
 
-import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
-import co.edu.uniandes.csw.biblioteca.adapters.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author estudiante
  */
-public class BibliotecaDTO implements Serializable
-{
+@Entity
+public class BibliotecaEntity extends BaseEntity implements Serializable {
+   
     
-   //---------------------------------------------------------
-   // ATRIBUTOS
-   //---------------------------------------------------------
-    
-   /**
-    * Se refiere al identificador de cada biblioteca
-    */
-    private Long id;
+    //---------------------------------------------------------
+    // ATRIBUTOS
+    //---------------------------------------------------------
     
     /**
      * Se refiere a la zona donde se encuentra la biblioteca
@@ -49,59 +49,34 @@ public class BibliotecaDTO implements Serializable
      * hora en que cierra la biblioteca
      */
     private String horaCierre;
-    
-   //---------------------------------------------------------
-   // CONSTRUCTOR
-   //---------------------------------------------------------
-    
-   /**
-     * Constructor por defecto.
+   
+    /**
+     * representa los libros que tiene la biblioteca
      */
-    public BibliotecaDTO() 
-    {
-        
-    }
+    @PodamExclude
+    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<LibroEntity> libros = new ArrayList<LibroEntity>();
     
     /**
-     * Constructor a partir de la entidad
-     *
-     * @param bibliotecaEntity La entidad de la biblioteca
+     * representa los videos que tiene la biblioteca
      */
-    public BibliotecaDTO(BibliotecaEntity bibliotecaEntity) {
-        if (bibliotecaEntity != null) 
-        {
-            this.id = bibliotecaEntity.getId();
-            this.zona = bibliotecaEntity.getZona();
-            this.nombre = bibliotecaEntity.getNombre();
-            this.direccion = bibliotecaEntity.getDireccion();
-            this.horaApertura = bibliotecaEntity.getHoraApertura();
-            this.horaCierre = bibliotecaEntity.getHoraCierre();
-        }
-    }
-    
-    //----------------------------------------------------------
-    // METODOS
-    //----------------------------------------------------------
-    
-     /**
-     * Método para transformar el DTO a una entidad.
-     *
-     * @return La entidad de la biblioteca asociada.
-     */
-    public BibliotecaEntity toEntity() 
-    {
-        BibliotecaEntity bibliotecaEntity = new BibliotecaEntity();
-        bibliotecaEntity.setId(this.id);
-        bibliotecaEntity.setZona(this.zona);
-        bibliotecaEntity.setNombre(this.nombre);
-        bibliotecaEntity.setDireccion(this.direccion);
-        bibliotecaEntity.setHoraApertura(this.horaApertura);
-        bibliotecaEntity.setHoraCierre(this.horaCierre);
-       
-        return bibliotecaEntity;
-    }
+    @PodamExclude
+    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<VideoEntity> videos = new ArrayList<VideoEntity>();
     
     /**
+     * representa las salas que tiene la biblioteca
+     */
+    @PodamExclude
+    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<SalaEntity> salas = new ArrayList<SalaEntity>();
+
+  //----------------------------------------------------------
+  // METODOS
+  //----------------------------------------------------------
+    
+   
+ /**
      * Devuelve la zona de la Bblioteca
      *
      * @return la zona 
@@ -192,5 +167,59 @@ public class BibliotecaDTO implements Serializable
     {
         this.horaCierre = pHoraCierre;
     } 
+
+     /**
+     * Devuelve los videos de la bilioteca.
+     *
+     * @return Lista de entidades de tipo video
+     */
+    public List<VideoEntity> getVideos() {
+        return videos;
+    }
+
+    /**
+     * Modifica los videos de la biblioteca.
+     *
+     * @param pVideos Los nuevos videos.
+     */
+    public void setVideos(List<VideoEntity> pVideos) {
+        this.videos = pVideos;
+    }
+    
+    /**
+     * Devuelve los libros de la bilioteca.
+     *
+     * @return Lista de entidades de tipo libros
+     */
+    public List<LibroEntity> getLibros() {
+        return libros;
+    }
+
+    /**
+     * Modifica los libros de la biblioteca.
+     *
+     * @param pLibros Los nuevos libros
+     */
+    public void setLibros(List<LibroEntity> pLibros) {
+        this.libros = pLibros;
+    }
+    
+    /**
+     * Devuelve las salas de la bilioteca.
+     *
+     * @return Lista de entidades de tipo salas
+     */
+    public List<SalaEntity> getSalas() {
+        return salas;
+    }
+
+    /**
+     * Modifica las salas de la biblioteca.
+     *
+     * @param pSalas Los nuevos libros
+     */
+    public void setSalas(List<SalaEntity> pSalas) {
+        this.salas = pSalas;
+    }
     
 }
