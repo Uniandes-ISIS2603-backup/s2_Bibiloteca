@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.*;
 import javax.enterprise.context.RequestScoped;
+import java.util.Collection;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -43,7 +44,25 @@ public class VidedoDigitalResource {
     {
        return null; 
     }
+    @GET
+    public Collection<VideoDigitalDTO> getVideosDigitales()
+    {
+       return null; 
+    }
     
+    @PUT
+     @Path("{videosdigitalesid: \\d+}")
+    public VideoDigitalDTO actualizarVideoDigital(@PathParam("videosdigitalesid") Long pVideosdigitalesid, VideoDigitalDTO pVideoDigital)
+    {
+       return pVideoDigital; 
+    }
+    
+    @DELETE
+     @Path("{videosdigitalesid: \\d+}")
+    public void eliminarVideoDigital(@PathParam("videosdigitalesid") Long videosdigitalesid)
+    {
+       
+    }
     
 }
     
