@@ -6,13 +6,14 @@
 package co.edu.uniandes.csw.biblioteca.dtos;
 
 import co.edu.uniandes.csw.biblioteca.adapters.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  *
  * @author estudiante
  */
-public class PrestamoDTO 
+public class PrestamoDTO implements Serializable
 {
     //--------------------------------------------
     // ATRIBUTOS
@@ -32,6 +33,11 @@ public class PrestamoDTO
      * Se refiere a si el libro fue devuelto o no
      */ 
     private boolean retornado;
+     
+    /**
+    * Se refiere al identificador de cada prestamo
+    */
+    private Long identificador;
     
     
     //----------------------------------------------
@@ -46,6 +52,24 @@ public class PrestamoDTO
     //----------------------------------------------
     // METODOS
     //----------------------------------------------
+    
+    /**
+     * Devuelve el ID del prestamo
+     *
+     * @return the id
+     */
+    public Long getId() {
+        return identificador;
+    }
+
+    /**
+     * Modifica el ID del prestamo
+     *
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.identificador = id;
+    }
     
     /**
      * Método para cambiar la fecha de salida
