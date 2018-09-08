@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.biblioteca.dtos;
 
 import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.VideoEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -108,12 +109,20 @@ public class BibliotecaDetailDTO extends BibliotecaDTO implements Serializable
             }
             bibliotecaEntity.setVideos(videosEntity);
         }
+         
+          if ( salas != null) {
+            List<SalaEntity> salasEntity = new ArrayList<>();
+            for (SalaDTO dtoSalas: getSalas()) {
+                salasEntity.add(dtoSalas.toEntity());
+            }
+            bibliotecaEntity.setSalas(salasEntity);
+        }
        
         return bibliotecaEntity;
     }
     
      /**
-     * Devuelve las libros asociadas a esta biblioteca
+     * Devuelve los libros asociados a esta biblioteca
      *
      * @return Lista de DTOs de Libros
      */
@@ -122,11 +131,47 @@ public class BibliotecaDetailDTO extends BibliotecaDTO implements Serializable
     }
     
      /**
-     * Devuelve las videos asociadas a esta biblioteca
+     * Modifica los libros de esta biblioteca.
+     *
+     * @param pLibros Los nuevos libros
+     */
+    public void setLibros(List<LibroDTO> pLibros) {
+        this.libros = pLibros;
+    }
+    
+     /**
+     * Devuelve los videos asociados a esta biblioteca
      *
      * @return Lista de DTOs de Videos
      */
     public List<VideoDTO> getVideos() {
         return videos;
+    }
+    
+    /**
+     * Modifica los videos de esta biblioteca.
+     *
+     * @param pVideos Los nuevos videos
+     */
+    public void setVideos(List<VideoDTO> pVideos) {
+        this.videos = pVideos;
+    }
+    
+      /**
+     * Devuelve las salas asociadas a esta biblioteca
+     *
+     * @return Lista de DTOs de Salas
+     */
+    public List<SalaDTO> getSalas() {
+        return salas;
+    }
+    
+    /**
+     * Modifica las salas de esta biblioteca.
+     *
+     * @param pSalas Las nuevos vsalas
+     */
+    public void setSalas(List<SalaDTO> pSalas) {
+        this.salas = pSalas;
     }
 }

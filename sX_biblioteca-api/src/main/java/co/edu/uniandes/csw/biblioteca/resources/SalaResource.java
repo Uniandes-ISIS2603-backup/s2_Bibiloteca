@@ -4,7 +4,8 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.biblioteca.resources;
-import co.edu.uniandes.csw.biblioteca.adapters.SalaDTO;
+
+import co.edu.uniandes.csw.biblioteca.dtos.SalaDTO;
 import javax.ws.rs.*;
 import javax.enterprise.context.RequestScoped;
 
