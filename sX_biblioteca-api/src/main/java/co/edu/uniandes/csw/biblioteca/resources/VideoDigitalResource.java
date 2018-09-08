@@ -36,8 +36,6 @@ public class VideoDigitalResource {
     {
         return pVideoDigital;
     }
-
-       
     @GET
     @Path("{videosdigitalesid: \\d+}")
     public VideoDigitalDTO getVideoDigital(@PathParam("videosdigitalesid") Long videosdigitalesId)
