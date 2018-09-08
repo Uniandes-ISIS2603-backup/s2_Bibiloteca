@@ -1,0 +1,143 @@
+{
+	"info": {
+		"_postman_id": "3510be4f-9622-4174-92c3-15ddfbbc6670",
+		"name": "BibliotecaCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CrearBiblioteca",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\" : \"Julio Mario Santodomingo\", \"zona\": \"Aguas\",\"direccion\": \"Cl. 21 #120\",\"horaApertura\":\"6:30 A.M\", \"horaCierre\": \"10:00 P.M\", \"identificador\":\"1\"} "
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas"
+					]
+				},
+				"description": "Espero lo mismo que le mandé"
+			},
+			"response": []
+		},
+		{
+			"name": "GetBibliotecas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas"
+					]
+				},
+				"description": "Se espera null"
+			},
+			"response": []
+		},
+		{
+			"name": "GetBiblioteca",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"1"
+					]
+				},
+				"description": "Se espera null"
+			},
+			"response": []
+		},
+		{
+			"name": "ActualizarBiblioteca",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\" : \"Julio  Santodomingo\", \"zona\": \"guas\",\"direccion\": \"Cl.#120\",\"horaApertura\":\"6:0 A.M\", \"horaCierre\": \"10:0 P.M\", \"identificador\":\"123\"} "
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"1"
+					]
+				},
+				"description": "Estoy esperando lo que le mandé\n"
+			},
+			"response": []
+		},
+		{
+			"name": "EliminarBiblioteca",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"5"
+					]
+				},
+				"description": "No me debe retornar nada. "
+			},
+			"response": []
+		}
+	]
+}

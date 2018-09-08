@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.biblioteca.resources;
 import java.util.logging.Level;
 import javax.ws.rs.*;
 import co.edu.uniandes.csw.biblioteca.dtos.BibliotecaDTO;
+import java.util.Collection;
 import javax.enterprise.context.RequestScoped;
 
 /**
@@ -31,8 +32,32 @@ public class BibliotecaResource {
     
     @GET
     @Path("{bibliotecasId: \\d+}")
-    public BibliotecaDTO getBiblioteca(@PathParam("bibliotecasId") Long librosId)
+    public BibliotecaDTO getBiblioteca(@PathParam("bibliotecasId") Long biliotecasId)
     {
        return null; 
     }
+        
+    @GET
+    public Collection<BibliotecaDTO> getBibliotecas()
+    {
+       return null; 
+    }
+    
+    @PUT
+     @Path("{bibliotecasId: \\d+}")
+    public BibliotecaDTO actualizarBiblioteca(@PathParam("bibliotecasId") Long bibliotecasId, BibliotecaDTO biblioteca)
+    {
+       return biblioteca; 
+    }
+    
+    @DELETE
+     @Path("{bibliotecasId: \\d+}")
+    public void eliminarBiblioteca(@PathParam("bibliotecasId") Long bibliotecasId)
+    {
+       
+    }
+    
+    
+        
+
 }
