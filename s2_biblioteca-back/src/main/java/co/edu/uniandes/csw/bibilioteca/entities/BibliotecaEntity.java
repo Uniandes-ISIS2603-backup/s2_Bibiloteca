@@ -15,7 +15,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author estudiante
+ * @author David Eduardo Saavedra Hernandez
  */
 @Entity
 public class BibliotecaEntity extends BaseEntity implements Serializable {

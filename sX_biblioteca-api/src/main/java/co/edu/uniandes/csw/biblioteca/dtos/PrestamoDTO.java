@@ -5,9 +5,10 @@
  */
 package co.edu.uniandes.csw.biblioteca.dtos;
 
+import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
 import co.edu.uniandes.csw.biblioteca.adapters.*;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -37,16 +38,34 @@ public class PrestamoDTO implements Serializable
     /**
     * Se refiere al identificador de cada prestamo
     */
-    private Long identificador;
+    private Long id;
     
     
     //----------------------------------------------
     // CONSTRUCTOR
     //----------------------------------------------
-    
+     /**
+     * Constructor por defecto.
+     */
     public PrestamoDTO()
     {
         
+    }
+    
+     /**
+     * Constructor a partir de la entidad
+     *
+     * @param prestamoEntity La entidad de la biblioteca
+     */
+    public PrestamoDTO(PrestamoEntity prestamoEntity) {
+        if (prestamoEntity != null) 
+        {
+            this.fechaDeEntrega = prestamoEntity.getFechaDeEntrega();
+            this.fechaDeSalida = prestamoEntity.getFechaDeSalida();
+            this.retornado = prestamoEntity.getRetornado();
+            this.id = prestamoEntity.getId();
+            // Ac´á iría la relación con el usuario.
+        }
     }
     
     //----------------------------------------------
@@ -54,21 +73,36 @@ public class PrestamoDTO implements Serializable
     //----------------------------------------------
     
     /**
+     * Método para transformar el DTO a una entidad.
+     *
+     * @return La entidad del libro asociado.
+     */
+    public PrestamoEntity toEntity() {
+        PrestamoEntity prestamoEntity = new PrestamoEntity();
+        prestamoEntity.setId(this.id);
+        prestamoEntity.setFechaDeEntrega(this.fechaDeEntrega);
+        prestamoEntity.setFechaDeSalida(this.fechaDeSalida);
+        prestamoEntity.setRetornado(this.retornado);
+        //Faltaría el usuarioEnttity cuando mi compañero lo haga       
+        return prestamoEntity;
+    }
+    
+    /**
      * Devuelve el ID del prestamo
      *
      * @return the id
      */
     public Long getId() {
-        return identificador;
+        return id;
     }
 
     /**
      * Modifica el ID del prestamo
      *
-     * @param id the id to set
+     * @param pId the id to set
      */
-    public void setId(Long id) {
-        this.identificador = id;
+    public void setId(Long pId) {
+        this.id = pId;
     }
     
     /**
