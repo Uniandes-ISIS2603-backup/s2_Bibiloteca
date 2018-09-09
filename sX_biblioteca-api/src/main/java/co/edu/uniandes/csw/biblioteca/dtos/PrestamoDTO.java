@@ -129,7 +129,7 @@ public class PrestamoDTO implements Serializable
      */
     public void setFechaDeEntrega(Date pFechaDeEntrega)
     {
-        this.fechaDeSalida= pFechaDeEntrega;
+        this.fechaDeEntrega= pFechaDeEntrega;
     }
     
     /**
