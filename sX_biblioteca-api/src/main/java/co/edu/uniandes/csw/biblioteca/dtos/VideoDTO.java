@@ -24,7 +24,12 @@ import java.io.Serializable;
      * @param videoEntity: Es la entidad que se va a convertir a DTO
      */
     public VideoDTO(VideoEntity videoEntity) {
-        
+        this.id = videoEntity.getId();
+        this.nombre = videoEntity.getNombre();
+        this.director = videoEntity.getDirector();
+        this.unidadesDisponibles = videoEntity.getUnidadesDis();
+        this.idioma = videoEntity.getIdioma();
+        this.subtitulos = videoEntity.getSubtitulos();
     }
 
     /**
@@ -35,9 +40,13 @@ import java.io.Serializable;
  
     public VideoEntity toEntity() 
     {
-       VideoEntity bookEntity = new VideoEntity();
-       
-       return bookEntity;
+       VideoEntity ve = new VideoEntity();
+       ve.setNombre(this.nombre);
+       ve.setDirector(this.director);
+       ve.setUnidadesDis(this.unidadesDisponibles);
+       ve.setIdioma(this.idioma);
+       ve.setSubtitulos(this.subtitulos);
+       return ve;
     }
    public Long getId(){
      return id;

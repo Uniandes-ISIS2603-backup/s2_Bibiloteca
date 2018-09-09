@@ -2,6 +2,7 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -16,6 +17,10 @@ import javax.persistence.*;
    private Integer unidadesDisponibles;
    private String idioma;
    private Boolean subtitulos;
+   
+   @PodamExclude
+   @ManyToOne
+   private BibliotecaEntity biblioteca;
 
 
 
