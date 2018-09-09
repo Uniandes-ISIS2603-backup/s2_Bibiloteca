@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.biblioteca.resources;
 import java.util.logging.Level;
 import javax.ws.rs.*;
 import co.edu.uniandes.csw.biblioteca.dtos.BibliotecaDTO;
+import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import java.util.Collection;
 import javax.enterprise.context.RequestScoped;
 
@@ -25,34 +26,34 @@ import javax.enterprise.context.RequestScoped;
 public class BibliotecaResource {
     
      @POST
-    public BibliotecaDTO createBiblioteca(BibliotecaDTO biblioteca) 
+    public BibliotecaDTO createBiblioteca(BibliotecaDTO biblioteca) throws BusinessLogicException 
     {
        return biblioteca;
     }
     
     @GET
     @Path("{bibliotecasId: \\d+}")
-    public BibliotecaDTO getBiblioteca(@PathParam("bibliotecasId") Long biliotecasId)
+    public BibliotecaDTO getBiblioteca(@PathParam("bibliotecasId") Long biliotecasId) throws BusinessLogicException 
     {
        return null; 
     }
         
     @GET
-    public Collection<BibliotecaDTO> getBibliotecas()
+    public Collection<BibliotecaDTO> getBibliotecas() throws BusinessLogicException 
     {
        return null; 
     }
     
     @PUT
      @Path("{bibliotecasId: \\d+}")
-    public BibliotecaDTO actualizarBiblioteca(@PathParam("bibliotecasId") Long bibliotecasId, BibliotecaDTO biblioteca)
+    public BibliotecaDTO actualizarBiblioteca(@PathParam("bibliotecasId") Long bibliotecasId, BibliotecaDTO biblioteca) throws BusinessLogicException 
     {
        return biblioteca; 
     }
     
     @DELETE
      @Path("{bibliotecasId: \\d+}")
-    public void eliminarBiblioteca(@PathParam("bibliotecasId") Long bibliotecasId)
+    public void eliminarBiblioteca(@PathParam("bibliotecasId") Long bibliotecasId) throws BusinessLogicException 
     {
        
     }
