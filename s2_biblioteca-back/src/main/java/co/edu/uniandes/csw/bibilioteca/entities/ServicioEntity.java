@@ -6,12 +6,14 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 
 /**
  * Clase que representa una entidad
  * de la clase Servicio
  * @author Daniel Preciado
  */
+@Entity
 public class ServicioEntity extends BaseEntity implements Serializable{
        
     //__________________________________________________________________________

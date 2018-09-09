@@ -7,12 +7,14 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
 
 /**
  * Clase que representa una entidad
  * de la clase Reserva
  * @author estudiante
  */
+@Entity
 public class ReservaEntity extends BaseEntity implements Serializable {
     
     //__________________________________________________________________________
