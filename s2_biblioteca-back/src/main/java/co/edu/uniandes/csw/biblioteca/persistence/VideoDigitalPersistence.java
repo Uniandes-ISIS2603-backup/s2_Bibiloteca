@@ -18,7 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 
     @Stateless
-public class VideoDigitalPersistence {
+    public class VideoDigitalPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(VideoDigitalPersistence.class.getName());
     
