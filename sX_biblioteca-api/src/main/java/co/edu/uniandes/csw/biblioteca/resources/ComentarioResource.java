@@ -68,7 +68,7 @@ public class ComentarioResource {
   */
  @GET
  @Path("{comentarioId: \\d+}")
- public ComentarioDTO getComentario (@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException{
+ public ComentarioDTO getComentario (@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId){
      return null;
  }
  
@@ -84,7 +84,7 @@ public class ComentarioResource {
  */    
  @PUT
  @Path("{comentarioId: \\d+}")
- public ComentarioDTO updateComentario(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId, ComentarioDTO comentario) throws BusinessLogicException {
+ public ComentarioDTO updateComentario(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId, ComentarioDTO comentario)  {
      return null;
  }
  
@@ -96,7 +96,7 @@ public class ComentarioResource {
      */
  @DELETE
  @Path("{comentarioId: \\d+}")
-    public void deleteReview(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException {
+    public void deleteReview(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId)  {
         
     }
 }

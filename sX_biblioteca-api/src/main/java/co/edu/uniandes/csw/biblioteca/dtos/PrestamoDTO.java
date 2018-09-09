@@ -33,7 +33,7 @@ public class PrestamoDTO implements Serializable
     /**
      * Se refiere a si el libro fue devuelto o no
      */ 
-    private boolean retornado;
+    private Boolean retornado;
      
     /**
     * Se refiere al identificador de cada prestamo

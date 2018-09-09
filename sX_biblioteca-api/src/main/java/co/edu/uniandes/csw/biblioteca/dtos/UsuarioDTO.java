@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.biblioteca.adapters;
+package co.edu.uniandes.csw.biblioteca.dtos;
+
+import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
 
 /**
  *
@@ -11,6 +13,8 @@ package co.edu.uniandes.csw.biblioteca.adapters;
  */
 public class UsuarioDTO {
     
+    private Long id;
+
     //Nombre del usuario.
     private String nombre;
     
@@ -21,14 +25,26 @@ public class UsuarioDTO {
     private String telefono;
     
     //Multa asignada al usuario.
-    private String multa;
+    private Integer multa;
     
-    public UsuarioDTO(String pNombre, String pEmail, String pTelefono, String pMulta)
+    public UsuarioDTO()
     {
-        nombre = pMulta;
-        email = pEmail;
-        telefono = pTelefono;
-        multa = pMulta;
+        
+    }
+    public UsuarioDTO(UsuarioEntity usuario)
+    {
+        this.id = usuario.getId();
+        this.nombre = usuario.getNombre();
+        this.email = usuario.getEmail();
+        this.telefono = usuario.getTelefono();
+        this.multa = usuario.getMulta();
+    }
+     public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
     
     public String getNombre()
@@ -43,7 +59,7 @@ public class UsuarioDTO {
     {
         return telefono;
     }
-    public String getMulta()
+    public Integer getMulta()
     {
         return multa;
     }
@@ -59,8 +75,19 @@ public class UsuarioDTO {
     {
        telefono = pTelefono;
     }
-    public void setMulta(String pMulta)
+    public void setMulta(Integer pMulta)
     {
        multa = pMulta;
+    }
+    
+    public UsuarioEntity toEntity()
+    {
+        UsuarioEntity usuario = new UsuarioEntity();
+        usuario.setId(this.id);
+        usuario.setNombre(this.nombre);
+        usuario.setEmail(this.email);
+        usuario.setMulta(this.multa);
+        usuario.setTelefono(this.telefono);
+        return usuario;
     }
 }

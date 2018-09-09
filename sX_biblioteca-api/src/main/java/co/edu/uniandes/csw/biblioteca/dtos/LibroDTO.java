@@ -38,29 +38,29 @@ public class LibroDTO implements Serializable{
     private String idioma;
     
     //Unidades que quedan disponibles del libro 
-    private int unidadesDisponibles;
+    private Integer unidadesDisponibles;
     
     //Numero de usuarios en lista de Espera
-    private int usuariosListaEspera;
+    private Integer usuariosListaEspera;
     
     //Calificacion promedio de los review
-    private int calificacionPromedio;
+    private Integer calificacionPromedio;
     
     public LibroDTO(){
         
     }
     public LibroDTO (LibroEntity libro)
     {
-        nombre = libro.getNombre();
-        isbn = libro.getIsbn();
-        autor = libro.getAutor();
-        editorial = libro.getEditorial();
-        edicion = libro.getEdicion();
-        idioma=libro.getIdioma();
-        unidadesDisponibles = libro.getUnidadesDisponibles();
-        usuariosListaEspera = 0;
-        calificacionPromedio = 0 ;
-        id = libro.getId();
+        this.nombre = libro.getNombre();
+        this.isbn = libro.getIsbn();
+        this.autor = libro.getAutor();
+        this.editorial = libro.getEditorial();
+        this.edicion = libro.getEdicion();
+        this.idioma=libro.getIdioma();
+        this.unidadesDisponibles = libro.getUnidadesDisponibles();
+        this.usuariosListaEspera = 0;
+        this.calificacionPromedio = 0 ;
+        this.id = libro.getId();
     }
 
     public Long getId() {
@@ -118,27 +118,27 @@ public class LibroDTO implements Serializable{
         this.idioma = idioma;
     }
 
-    public int getUnidadesDisponibles() {
+    public Integer getUnidadesDisponibles() {
         return unidadesDisponibles;
     }
 
-    public void setUnidadesDisponibles(int unidadesDisponibles) {
+    public void setUnidadesDisponibles(Integer unidadesDisponibles) {
         this.unidadesDisponibles = unidadesDisponibles;
     }
 
-    public int getUsuariosListaEspera() {
+    public Integer getUsuariosListaEspera() {
         return usuariosListaEspera;
     }
 
-    public void setUsuariosListaEspera(int usuariosListaEspera) {
+    public void setUsuariosListaEspera(Integer usuariosListaEspera) {
         this.usuariosListaEspera = usuariosListaEspera;
     }
 
-    public int getCalificacionPromedio() {
+    public Integer getCalificacionPromedio() {
         return calificacionPromedio;
     }
 
-    public void setCalificacionPromedio(int calificacionPromedio) {
+    public void setCalificacionPromedio(Integer calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
 
