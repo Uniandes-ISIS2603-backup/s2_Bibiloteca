@@ -43,5 +43,10 @@ public class UsuarioPersistence {
         LOGGER.log(Level.INFO, "Consultando usuario con id = {0}",usuarioID );
         return em.find(UsuarioEntity.class, usuarioID);
     }
+    public UsuarioEntity update(UsuarioEntity usuarioEntity)
+    {
+        LOGGER.log(Level.INFO, "Actualizando usuario con id = {0}",usuarioEntity.getId() );
+        return em.merge(usuarioEntity);
+    }
     
 }
