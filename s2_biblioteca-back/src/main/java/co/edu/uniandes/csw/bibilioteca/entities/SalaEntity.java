@@ -6,11 +6,13 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 
 /**
  *
  * @author Juan Nicolás García
  */
+@Entity
 public class SalaEntity extends BaseEntity implements Serializable{
     private String ubicacion;
     private Boolean disponibilidad;

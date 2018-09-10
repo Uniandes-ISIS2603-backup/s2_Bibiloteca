@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.biblioteca.resources;
-import co.edu.uniandes.csw.biblioteca.adapters.UsuarioDTO;
+import co.edu.uniandes.csw.biblioteca.dtos.UsuarioDTO;
 import javax.ws.rs.*;
 import javax.enterprise.context.RequestScoped;
 

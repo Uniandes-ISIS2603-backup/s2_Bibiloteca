@@ -32,6 +32,10 @@ import java.io.Serializable;
         this.subtitulos = videoEntity.getSubtitulos();
     }
 
+    public VideoDTO ()
+    {
+        
+    }
     /**
      * Transformar el DTO a una entidad
      *
@@ -41,6 +45,7 @@ import java.io.Serializable;
     public VideoEntity toEntity() 
     {
        VideoEntity ve = new VideoEntity();
+       ve.setId(this.id);
        ve.setNombre(this.nombre);
        ve.setDirector(this.director);
        ve.setUnidadesDis(this.unidadesDisponibles);

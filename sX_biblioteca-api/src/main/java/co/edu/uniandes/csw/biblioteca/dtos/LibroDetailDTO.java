@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author estudiante
+ * @author Daniel Montoya
  */
 public class LibroDetailDTO extends LibroDTO implements Serializable {
     

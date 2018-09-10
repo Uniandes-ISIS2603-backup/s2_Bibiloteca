@@ -40,12 +40,12 @@ public class ServicioDTO implements Serializable{
     /**
      * identificador del servicio
      */
-    private long id;
+    private Long id;
     
     /**
      * identificador del objeto que se va a utilizar para el servicio
      */
-    private int idObjeto;
+    private Integer idObjeto;
     
     /**
      * nombre del servicio que se va a prestar
@@ -66,23 +66,6 @@ public class ServicioDTO implements Serializable{
     public void ServicioDTO ()
     {
     }
-
-    /**
-     * constructor B
-     * @param id
-     * @param idObjeto
-     * @param nombreServicio
-     * @param descripcion 
-     */
-    public ServicioDTO(long id, int idObjeto, String nombreServicio, String descripcion) 
-    {
-        this.id = id;
-        this.idObjeto = idObjeto;
-        this.nombreServicio = nombreServicio;
-        this.descripcion = descripcion;
-    }
-    
-    
     /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
@@ -107,7 +90,7 @@ public class ServicioDTO implements Serializable{
      *  retorna el id del servicio
      * @return id
      */
-    public long getId() 
+    public Long getId() 
     {
         return id;
     }
@@ -116,7 +99,7 @@ public class ServicioDTO implements Serializable{
      * asigna un pId al id del servicio
      * @param id 
      */
-    public void setId(long id) 
+    public void setId(Long id) 
     {
         this.id = id;
     }
@@ -125,7 +108,7 @@ public class ServicioDTO implements Serializable{
      * obtiene el id del objeto por el cual se solicita el servicio
      * @return 
      */
-    public int getIdObjeto()
+    public Integer getIdObjeto()
     {
         return idObjeto;
     }
@@ -134,7 +117,7 @@ public class ServicioDTO implements Serializable{
      * asigna el id del objeto por el cual se solicita el servicio
      * @param idObjeto 
      */
-    public void setIdObjeto(int idObjeto) 
+    public void setIdObjeto(Integer idObjeto) 
     {
         this.idObjeto = idObjeto;
     }

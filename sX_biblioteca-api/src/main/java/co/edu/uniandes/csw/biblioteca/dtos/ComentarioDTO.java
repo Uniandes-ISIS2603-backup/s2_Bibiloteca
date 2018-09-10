@@ -35,11 +35,11 @@ public class ComentarioDTO {
     }
     public ComentarioDTO (ComentarioEntity comentario)
     {
-        numeroEstrellas = comentario.getNumeroEstrellas();
-        texto = comentario.getTexto();
-        nombreUsuario = comentario.getNombreUsuario();
-        fecha = comentario.getFecha();
-        id = comentario.getId();
+        this.numeroEstrellas = comentario.getNumeroEstrellas();
+        this.texto = comentario.getTexto();
+        this.nombreUsuario = comentario.getNombreUsuario();
+        this.fecha = comentario.getFecha();
+        this.id = comentario.getId();
     }
 
     public Long getId() {

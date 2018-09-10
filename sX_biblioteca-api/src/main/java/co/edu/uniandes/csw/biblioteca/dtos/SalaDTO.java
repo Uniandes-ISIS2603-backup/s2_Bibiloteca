@@ -12,6 +12,7 @@ import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
  * @author Juan Nicolás García
  */
 public class SalaDTO {
+    private Long id;
     private String ubicacion;
     private Boolean disponibilidad;
     private Integer capacidad;
@@ -23,9 +24,16 @@ public class SalaDTO {
      * @param salaEntity: Es la entidad que se va a convertir a DTO
      */
     public SalaDTO(SalaEntity salaEntity) {
-        
+        this.capacidad = salaEntity.getCapacidad();
+        this.disponibilidad = salaEntity.getDisponibilidad();
+        this.ubicacion = salaEntity.getUbicacion();
+        this.id = salaEntity.getId();
     }
 
+    public SalaDTO()
+    {
+        
+    }
     /**
      * Transformar el DTO a una entidad
      *
@@ -34,9 +42,13 @@ public class SalaDTO {
  
     public SalaEntity toEntity() 
     {
-       SalaEntity bookEntity = new SalaEntity();
+       SalaEntity sala = new SalaEntity();
+       sala.setId(this.id);
+       sala.setCapacidad(this.capacidad);
+       sala.setDisponibilidad(this.disponibilidad);
+       sala.setUbicacion(this.ubicacion);
        
-       return bookEntity;
+       return sala;
     }
     public String getUbicacion()
     {

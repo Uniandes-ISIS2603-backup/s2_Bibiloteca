@@ -56,15 +56,6 @@ public class ReservaDTO implements Serializable {
     public ReservaDTO() {
     }
     
-    /**
-     * Constructor B
-     * @param id
-     * @param fechaReserva 
-     */
-    public ReservaDTO(long id, Date fechaReserva) {
-        this.id = id;
-        this.fechaReserva = fechaReserva;
-    }
     
      /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
@@ -89,7 +80,7 @@ public class ReservaDTO implements Serializable {
      * devuelve el id de una reserva
      * @return  id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -97,7 +88,7 @@ public class ReservaDTO implements Serializable {
      * modifica el id de una reserva
      * @param id 
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
