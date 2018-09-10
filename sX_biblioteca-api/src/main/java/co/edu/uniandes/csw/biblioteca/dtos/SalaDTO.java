@@ -6,12 +6,13 @@
 package co.edu.uniandes.csw.biblioteca.dtos;
 
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
+import java.io.Serializable;
 
 /**
  *
  * @author Juan Nicolás García
  */
-public class SalaDTO {
+public class SalaDTO  implements Serializable{
     private Long id;
     private String ubicacion;
     private Boolean disponibilidad;
@@ -20,7 +21,6 @@ public class SalaDTO {
     /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
-     *
      * @param salaEntity: Es la entidad que se va a convertir a DTO
      */
     public SalaDTO(SalaEntity salaEntity) {

@@ -6,12 +6,13 @@
 package co.edu.uniandes.csw.biblioteca.dtos;
 
 import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
+import java.io.Serializable;
 
 /**
  *
  * @author Juan Nicolás García
  */
-public class UsuarioDTO {
+public class UsuarioDTO  implements Serializable{
     
     private Long id;
 

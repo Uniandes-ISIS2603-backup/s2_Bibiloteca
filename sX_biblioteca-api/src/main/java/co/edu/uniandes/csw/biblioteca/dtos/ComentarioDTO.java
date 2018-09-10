@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.biblioteca.dtos;
 
 import co.edu.uniandes.csw.bibilioteca.entities.ComentarioEntity;
+import java.io.Serializable;
 import java.util.Date;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -14,7 +15,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Daniel Montoya
  */
-public class ComentarioDTO {
+public class ComentarioDTO implements Serializable{
     
     //Calificacion asignada al libro
     private Double numeroEstrellas; 
