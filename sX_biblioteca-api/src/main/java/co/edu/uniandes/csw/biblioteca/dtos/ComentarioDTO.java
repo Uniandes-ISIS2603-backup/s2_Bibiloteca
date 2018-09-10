@@ -36,11 +36,13 @@ public class ComentarioDTO implements Serializable{
     }
     public ComentarioDTO (ComentarioEntity comentario)
     {
-        this.numeroEstrellas = comentario.getNumeroEstrellas();
-        this.texto = comentario.getTexto();
-        this.nombreUsuario = comentario.getNombreUsuario();
-        this.fecha = comentario.getFecha();
-        this.id = comentario.getId();
+        if (comentario != null) {
+            this.numeroEstrellas = comentario.getNumeroEstrellas();
+            this.texto = comentario.getTexto();
+            this.nombreUsuario = comentario.getNombreUsuario();
+            this.fecha = comentario.getFecha();
+            this.id = comentario.getId();
+        }
     }
 
     public Long getId() {

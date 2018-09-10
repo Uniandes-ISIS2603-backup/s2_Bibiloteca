@@ -65,6 +65,7 @@ public class ServicioDTO implements Serializable{
      */
     public void ServicioDTO ()
     {
+        
     }
     /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en

@@ -20,15 +20,19 @@ public class VideoDigitalDTO implements Serializable {
     
     public VideoDigitalDTO()
     {
+        
     }
 
     public VideoDigitalDTO(VideoDigitalEntity pVideoDigital) {
         
+        if(pVideoDigital != null){
         this.id = pVideoDigital.getId();
         this.nombre = pVideoDigital.getNombre();
         this.director = pVideoDigital.getDirector();
         this.idioma = pVideoDigital.getIdioma();
         this.subtitulos = pVideoDigital.getSubtitulos();
+        }
+        
     }
     public VideoDigitalEntity toEntity()
     {

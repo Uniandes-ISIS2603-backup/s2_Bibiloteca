@@ -12,77 +12,77 @@ import java.io.Serializable;
  *
  * @author Juan Nicolás García
  */
-public class UsuarioDTO  implements Serializable{
-    
+public class UsuarioDTO implements Serializable {
+
     private Long id;
 
     //Nombre del usuario.
     private String nombre;
-    
+
     //Email del usuario.
     private String email;
-    
+
     //Telefono del usuario.
     private String telefono;
-    
+
     //Multa asignada al usuario.
     private Integer multa;
-    
-    public UsuarioDTO()
-    {
-        
+
+    public UsuarioDTO() {
+
     }
-    public UsuarioDTO(UsuarioEntity usuario)
-    {
-        this.id = usuario.getId();
-        this.nombre = usuario.getNombre();
-        this.email = usuario.getEmail();
-        this.telefono = usuario.getTelefono();
-        this.multa = usuario.getMulta();
+
+    public UsuarioDTO(UsuarioEntity usuario) {
+        if (usuario != null) {
+            this.id = usuario.getId();
+            this.nombre = usuario.getNombre();
+            this.email = usuario.getEmail();
+            this.telefono = usuario.getTelefono();
+            this.multa = usuario.getMulta();
+        }
     }
-     public Long getId() {
+
+    public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public String getNombre()
-    {
+
+    public String getNombre() {
         return nombre;
     }
-    public String getEmail()
-    {
+
+    public String getEmail() {
         return email;
     }
-    public String getTelefono()
-    {
+
+    public String getTelefono() {
         return telefono;
     }
-    public Integer getMulta()
-    {
+
+    public Integer getMulta() {
         return multa;
     }
-    public void setNombre(String pNombre)
-    {
-       nombre = pNombre;
+
+    public void setNombre(String pNombre) {
+        nombre = pNombre;
     }
-    public void setEmail(String pEmail)
-    {
-       email = pEmail;
+
+    public void setEmail(String pEmail) {
+        email = pEmail;
     }
-    public void setTelefono(String pTelefono)
-    {
-       telefono = pTelefono;
+
+    public void setTelefono(String pTelefono) {
+        telefono = pTelefono;
     }
-    public void setMulta(Integer pMulta)
-    {
-       multa = pMulta;
+
+    public void setMulta(Integer pMulta) {
+        multa = pMulta;
     }
-    
-    public UsuarioEntity toEntity()
-    {
+
+    public UsuarioEntity toEntity() {
         UsuarioEntity usuario = new UsuarioEntity();
         usuario.setId(this.id);
         usuario.setNombre(this.nombre);

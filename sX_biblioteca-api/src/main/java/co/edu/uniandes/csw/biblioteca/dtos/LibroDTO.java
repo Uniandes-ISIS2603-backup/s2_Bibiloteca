@@ -51,16 +51,19 @@ public class LibroDTO implements Serializable{
     }
     public LibroDTO (LibroEntity libro)
     {
-        this.nombre = libro.getNombre();
-        this.isbn = libro.getIsbn();
-        this.autor = libro.getAutor();
-        this.editorial = libro.getEditorial();
-        this.edicion = libro.getEdicion();
-        this.idioma=libro.getIdioma();
-        this.unidadesDisponibles = libro.getUnidadesDisponibles();
-        this.usuariosListaEspera = 0;
-        this.calificacionPromedio = 0 ;
-        this.id = libro.getId();
+        if (libro != null) {
+            this.nombre = libro.getNombre();
+            this.isbn = libro.getIsbn();
+            this.autor = libro.getAutor();
+            this.editorial = libro.getEditorial();
+            this.edicion = libro.getEdicion();
+            this.idioma = libro.getIdioma();
+            this.unidadesDisponibles = libro.getUnidadesDisponibles();
+            this.usuariosListaEspera = 0;
+            this.calificacionPromedio = 0;
+            this.id = libro.getId();
+        }
+        
     }
 
     public Long getId() {
