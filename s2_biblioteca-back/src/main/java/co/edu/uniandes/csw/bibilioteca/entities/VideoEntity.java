@@ -19,7 +19,7 @@ import uk.co.jemos.podam.common.PodamExclude;
    private Boolean subtitulos;
    
    @PodamExclude
-   @ManyToOne
+   @ManyToOne(cascade = CascadeType.PERSIST)
    private BibliotecaEntity biblioteca;
 
 

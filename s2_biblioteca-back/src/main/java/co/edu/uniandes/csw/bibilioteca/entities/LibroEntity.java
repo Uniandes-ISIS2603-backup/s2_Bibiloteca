@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import org.eclipse.persistence.jpa.config.Cascade;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -50,6 +52,10 @@ public class LibroEntity extends BaseEntity implements Serializable{
     @OneToMany(mappedBy = "libro", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private ArrayList<ComentarioEntity> comentarios = new ArrayList<>();
 
+    @PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private BibliotecaEntity biblioteca;
+    
     public String getNombre() {
         return nombre;
     }

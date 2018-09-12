@@ -6,41 +6,57 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author Juan Nicolás García
  */
 @Entity
-public class SalaEntity extends BaseEntity implements Serializable{
+public class SalaEntity extends BaseEntity implements Serializable {
+
     private String ubicacion;
     private Boolean disponibilidad;
     private Integer capacidad;
-    
-    public String getUbicacion()
-    {
+
+    @PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private BibliotecaEntity biblioteca;
+
+    public String getUbicacion() {
         return ubicacion;
     }
-    public Boolean getDisponibilidad()
-    {
+
+    public Boolean getDisponibilidad() {
         return disponibilidad;
     }
-    public Integer getCapacidad()
-    {
+
+    public Integer getCapacidad() {
         return capacidad;
     }
-    public void setUbicacion(String ubicacion)
-    {
+
+    public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
     }
-    public void setDisponibilidad(Boolean disponibilidad)
-    {
+
+    public void setDisponibilidad(Boolean disponibilidad) {
         this.disponibilidad = disponibilidad;
     }
-    public void setCapacidad(Integer capacidad)
-    {
+
+    public void setCapacidad(Integer capacidad) {
         this.capacidad = capacidad;
     }
+
+    public BibliotecaEntity getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(BibliotecaEntity biblioteca) {
+        this.biblioteca = biblioteca;
+    }
     
+
 }
