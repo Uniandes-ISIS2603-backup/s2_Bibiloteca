@@ -48,5 +48,10 @@ public class UsuarioPersistence {
         LOGGER.log(Level.INFO, "Actualizando usuario con id = {0}",usuarioEntity.getId() );
         return em.merge(usuarioEntity);
     }
-    
+     public void delete(Long usuarioId)
+    {
+        LOGGER.log(Level.INFO,"Borrando usuario con id={0}",usuarioId);
+        UsuarioEntity usuario = em.find(UsuarioEntity.class, usuarioId);
+        em.remove(usuario);
+    }
 }
