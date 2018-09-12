@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "e8338859-a7ce-4149-85fc-401800c4d1dd",
+		"name": "VideoDigitalCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CrearVideoDigital",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"BIBLIOTECA\", \"director\": \"Quentin Jerome Tarantino\", \"idioma\": \"español\", \"subtitulos\": \"False\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videosdigitales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetVideosDigitales",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videosdigitales"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetVideoDigital",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "1f209b7c-f619-489a-beda-f4896e3cc860",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videosdigitales",
+						"1"
+					]
+				},
+				"description": "Se espera null"
+			},
+			"response": []
+		},
+		{
+			"name": "ActualizarVideoDigital",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\": \"BIBLIOTECA\", \"director\": \"Quentin Jerome Tarantino\", \"idioma\": \"ingles\", \"subtitulos\": \"True\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videosdigitales",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EliminarBiblioteca",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videosdigitales",
+						"1"
+					]
+				},
+				"description": "Se espera null"
+			},
+			"response": []
+		}
+	]
+}
