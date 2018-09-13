@@ -23,8 +23,9 @@ import java.util.Date;
  * <pre>
  *
  *   {
- *      "id": 000001,
+ *      "id": 000001
  *      "fechaReserva": "DD/MM/YYYY"
+ *      "idRecursoReservado":12354564
  *  
  *   }
  *
@@ -45,6 +46,11 @@ public class ReservaDTO implements Serializable {
      * fecha de una reserva
      */
     private Date fechaReserva;
+    
+    /**
+     * identificador del recurso que se quiere reservar
+     */
+    private Long idRecursoReservado;
     
     //__________________________________________________________________________
     //Constructores
