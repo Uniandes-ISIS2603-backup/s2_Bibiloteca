@@ -1,4 +1,4 @@
-package co.uniandes.csw.biblioteca.ejb;
+package co.edu.uniandes.csw.biblioteca.ejb;
 
 import co.edu.uniandes.csw.bibilioteca.entities.VideoEntity;
 import co.edu.uniandes.csw.biblioteca.persistence.*;
