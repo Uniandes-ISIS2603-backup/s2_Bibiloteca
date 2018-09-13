@@ -7,7 +7,10 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -43,6 +46,21 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     /**
      * Aquí iría la relación con el usuario o con el que le toque porque aún no se ha decidido tiene que ser ManyToOne
      */
+    /**
+     * Un prestamo solo tiene un prestamo
+     */
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private UsuarioEntity usuario;
+    
+    
+    private LibroEntity libro;
+    
+    private VideoEntity video;
+    
+    private VideoDigitalEntity videoDigital;
+    
+    private SalaEntity sala;
+    
     
     //-------------------------------------------------------------------------
     // MÉTODOS  
@@ -101,6 +119,14 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     public boolean getRetornado()
     {
         return retornado;
+    }
+
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
     }
     
 }
