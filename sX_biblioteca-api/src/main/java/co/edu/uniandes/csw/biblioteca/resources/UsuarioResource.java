@@ -17,7 +17,7 @@ import javax.ws.rs.Produces;
  *
  * @author Juan Nicolás García
  */
-@Path("usarios")
+@Path("usuarios")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

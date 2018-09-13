@@ -7,36 +7,42 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.ManyToOne;
 
 /**
- * Clase que representa una entidad
- * de la clase Reserva
+ * Clase que representa una entidad de la clase Reserva
+ *
  * @author Daniel Preciado
  */
 @Entity
-public class ReservaEntity extends BaseEntity implements Serializable {
-    
+public class ReservaEntity extends BaseEntity implements Serializable { 
+
     //__________________________________________________________________________
     //Atributos
     //__________________________________________________________________________
-    
     /**
      * fecha de una reserva
      */
    @Temporal(TemporalType.DATE)
     private Date fechaReserva;
-    
+
+    /**
+     * Una reserva solo tiene un usuario
+     */
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private UsuarioEntity usuario;
     //__________________________________________________________________________
     //Metodos
     //__________________________________________________________________________
 
-
     /**
      * obtiene la fecha de una reserva
-     * @return 
+     *
+     * @return
      */
     public Date getFechaReserva() {
         return fechaReserva;
@@ -44,11 +50,19 @@ public class ReservaEntity extends BaseEntity implements Serializable {
 
     /**
      * configura la fecha de una reserva
-     * @param fechaReserva 
+     *
+     * @param fechaReserva
      */
     public void setFechaReserva(Date fechaReserva) {
         this.fechaReserva = fechaReserva;
     }
-    
-    
+
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
 }

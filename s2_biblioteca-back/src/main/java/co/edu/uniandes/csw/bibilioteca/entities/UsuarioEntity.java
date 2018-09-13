@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -23,6 +24,42 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private String telefono;
     //Multa del usuario 
     private Integer multa;
+    
+    @PodamExclude
+    @OneToMany (mappedBy = "reserva" , cascade = CascadeType.PERSIST )
+    private ArrayList<ReservaEntity> reservas; 
+    
+    @PodamExclude
+    @OneToMany (mappedBy = "prestamo" , cascade = CascadeType.PERSIST )
+    private ArrayList<PrestamoEntity> prestamos;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "comentario" , cascade = CascadeType.PERSIST )
+    private ArrayList<ComentarioEntity> comentarios;
+
+    public ArrayList<ReservaEntity> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(ArrayList<ReservaEntity> reservas) {
+        this.reservas = reservas;
+    }
+
+    public ArrayList<PrestamoEntity> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(ArrayList<PrestamoEntity> prestamos) {
+        this.prestamos = prestamos;
+    }
+
+    public ArrayList<ComentarioEntity> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(ArrayList<ComentarioEntity> comentarios) {
+        this.comentarios = comentarios;
+    }
     
     public String getNombre() {
         return nombre;
