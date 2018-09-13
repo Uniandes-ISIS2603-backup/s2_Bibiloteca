@@ -6,6 +6,9 @@
 package co.edu.uniandes.csw.biblioteca.ejb;
 
 import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.VideoEntity;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.BibliotecaPersistence;
 import java.util.List;
@@ -93,5 +96,31 @@ public class BibliotecaLogic
         BibliotecaEntity newEntity = persistence.update(bibliotecaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la biblioteca con id = {0}", bibliotecaEntity.getId());
         return newEntity;
+    }
+    
+     /**
+     * Borrar una biblioteca
+     *
+     * @param bibliotecaId: id de la biblioteca a borrar
+     * @throws BusinessLogicException Si la biblioteca a eliminar tiene libros o video o salas. 
+     */
+    public void deleteEditorial(Long bibliotecaId) throws BusinessLogicException 
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la biblioteca con id = {0}", bibliotecaId);
+        // Note que, por medio de la inyección de dependencias se llama al método "delete(id)" que se encuentra en la persistencia.
+        List<LibroEntity> books = getBiblioteca(bibliotecaId).getLibros();
+        List<SalaEntity> salas = getBiblioteca(bibliotecaId).getSalas();
+        List<VideoEntity> videos = getBiblioteca(bibliotecaId).getVideos();
+        if (books != null && !books.isEmpty()) {
+            throw new BusinessLogicException("No se puede borrar la biblioteca con id = " + bibliotecaId + " porque tiene libros asociados");
+        }         
+        else if (salas != null && !salas.isEmpty()) {
+            throw new BusinessLogicException("No se puede borrar la biblioteca con id = " + bibliotecaId + " porque tiene salas asociados");
+        }
+         else if (videos!= null && !videos.isEmpty()) {
+            throw new BusinessLogicException("No se puede borrar la biblioteca con id = " + bibliotecaId + " porque tiene videos asociados");
+        }
+        persistence.delete(bibliotecaId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la biblioteca con id = {0}", bibliotecaId);
     }
 }
