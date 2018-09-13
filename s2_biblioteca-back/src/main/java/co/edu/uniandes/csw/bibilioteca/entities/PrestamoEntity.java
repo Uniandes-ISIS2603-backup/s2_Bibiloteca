@@ -90,7 +90,7 @@ public class PrestamoEntity extends BaseEntity implements Serializable
      */
     public void setFechaDeEntrega(Date pFechaDeEntrega)
     {
-        this.fechaDeSalida= pFechaDeEntrega;
+        this.fechaDeEntrega= pFechaDeEntrega;
     }
     
     /**
