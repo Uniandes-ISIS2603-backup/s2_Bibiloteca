@@ -5,19 +5,19 @@
  */
 package co.edu.uniandes.csw.biblioteca.test.persistence;
 
-import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
-import co.edu.uniandes.csw.biblioteca.persistence.BibliotecaPersistence;
+import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
+import co.edu.uniandes.csw.biblioteca.persistence.PrestamoPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
+import org.junit.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,23 +25,24 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- * Pruebas de persistencia para la biblioteca
+ *  Purebas de presistencia de Prestamo
  * 
  * @author David Eduardo Saavedra Hernandez
  */
 @RunWith(Arquillian.class)
-public class BibliotecaPersistenceTest 
+public class PrestamoPersistenceTest 
 {
+    
     @Inject
-    private BibliotecaPersistence bibliotecaPersistence;
-
+    private PrestamoPersistence prestamoPersistence;
+     
     @PersistenceContext
     private EntityManager em;
-
+       
     @Inject
     UserTransaction utx;
-
-    private List<BibliotecaEntity> data = new ArrayList<BibliotecaEntity>();
+    
+    private List<PrestamoEntity> data = new ArrayList<PrestamoEntity>();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -51,12 +52,12 @@ public class BibliotecaPersistenceTest
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(BibliotecaEntity.class.getPackage())
-                .addPackage(BibliotecaPersistence.class.getPackage())
+                .addPackage(PrestamoEntity.class.getPackage())
+                .addPackage(PrestamoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      */
@@ -77,12 +78,12 @@ public class BibliotecaPersistenceTest
             }
         }
     }
-    
+
     /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from BibliotecaEntity").executeUpdate();
+        em.createQuery("delete from PrestamoEntity").executeUpdate();
     }
     
     /**
@@ -93,7 +94,7 @@ public class BibliotecaPersistenceTest
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
 
-            BibliotecaEntity entity = factory.manufacturePojo(BibliotecaEntity.class);
+            PrestamoEntity entity = factory.manufacturePojo(PrestamoEntity.class);
 
             em.persist(entity);
 
@@ -101,33 +102,32 @@ public class BibliotecaPersistenceTest
         }
     }
     
-    
-    /**
-     * Prueba para crear una Biblioteca
+     /**
+     * Prueba para crear un Prestamo.
      */
     @Test
-    public void createBibliotecaTest() {
+    public void createPrestamoTest() {
         PodamFactory factory = new PodamFactoryImpl();
-       BibliotecaEntity newEntity = factory.manufacturePojo(BibliotecaEntity.class);
-        BibliotecaEntity result = bibliotecaPersistence.create(newEntity);
+        PrestamoEntity newEntity = factory.manufacturePojo(PrestamoEntity.class);
+        PrestamoEntity result = prestamoPersistence.create(newEntity);
 
         Assert.assertNotNull(result);
 
-        BibliotecaEntity entity = em.find(BibliotecaEntity.class, result.getId());
+        PrestamoEntity entity = em.find(PrestamoEntity.class, result.getId());
 
         Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
     /**
-     * Prueba para consultar la lista de Bibliotecas.
+     * Prueba para consultar la lista de Prestamos.
      */
     @Test
-    public void getBibliotecasTest() {
-        List<BibliotecaEntity> list = bibliotecaPersistence.findAll();
+    public void getPrestamosTest() {
+        List<PrestamoEntity> list = prestamoPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for (BibliotecaEntity ent : list) {
+        for (PrestamoEntity ent : list) {
             boolean found = false;
-            for (BibliotecaEntity entity : data) {
+            for (PrestamoEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -137,56 +137,43 @@ public class BibliotecaPersistenceTest
     }
     
     /**
-     * Prueba para consultar una biblioteca.
+     * Prueba para consultar un Prestamo.
      */
     @Test
-    public void getBibliotecaTest() {
-        BibliotecaEntity entity = data.get(0);
-        BibliotecaEntity newEntity = bibliotecaPersistence.find(entity.getId());
+    public void getPrestamoTest() {
+        PrestamoEntity entity = data.get(0);
+        PrestamoEntity newEntity = prestamoPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getId(), newEntity.getId());
     }
     
     /**
-     * Prueba para eliminar una Biblioteca.
+     * Prueba para eliminar una Editorial.
      */
     @Test
-    public void deleteBibliotecaTest() {
-        BibliotecaEntity entity = data.get(0);
-        bibliotecaPersistence.delete(entity.getId());
-        BibliotecaEntity deleted = em.find(BibliotecaEntity.class, entity.getId());
+    public void deletePrestamoTest() {
+        PrestamoEntity entity = data.get(0);
+        prestamoPersistence.delete(entity.getId());
+        PrestamoEntity deleted = em.find(PrestamoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
     
-     /**
-     * Prueba para actualizar una Biblioteca.
+    /**
+     * Prueba para actualizar un Prestamo. 
      */
     @Test
-    public void updateBibliotecaTest() {
-        BibliotecaEntity entity = data.get(0);
+    public void updatePrestamoTest() {
+        PrestamoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        BibliotecaEntity newEntity = factory.manufacturePojo(BibliotecaEntity.class);
+        PrestamoEntity newEntity = factory.manufacturePojo(PrestamoEntity.class);
 
         newEntity.setId(entity.getId());
 
-        bibliotecaPersistence.update(newEntity);
+        prestamoPersistence.update(newEntity);
 
-        BibliotecaEntity resp = em.find(BibliotecaEntity.class, entity.getId());
+        PrestamoEntity resp = em.find(PrestamoEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
     }
-    
-    /**
-     * Prueba para consultar una Biblioteca por nombre.
-     */
-    @Test
-    public void findBibliotecaByNameTest() {
-       BibliotecaEntity entity = data.get(0);
-        BibliotecaEntity newEntity = bibliotecaPersistence.findByName(entity.getNombre());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
 
-        newEntity = bibliotecaPersistence.findByName(null);
-        Assert.assertNull(newEntity);
-    }
 }
