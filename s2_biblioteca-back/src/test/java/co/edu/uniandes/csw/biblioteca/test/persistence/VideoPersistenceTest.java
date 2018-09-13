@@ -10,7 +10,12 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import uk.co.jemos.podam.api.PodamFactory;
+import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
@@ -37,5 +42,48 @@ public class VideoPersistenceTest {
                 .addPackage(VideoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
+    }
+    
+    @Before
+    public void configTest() {
+        try {
+            ut.begin();
+            em.joinTransaction();
+            em.createQuery("delete from VideoEntity").executeUpdate();
+            insertData();
+            ut.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                ut.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+    
+    private void insertData() {
+    PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i < 3; i++) {
+
+        VideoEntity et = factory.manufacturePojo(VideoEntity.class);
+
+        em.persist(et);
+
+        listVE.add(et);
+        }
+    }
+    
+    @Test
+    public void createEditorialTest() {
+    PodamFactory factory = new PodamFactoryImpl();
+    VideoEntity newVE = factory.manufacturePojo(VideoEntity.class);
+    VideoEntity result = vp.create(newVE);
+
+    Assert.assertNotNull(result);
+
+    VideoEntity entity = em.find(VideoEntity.class, result.getId());
+
+    Assert.assertEquals(newVE.getNombre(), entity.getNombre());
     }
 }
