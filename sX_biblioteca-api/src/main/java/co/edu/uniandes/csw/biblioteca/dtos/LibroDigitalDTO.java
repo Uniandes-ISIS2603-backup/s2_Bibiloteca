@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.biblioteca.dtos;
 
-import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.LibroDigitalEntity;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -111,7 +111,7 @@ public class LibroDigitalDTO implements Serializable {
             this.editorial = libroDigitalEntity.getEditorial();
             this.edicion = libroDigitalEntity.getEdicion();
             this.idioma = libroDigitalEntity.getIdioma();
-            this.calificacionPromedio = libroDigitalEntity.getCalificacion();
+  //el          this.calificacionPromedio = libroDigitalEntity.getCalificacion();
             
         }
         
@@ -269,9 +269,9 @@ public class LibroDigitalDTO implements Serializable {
      * 
      * @return 
      */
-    public LibroEntity toEntity()
+    public LibroDigitalEntity toEntity()
     {
-        LibroEntity libro = new LibroEntity();
+        LibroDigitalEntity libro = new LibroDigitalEntity();
         libro.setAutor(autor);
         libro.setCalificacionPromedio(calificacionPromedio);
         libro.setEdicion(edicion);
