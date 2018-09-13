@@ -50,7 +50,7 @@ public class PrestamoPersistence
      */
     public List<PrestamoEntity> findAll() {
         LOGGER.log(Level.INFO, "Consultando todos los prestamos");
-        Query q = em.createQuery("select u from PrestamosEntity u");
+        Query q = em.createQuery("select u from PrestamoEntity u");
         return q.getResultList();
     }
     
