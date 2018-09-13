@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.ManyToOne;
 
 /**
@@ -17,7 +19,7 @@ import javax.persistence.ManyToOne;
  * @author Daniel Preciado
  */
 @Entity
-public class ReservaEntity extends BaseEntity implements Serializable {
+public class ReservaEntity extends BaseEntity implements Serializable { 
 
     //__________________________________________________________________________
     //Atributos
@@ -25,6 +27,7 @@ public class ReservaEntity extends BaseEntity implements Serializable {
     /**
      * fecha de una reserva
      */
+   @Temporal(TemporalType.DATE)
     private Date fechaReserva;
 
     /**

@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.csw.biblioteca.dtos;
 
+
 import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
-import co.edu.uniandes.csw.biblioteca.adapters.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -40,7 +40,34 @@ public class PrestamoDTO implements Serializable
     */
     private Long id;
     
+    /**
+    * Relación a una usuario dado que esta tiene cardinalidad 1.
+    * 
+    */
+    private UsuarioDTO usuario;
     
+    // Las siguientes relaciones son exclusivas sólo se puede tener relación con una de las siguientes. 
+    /**
+     * Relacion con el libro. 
+     */
+     private LibroDTO libro;
+
+    
+    
+     /**
+     * Relacion con el video. 
+     */
+    private VideoDTO video;
+    
+     /**
+     * Relacion con el videoDigital 
+     */
+     private VideoDigitalDTO videoDigital;
+        
+     /**
+     * Relacion con la Sala.
+     */
+    private SalaDTO sala;
     //----------------------------------------------
     // CONSTRUCTOR
     //----------------------------------------------
@@ -54,7 +81,7 @@ public class PrestamoDTO implements Serializable
     
      /**
      * Constructor a partir de la entidad
-     *
+     * Dado que prestamo sólo tiene un recurso entonces se hace la validadción para cada recurso y el que no sea nulo es el que tiene el prestamo
      * @param prestamoEntity La entidad de la biblioteca
      */
     public PrestamoDTO(PrestamoEntity prestamoEntity) {
@@ -64,7 +91,35 @@ public class PrestamoDTO implements Serializable
             this.fechaDeSalida = prestamoEntity.getFechaDeSalida();
             this.retornado = prestamoEntity.getRetornado();
             this.id = prestamoEntity.getId();
-            // Ac´á iría la relación con el usuario.
+            if (prestamoEntity.getUsuario()!= null) {
+                this.usuario = new UsuarioDTO(prestamoEntity.getUsuario());
+            } else {
+                this.usuario = null;
+            }
+            if( prestamoEntity.getLibro() != null)
+            {
+                this.libro = new LibroDTO(prestamoEntity.getLibro());
+            }
+            else if ( prestamoEntity.getVideo() != null)
+            {
+                this.video = new VideoDTO(prestamoEntity.getVideo());    
+            }
+            else if ( prestamoEntity.getVideoDigital() != null)
+            {
+                this.videoDigital = new VideoDigitalDTO(prestamoEntity.getVideoDigital());    
+            }
+            else if ( prestamoEntity.getSala() != null)
+            {
+                this.sala = new SalaDTO(prestamoEntity.getSala());    
+            }
+            else
+            {
+                this.sala = null;
+                this.libro = null;
+                this.video = null;
+                this.videoDigital = null;
+                
+            }
         }
     }
     
@@ -83,8 +138,62 @@ public class PrestamoDTO implements Serializable
         prestamoEntity.setFechaDeEntrega(this.fechaDeEntrega);
         prestamoEntity.setFechaDeSalida(this.fechaDeSalida);
         prestamoEntity.setRetornado(this.retornado);
-        //Faltaría el usuarioEnttity cuando mi compañero lo haga       
+        if (this.usuario != null) {
+            prestamoEntity.setUsuario(this.usuario.toEntity());
+        }
+        if( prestamoEntity.getLibro() != null)
+        {
+            prestamoEntity.setLibro(this.libro.toEntity());
+        }
+        else if ( prestamoEntity.getVideo() != null)
+        {
+            prestamoEntity.setVideo(this.video.toEntity());    
+        }
+        else if ( prestamoEntity.getVideoDigital() != null)
+        {
+           prestamoEntity.setVideoDigital(this.videoDigital.toEntity());   
+        }
+        else if ( prestamoEntity.getSala() != null)
+        {
+            prestamoEntity.setSala(this.sala.toEntity());   
+        }
+        
         return prestamoEntity;
+    }
+    /**
+     * Devuelve si el prestamo está retornado.
+     *
+     * @return the id
+     */
+    public Boolean getRetornado() {
+        return retornado;
+    }
+    
+    /**
+     * Modifica el estado del préstamo. Retornado o no retornado
+     *
+     * @param pRetornado retornado para poner
+     */
+    public void setRetornado(Boolean pRetornado) {
+        this.retornado = pRetornado;
+    }
+    
+    /**
+     * Devuelve el usuario del prestamo. 
+     *
+     * @return El usuario
+     */
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+    
+    /**
+     * Modifica elusuario del prestamo
+     *
+     * @param pUsuario the id to set
+     */
+    public void setUsuario(UsuarioDTO pUsuario) {
+        this.usuario = pUsuario;
     }
     
     /**
@@ -158,6 +267,70 @@ public class PrestamoDTO implements Serializable
     public boolean darRetornado()
     {
         return retornado;
+    }
+    
+    /**
+     * Método que da la fecha de entrega del libro
+     * @return Libro Fisico
+     */
+    public LibroDTO getLibro() {
+        return libro;
+    }
+    
+    /**
+     * Método para cambiar si el libro ha sido prestado. 
+     * @param pLibro LibroDTO con el nuevo libro. 
+     */
+    public void setLibro(LibroDTO pLibro) {
+        this.libro = pLibro;
+    }
+
+    /**
+     * Método que da el video del prestamo
+     * @return Video
+     */
+    public VideoDTO getVideo() {
+        return video;
+    }
+
+    /**
+     * Método para cambiar el video del prestamo. 
+     * @param pVideo VideoDTO con el nuevo video. 
+     */
+    public void setVideo(VideoDTO pVideo) {
+        this.video = pVideo;
+    }
+
+    /**
+     * Método que da el video digital del prestamo. 
+     * @return Video digital 
+     */
+    public VideoDigitalDTO getVideoDigital() {
+        return videoDigital;
+    }
+
+    /**
+     * Método para cambiar el video digital del libro. 
+     * @param pVideoDigital VideoDigitalDTO con el valor para videoDigital
+     */
+    public void setVideoDigital(VideoDigitalDTO pVideoDigital) {
+        this.videoDigital = pVideoDigital;
+    }
+
+    /**
+     * Método que da la sala del prestamo. 
+     * @return Sala
+     */
+    public SalaDTO getSala() {
+        return sala;
+    }
+
+    /**
+     * Método para cambiar la sala del prestamo. 
+     * @param pSala SalaEntity con el valor sala.
+     */
+    public void setSala(SalaDTO pSala) {
+        this.sala = pSala;
     }
     
    
