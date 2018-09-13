@@ -6,13 +6,14 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import javax.persistence.Entity;
 
 /**
  * Clase que representa una entidad
  * de la clase LibroDigital
  * @author Daniel Preciado
  */
+@Entity
 public class LibroDigitalEntity extends BaseEntity implements Serializable  {
     
     //__________________________________________________________________________
