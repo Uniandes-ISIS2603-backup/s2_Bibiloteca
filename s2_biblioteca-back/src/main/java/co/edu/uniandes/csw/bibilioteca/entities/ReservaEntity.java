@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * Clase que representa una entidad
@@ -24,6 +26,7 @@ public class ReservaEntity extends BaseEntity implements Serializable {
     /**
      * fecha de una reserva
      */
+   @Temporal(TemporalType.DATE)
     private Date fechaReserva;
     
     //__________________________________________________________________________
