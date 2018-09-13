@@ -111,7 +111,7 @@ public class LibroDigitalDTO implements Serializable {
             this.editorial = libroDigitalEntity.getEditorial();
             this.edicion = libroDigitalEntity.getEdicion();
             this.idioma = libroDigitalEntity.getIdioma();
-  //el          this.calificacionPromedio = libroDigitalEntity.getCalificacion();
+            this.calificacionPromedio = libroDigitalEntity.getCalificacionPromedio();
             
         }
         
@@ -266,8 +266,8 @@ public class LibroDigitalDTO implements Serializable {
     }
     
     /**
-     * 
-     * @return 
+     * Convertir el DTO LibroDigital a Entity
+     * @return Un Entity con los valores del DTO
      */
     public LibroDigitalEntity toEntity()
     {
@@ -281,11 +281,6 @@ public class LibroDigitalDTO implements Serializable {
         libro.setIsbn(isbn);
         libro.setNombre(nombre);
         return libro;
-    }
-    @Override
-    public String toString() 
-    {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
     
 }

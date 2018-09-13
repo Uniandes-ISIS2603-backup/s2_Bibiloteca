@@ -9,93 +9,180 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *
+ * Clase que representa una entidad
+ * de la clase LibroDigital
  * @author Daniel Preciado
  */
 public class LibroDigitalEntity extends BaseEntity implements Serializable  {
-   //Nombre del libro
+    
+    //__________________________________________________________________________
+    //Atributos
+    //__________________________________________________________________________
+    
+   /**
+    * Nombre del libro
+    */
     private String nombre; 
     
-    //Codigo id del libro
+    /**
+     * Codigo id del libro
+     */
     private String isbn; 
     
-    //Autor del libro
+    /**
+     * Autor del libro
+     */
     private String autor;
     
-    //Editorial del libro
+    /**
+     * Editorial del libro
+     */
     private String editorial;
     
-    //Edicion del libro
+    /**
+     * Edicion del libro
+     */
     private String edicion;
     
-    //Idioma del libro
+    /**
+     * Idioma del libro
+     */
     private String idioma;
-    
-    
-    //Calificacion promedio de los review
-    private Integer calificacionPromedio;
 
+    /**
+     * Calificacion promedio de los review
+     */
+    private Integer calificacionPromedio;
     
-    public String getNombre() {
+    //__________________________________________________________________________
+    //Metodos
+    //__________________________________________________________________________
+    
+    /**
+     * obtiene el nombre de un libro digital
+     * @return nombre
+     */
+    public String getNombre()
+    {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    /**
+     * asigna el nombre al librodigital
+     * @param nombre 
+     */
+    public void setNombre(String nombre) 
+    {
         this.nombre = nombre;
     }
 
-    public String getIsbn() {
+    /**
+     * ontiene el isbn de un libro digital
+     * @return isbn
+     */
+    public String getIsbn()
+    {
         return isbn;
     }
-
-    public void setIsbn(String isbn) {
+    
+    /**
+     * asigna el isbn al libro digital
+     * @param isbn 
+     */
+    public void setIsbn(String isbn) 
+    {
         this.isbn = isbn;
     }
 
-    public String getAutor() {
+    /**
+     * obtiene el nombre del autor del libro digital
+     * @return autor
+     */
+    public String getAutor() 
+    {
         return autor;
     }
-
-    public void setAutor(String autor) {
+   
+    /**
+     * asigna el autor del libro digital
+     * @param autor 
+     */
+    public void setAutor(String autor) 
+    {
         this.autor = autor;
     }
-
-    public String getEditorial() {
+    
+    /**
+     * obtiene la editorial de ub libro digital
+     * @return editorial
+     */
+    public String getEditorial() 
+    {
         return editorial;
     }
-
-    public void setEditorial(String editorial) {
+    
+    /**
+     * asigna la editorial a un libro digital
+     * @param editorial 
+     */
+    public void setEditorial(String editorial)
+    {
         this.editorial = editorial;
     }
-
-    public String getEdicion() {
+    
+    /**
+     * obtiene la edición de un libro digital
+     * @return edicion
+     */
+    public String getEdicion() 
+    {
         return edicion;
     }
-
-    public void setEdicion(String edicion) {
+    
+    /**
+     * asigna la edición ee un libro digital
+     * @param edicion 
+     */
+    public void setEdicion(String edicion)
+    {
         this.edicion = edicion;
     }
-
-    public String getIdioma() {
+    
+    /**
+     * devuelve el idioma del libro digital
+     * @return idioma
+     */
+    public String getIdioma() 
+    {
         return idioma;
     }
-
-    public void setIdioma(String idioma) {
+    
+    /**
+     * asigna el idioma en el cual se encuentra el libro digital
+     * @param idioma 
+     */
+    public void setIdioma(String idioma)
+    {
         this.idioma = idioma;
     }
-
- 
-
-    public Integer getCalificacionPromedio() {
+    
+    /**
+     * obtiene la calificación promedio de un libro digital
+     * @return calificacionPromedio
+     */
+    public Integer getCalificacionPromedio()
+    {
         return calificacionPromedio;
     }
-
-    public void setCalificacionPromedio(Integer calificacionPromedio) {
+    
+    /**
+     * asigna una calificacionPromedio ql libro digital
+     * @param calificacionPromedio 
+     */
+    public void setCalificacionPromedio(Integer calificacionPromedio)
+    {
         this.calificacionPromedio = calificacionPromedio;
     }
-    
-    
-    
     
      
 }
