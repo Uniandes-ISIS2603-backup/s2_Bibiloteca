@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.biblioteca.dtos;
 import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.VideoEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,6 +41,11 @@ public class BibliotecaDetailDTO extends BibliotecaDTO implements Serializable
      */
     private List<SalaDTO> salas;
     
+    /**
+     * Atributo que representa los usuarios que tiene la bilioteca
+     * Relacion cero a muchos
+     */
+    private List<UsuarioDTO> usuarios;
     
     //-----------------------------------------------------------------------------
     // ATRIBUTOS
@@ -79,8 +85,16 @@ public class BibliotecaDetailDTO extends BibliotecaDTO implements Serializable
                 videos.add(new VideoDTO(entityVideo));
             }
         }
+         
+         if (bibliotecaEntity.getUsuarios()!= null) {
+            usuarios = new ArrayList<>();
+            for (UsuarioEntity entityUsuario : bibliotecaEntity.getUsuarios()) {
+               usuarios.add(new UsuarioDTO(entityUsuario));
+            }
+        }
     }
-    
+
+   
     
     //-----------------------------------------------------------------------------
     // MÉTODOS
@@ -174,4 +188,24 @@ public class BibliotecaDetailDTO extends BibliotecaDTO implements Serializable
     public void setSalas(List<SalaDTO> pSalas) {
         this.salas = pSalas;
     }
+    
+    
+    /**
+     * Devuelve los usuarios de la biblioteca. 
+     *
+     * @return Lista de DTOs de Usuarios
+     */
+    public List<UsuarioDTO> getUsuarios() {
+        return usuarios;
+    }
+
+     /**
+     * Modifica los usuarios de la biblioteca. 
+     *
+     * @param pUsuarios Las nuevos vsalas
+     */
+    public void setUsuarios(List<UsuarioDTO> pUsuarios) {
+        this.usuarios = pUsuarios;
+    }
+    
 }

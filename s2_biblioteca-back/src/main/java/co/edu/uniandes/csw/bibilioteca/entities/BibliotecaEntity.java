@@ -71,9 +71,34 @@ public class BibliotecaEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = false)
     private List<SalaEntity> salas = new ArrayList<SalaEntity>();
 
+    
+    /**
+     * representa los usuarios que tiene la biblioteca
+     */
+    @PodamExclude
+    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = false)
+    private List<UsuarioEntity> usuarios = new ArrayList<UsuarioEntity>();
   //----------------------------------------------------------
   // METODOS
   //----------------------------------------------------------
+
+    /**
+     * Devuelve los usuarios de la biblioteca
+     *
+     * @return usuarios de la biblioteca. 
+     */
+    public List<UsuarioEntity> getUsuarios() {
+        return usuarios;
+    }
+
+    /**
+     * Modifica los usuarios de la biblioteca
+     *
+     * @param pUsuarios la nueva zona
+     */
+    public void setUsuarios(List<UsuarioEntity> pUsuarios) {
+        this.usuarios = pUsuarios;
+    }
     
    
  /**
