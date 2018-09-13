@@ -7,12 +7,12 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -44,27 +44,57 @@ public class PrestamoEntity extends BaseEntity implements Serializable
      
       
     /**
-     * Aquí iría la relación con el usuario o con el que le toque porque aún no se ha decidido tiene que ser ManyToOne
+     * Relación con el usuario.
      */
-    /**
-     * Un prestamo solo tiene un prestamo
-     */
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @PodamExclude
+    @ManyToOne
     private UsuarioEntity usuario;
-    
-    
+
+    /**
+     * Relacion con el libro. 
+     */
+    @PodamExclude
+    @OneToOne
     private LibroEntity libro;
     
+     /**
+     * Relacion con el video. 
+     */
+    @PodamExclude
+    @OneToOne
     private VideoEntity video;
     
+     /**
+     * Relacion con el videoDigital 
+     */
+    @PodamExclude
+    @OneToOne
     private VideoDigitalEntity videoDigital;
-    
+        
+     /**
+     * Relacion con la Sala.
+     */
+    @PodamExclude
+    @OneToOne
     private SalaEntity sala;
-    
-    
     //-------------------------------------------------------------------------
     // MÉTODOS  
     //-------------------------------------------------------------------------
+    /**
+     * Método que da el usuario del prestamo
+     * @return Usuario del prestamo
+     */
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+    /**
+     * Método que modifica el usuario del prestamo
+     */
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+    
+   
  
     /**
      * Método para cambiar la fecha de salida
@@ -103,7 +133,7 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     }
 
     /**
-     * Método para cambiar si el libro ha sido retornado o no
+     * Método para cambiar si el prestamo ha sido retornado o no
      * @param pRetornado Booleano con el valor para retornado
      */
     public void setRetornado (boolean pRetornado)
@@ -112,7 +142,7 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     }
     
     /**
-     * Devuelve si el libro ha sido retornado o no
+     * Devuelve si el prestamo ha sido retornado o no
      * @return  true: si el libro ha sido retornado
      *          false: si el libro no ha sido retornado
      */
@@ -120,13 +150,68 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     {
         return retornado;
     }
-
-    public UsuarioEntity getUsuario() {
-        return usuario;
+    
+    /**
+     * Método que da la fecha de entrega del libro
+     * @return Libro Fisico
+     */
+    public LibroEntity getLibro() {
+        return libro;
+    }
+    
+    /**
+     * Método para cambiar si el libro ha sido prestado. 
+     * @param pLibro LibroEntity con el nuevo libro. 
+     */
+    public void setLibro(LibroEntity pLibro) {
+        this.libro = pLibro;
     }
 
-    public void setUsuario(UsuarioEntity usuario) {
-        this.usuario = usuario;
+    /**
+     * Método que da el video del prestamo
+     * @return Video
+     */
+    public VideoEntity getVideo() {
+        return video;
+    }
+    /**
+     * Método para cambiar el video del prestamo. 
+     * @param pVideo VideoEntity con el nuevo video. 
+     */
+    public void setVideo(VideoEntity pVideo) {
+        this.video = pVideo;
+    }
+
+    /**
+     * Método que da el video digital del prestamo. 
+     * @return Video digital 
+     */
+    public VideoDigitalEntity getVideoDigital() {
+        return videoDigital;
+    }
+
+    /**
+     * Método para cambiar el video digital del libro. 
+     * @param pVideoDigital VideoDigitalEntity con el valor para videoDigital
+     */
+    public void setVideoDigital(VideoDigitalEntity pVideoDigital) {
+        this.videoDigital = pVideoDigital;
+    }
+
+    /**
+     * Método que da la sala del prestamo. 
+     * @return Sala
+     */
+    public SalaEntity getSala() {
+        return sala;
+    }
+    
+    /**
+     * Método para cambiar la sala del prestamo. 
+     * @param pSala SalaEntity con el valor sala.
+     */
+    public void setSala(SalaEntity pSala) {
+        this.sala = pSala;
     }
     
 }
