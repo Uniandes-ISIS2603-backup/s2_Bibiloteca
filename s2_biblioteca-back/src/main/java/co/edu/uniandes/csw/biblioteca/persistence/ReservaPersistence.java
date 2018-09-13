@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.biblioteca.persistence;
 
 import co.edu.uniandes.csw.bibilioteca.entities.ReservaEntity;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,7 +117,7 @@ public class ReservaPersistence {
      * @return null si no existe ninguna reserva con la fecha dada.
      * Si existe alguna devuelve la primera.
      */
-    public ReservaEntity findByDate(String pFechaReserva)
+    public ReservaEntity findByDate(Date pFechaReserva)
     {
         LOGGER.log(Level.INFO, "Consultando reserva por fecha ", pFechaReserva);
         TypedQuery query = entityManager.createQuery("Select e From ReservaEntity e where e.fechaReserva = :pFechaReserva", ReservaEntity.class);
