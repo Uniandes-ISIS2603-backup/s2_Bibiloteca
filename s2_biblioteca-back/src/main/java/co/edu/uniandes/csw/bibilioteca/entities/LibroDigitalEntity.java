@@ -5,10 +5,12 @@
  */
 package co.edu.uniandes.csw.bibilioteca.entities;
 
+import java.io.Serializable;
+
 /**
  *
- * @author estudiante
+ * @author Daniel Preciado
  */
-public class LibroDigitalEntity {
+public class LibroDigitalEntity extends BaseEntity implements Serializable  {
     
 }
