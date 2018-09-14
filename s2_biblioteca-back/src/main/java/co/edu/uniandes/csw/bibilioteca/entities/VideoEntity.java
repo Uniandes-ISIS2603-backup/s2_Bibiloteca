@@ -22,6 +22,14 @@ import uk.co.jemos.podam.common.PodamExclude;
    @ManyToOne(cascade = CascadeType.PERSIST)
    private BibliotecaEntity biblioteca;
 
+    public BibliotecaEntity getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(BibliotecaEntity biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
 
 
    public String getNombre(){

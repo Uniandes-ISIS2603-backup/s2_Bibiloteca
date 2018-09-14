@@ -17,8 +17,9 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
- *
- * @author estudiante
+ * Clase que implementa la conexion con la persistencia para la relación entre
+ * la entidad de Biblioteca y libro.
+ * @author estudiante David Eduardo Saavedra Hernandez
  */
 @Stateless
 public class BibliotecaLibrosLogic 
