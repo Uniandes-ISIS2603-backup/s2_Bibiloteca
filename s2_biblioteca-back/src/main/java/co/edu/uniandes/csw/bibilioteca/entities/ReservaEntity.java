@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * Clase que representa una entidad de la clase Reserva
@@ -33,8 +35,38 @@ public class ReservaEntity extends BaseEntity implements Serializable {
     /**
      * Una reserva solo tiene un usuario
      */
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @PodamExclude
+    @ManyToOne
     private UsuarioEntity usuario;
+    
+    /**
+     * Relacion con el libro. 
+     */
+    @PodamExclude
+    @ManyToOne
+    private LibroEntity libro;
+    
+     /**
+     * Relacion con el video. 
+     */
+    @PodamExclude
+    @ManyToOne
+    private VideoEntity video;
+    
+     /**
+     * Relacion con el videoDigital 
+     */
+    @PodamExclude
+    @ManyToOne
+    private VideoDigitalEntity videoDigital;
+        
+     /**
+     * Relacion con la Sala.
+     */
+    @PodamExclude
+    @ManyToOne
+    private SalaEntity sala;
+    
     //__________________________________________________________________________
     //Metodos
     //__________________________________________________________________________

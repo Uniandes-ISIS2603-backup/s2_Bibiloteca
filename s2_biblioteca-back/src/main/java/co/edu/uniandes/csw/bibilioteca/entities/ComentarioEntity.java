@@ -30,6 +30,13 @@ public class ComentarioEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private LibroEntity libro;
+    
+   /**
+     * Una reserva solo tiene un usuario
+     */
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
 
     public Double getNumeroEstrellas() {
         return numeroEstrellas;

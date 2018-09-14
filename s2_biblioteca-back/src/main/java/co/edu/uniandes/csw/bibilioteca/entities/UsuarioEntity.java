@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -15,6 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author estudiante
  */
+@Entity
 public class UsuarioEntity extends BaseEntity implements Serializable{
     //Nombre del usuario
     private String nombre;
@@ -26,17 +29,23 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private Integer multa;
     
     @PodamExclude
-    @OneToMany (mappedBy = "reserva" , cascade = CascadeType.PERSIST )
+    @OneToMany (mappedBy = "usuario" , cascade = CascadeType.PERSIST )
     private ArrayList<ReservaEntity> reservas; 
     
     @PodamExclude
-    @OneToMany (mappedBy = "prestamo" , cascade = CascadeType.PERSIST )
+    @OneToMany (mappedBy = "usuario" , cascade = CascadeType.PERSIST )
     private ArrayList<PrestamoEntity> prestamos;
     
     @PodamExclude
-    @OneToMany(mappedBy = "comentario" , cascade = CascadeType.PERSIST )
+    @OneToMany(mappedBy = "usuario" , cascade = CascadeType.PERSIST )
     private ArrayList<ComentarioEntity> comentarios;
 
+    /**
+     * Relación con el usuario.
+     */
+    @PodamExclude
+    @ManyToOne
+    private BibliotecaEntity biblioteca;
     public ArrayList<ReservaEntity> getReservas() {
         return reservas;
     }

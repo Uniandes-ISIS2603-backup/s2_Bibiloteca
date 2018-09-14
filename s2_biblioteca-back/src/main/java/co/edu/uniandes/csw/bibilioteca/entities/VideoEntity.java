@@ -28,7 +28,7 @@ import uk.co.jemos.podam.common.PodamExclude;
    private ArrayList<ReservaEntity> reservas = new ArrayList<>();
    
    @PodamExclude
-   @OneToMany(mappedBy = "video", cascade = CascadeType.PERSIST, orphanRemoval = true)
+   @OneToOne
    private ArrayList<PrestamoEntity> prestamos = new ArrayList<>();
 
     public BibliotecaEntity getBiblioteca() {
