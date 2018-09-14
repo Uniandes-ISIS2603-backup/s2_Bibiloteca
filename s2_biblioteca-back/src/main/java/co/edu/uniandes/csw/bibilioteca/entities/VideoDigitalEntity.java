@@ -22,9 +22,13 @@ public class VideoDigitalEntity extends BaseEntity implements Serializable {
     private String idioma;
     private Boolean subtitulos;
     
-    
+    @PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private PrestamoEntity prestamo;
 
-
+@PodamExclude
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private ReservaEntity reserva;
 
     public String getNombre() {
         return nombre;
