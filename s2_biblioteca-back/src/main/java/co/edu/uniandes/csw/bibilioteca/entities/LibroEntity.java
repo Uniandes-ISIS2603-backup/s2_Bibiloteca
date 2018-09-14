@@ -55,6 +55,14 @@ public class LibroEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private BibliotecaEntity biblioteca;
+
+    public BibliotecaEntity getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(BibliotecaEntity biblioteca) {
+        this.biblioteca = biblioteca;
+    }
     
     public String getNombre() {
         return nombre;
