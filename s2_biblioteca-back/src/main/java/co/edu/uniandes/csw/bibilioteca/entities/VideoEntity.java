@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
+import java.util.*;
 import javax.persistence.*;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -21,6 +22,14 @@ import uk.co.jemos.podam.common.PodamExclude;
    @PodamExclude
    @ManyToOne(cascade = CascadeType.PERSIST)
    private BibliotecaEntity biblioteca;
+   
+   @PodamExclude
+   @OneToMany(mappedBy = "video", cascade = CascadeType.PERSIST, orphanRemoval = true)
+   private ArrayList<ReservaEntity> reservas = new ArrayList<>();
+   
+   @PodamExclude
+   @OneToMany(mappedBy = "video", cascade = CascadeType.PERSIST, orphanRemoval = true)
+   private ArrayList<PrestamoEntity> prestamos = new ArrayList<>();
 
     public BibliotecaEntity getBiblioteca() {
         return biblioteca;
@@ -51,6 +60,14 @@ import uk.co.jemos.podam.common.PodamExclude;
    public Boolean getSubtitulos(){
      return subtitulos;
    }
+   
+   public ArrayList<ReservaEntity> getReservas(){
+       return reservas;
+   }
+   
+   public ArrayList<PrestamoEntity> getPrestamos(){
+       return prestamos;
+   }
 
 
    public void setNombre(String pNombre){
@@ -72,4 +89,13 @@ import uk.co.jemos.podam.common.PodamExclude;
    public void setSubtitulos(Boolean pSubtitulos){
      subtitulos = pSubtitulos;
    }
+   
+   public void setReservas(ArrayList<ReservaEntity> listaRE){
+       reservas = listaRE;
+   }
+   
+   public void setPrestamos(ArrayList<PrestamoEntity> listPE){
+       prestamos = listPE;
+   }
+   
  }

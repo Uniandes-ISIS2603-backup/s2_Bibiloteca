@@ -15,6 +15,8 @@ public class VideoDTO implements Serializable {
     private Integer unidadesDisponibles;
     private String idioma;
     private Boolean subtitulos;
+    
+    private BibliotecaDTO biblioteca;
 
     /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
@@ -30,6 +32,12 @@ public class VideoDTO implements Serializable {
             this.unidadesDisponibles = videoEntity.getUnidadesDis();
             this.idioma = videoEntity.getIdioma();
             this.subtitulos = videoEntity.getSubtitulos();
+            if(videoEntity.getBiblioteca() != null){
+                biblioteca = new BibliotecaDTO(videoEntity.getBiblioteca());
+            }
+            else{
+                biblioteca = null;
+            }
         }
     }
 
@@ -51,6 +59,9 @@ public class VideoDTO implements Serializable {
         ve.setUnidadesDis(this.unidadesDisponibles);
         ve.setIdioma(this.idioma);
         ve.setSubtitulos(this.subtitulos);
+        if(biblioteca != null){
+            ve.setBiblioteca(biblioteca.toEntity());
+        }
         return ve;
     }
 
@@ -77,6 +88,10 @@ public class VideoDTO implements Serializable {
     public Boolean getSubtitulos() {
         return subtitulos;
     }
+    
+    public BibliotecaDTO getBiblioteca(){
+        return biblioteca;
+    }
 
     public void setId(Long pID) {
         id = pID;
@@ -100,5 +115,9 @@ public class VideoDTO implements Serializable {
 
     public void setSubtitulos(Boolean pSubtitulos) {
         subtitulos = pSubtitulos;
+    }
+    
+    public void setBiblioteca(BibliotecaDTO pBiblioteca){
+        biblioteca = pBiblioteca;
     }
 }
