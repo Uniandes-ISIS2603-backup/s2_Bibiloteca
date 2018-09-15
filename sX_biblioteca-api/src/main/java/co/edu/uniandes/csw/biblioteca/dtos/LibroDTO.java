@@ -46,6 +46,9 @@ public class LibroDTO implements Serializable{
     //Calificacion promedio de los review
     private Integer calificacionPromedio;
     
+    private BibliotecaDTO biblioteca;
+    
+    
     public LibroDTO(){
         
     }
@@ -62,6 +65,14 @@ public class LibroDTO implements Serializable{
             this.usuariosListaEspera = 0;
             this.calificacionPromedio = 0;
             this.id = libro.getId();
+            if(libro.getBiblioteca()!= null)
+            {
+                this.biblioteca = new BibliotecaDTO(libro.getBiblioteca());
+            }
+            else
+            {
+                this.biblioteca = null;
+            }
         }
         
     }
@@ -145,6 +156,14 @@ public class LibroDTO implements Serializable{
         this.calificacionPromedio = calificacionPromedio;
     }
 
+    public BibliotecaDTO getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(BibliotecaDTO biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
     public LibroEntity toEntity(){
         LibroEntity libro = new LibroEntity();
         libro.setAutor(autor);
@@ -157,6 +176,10 @@ public class LibroDTO implements Serializable{
         libro.setNombre(nombre);
         libro.setUnidadesDisponibles(unidadesDisponibles);
         libro.setUsuariosListaEspera(usuariosListaEspera);
+        if(this.biblioteca != null)
+        {
+            libro.setBiblioteca(this.biblioteca.toEntity());
+        }
         return libro;
     }
     @Override

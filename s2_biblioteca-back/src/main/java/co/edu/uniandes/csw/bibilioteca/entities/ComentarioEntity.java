@@ -20,18 +20,18 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class ComentarioEntity extends BaseEntity implements Serializable {
-    
+
     private Double numeroEstrellas;
-    private String texto; 
+    private String texto;
     private String nombreUsuario;
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    
+
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private LibroEntity libro;
-    
-   /**
+
+    /**
      * Una reserva solo tiene un usuario
      */
     @PodamExclude
@@ -77,6 +77,13 @@ public class ComentarioEntity extends BaseEntity implements Serializable {
     public void setLibro(LibroEntity libro) {
         this.libro = libro;
     }
-    
-    
+
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+
 }

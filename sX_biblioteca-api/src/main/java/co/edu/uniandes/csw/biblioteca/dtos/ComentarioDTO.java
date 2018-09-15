@@ -31,6 +31,10 @@ public class ComentarioDTO implements Serializable{
     
     private Long id; 
     
+    private LibroDTO libro;
+    
+    private UsuarioDTO usuario;
+    
     public ComentarioDTO(){
         
     }
@@ -42,6 +46,22 @@ public class ComentarioDTO implements Serializable{
             this.nombreUsuario = comentario.getNombreUsuario();
             this.fecha = comentario.getFecha();
             this.id = comentario.getId();
+            if(comentario.getLibro() != null)
+            {
+                this.libro=new LibroDTO(comentario.getLibro());
+            }
+            else
+            {
+                this.libro = null;
+            }
+            if(comentario.getUsuario() != null)
+            {
+                this.usuario = new UsuarioDTO(comentario.getUsuario());
+            }
+            else
+            {
+                this.usuario = null;
+            }
         }
     }
 
@@ -84,6 +104,22 @@ public class ComentarioDTO implements Serializable{
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+
+    public LibroDTO getLibro() {
+        return libro;
+    }
+
+    public void setLibro(LibroDTO libro) {
+        this.libro = libro;
+    }
+
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
     
     public ComentarioEntity toEntity(){
         ComentarioEntity comentario = new ComentarioEntity();
@@ -92,6 +128,14 @@ public class ComentarioDTO implements Serializable{
         comentario.setNombreUsuario(this.nombreUsuario);
         comentario.setFecha(this.fecha);
         comentario.setTexto(this.texto);
+        if(this.libro != null)
+        {
+            comentario.setLibro(this.libro.toEntity());
+        }
+        if(this.usuario != null)
+        {
+            comentario.setUsuario(this.usuario.toEntity());
+        }
       return comentario;          
     }
     @Override
