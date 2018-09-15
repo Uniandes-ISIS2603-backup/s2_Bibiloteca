@@ -38,7 +38,7 @@ public class BibliotecaSalasLogic
      * @param salaId El id de la sala a guardar
      * @param bibliotecaId El id de la biblioteca en la cual se va a guardar la
      * sala.
-     * @return El libro creado.
+     * @return La sala creada.
      */
     public SalaEntity addSala(Long salaId, Long bibliotecaId) 
     {

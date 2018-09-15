@@ -69,7 +69,7 @@ public class BibliotecaLibrosLogic
      * @throws BusinessLogicException Si el libro no se encuentra en la
      * biblioteca
      */
-    public LibroEntity getBook(Long bibliotecaId, Long libroId) throws BusinessLogicException 
+    public LibroEntity getLibro(Long bibliotecaId, Long libroId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar el libro con id = {0} de la biblioteca con id = " + bibliotecaId, libroId);
         List<LibroEntity> books = bibliotecaPersistence.find(bibliotecaId).getLibros();

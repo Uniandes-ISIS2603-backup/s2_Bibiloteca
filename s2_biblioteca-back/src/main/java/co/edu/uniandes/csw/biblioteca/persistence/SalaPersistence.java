@@ -33,7 +33,7 @@ public class SalaPersistence {
     public List<SalaEntity> findAll()
     {
         LOGGER.log(Level.INFO, "Consultando todas las salas");
-        Query q = em.createQuery("Select from SalaEntity");
+        Query q = em.createQuery("Select u from SalaEntity u");
         return  q.getResultList();
         
     }

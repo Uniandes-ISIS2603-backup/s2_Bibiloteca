@@ -6,9 +6,9 @@
 package co.edu.uniandes.csw.biblioteca.test.logic;
 
 import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
-import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.VideoEntity;
 import co.edu.uniandes.csw.biblioteca.ejb.BibliotecaLogic;
-import co.edu.uniandes.csw.biblioteca.ejb.BibliotecaSalasLogic;
+import co.edu.uniandes.csw.biblioteca.ejb.BibliotecaVideosLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.BibliotecaPersistence;
 import java.util.ArrayList;
@@ -33,23 +33,24 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author estudiante
  */
 @RunWith(Arquillian.class)
-public class BibliotecaSalasLogicTest {
-    
+public class BibliotecaVideosLogicTest 
+{
     private PodamFactory factory = new PodamFactoryImpl();
-    
+
     @Inject
     private BibliotecaLogic bibliotecaLogic;
     @Inject
-    private BibliotecaSalasLogic bibliotecaSalasLogic;
+    private BibliotecaVideosLogic editorialBooksLogic;
+
     @PersistenceContext
     private EntityManager em;
-    
+
     @Inject
     private UserTransaction utx;
-    
+
     private List<BibliotecaEntity> data = new ArrayList<BibliotecaEntity>();
 
-    private List<SalaEntity> salasData = new ArrayList();
+    private List<VideoEntity> videosData = new ArrayList();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -65,7 +66,7 @@ public class BibliotecaSalasLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      */
@@ -85,12 +86,12 @@ public class BibliotecaSalasLogicTest {
             }
         }
     }
-    
+
     /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from SalaEntity").executeUpdate();
+        em.createQuery("delete from VideoEntity").executeUpdate();
         em.createQuery("delete from BibliotecaEntity").executeUpdate();
     }
 
@@ -100,91 +101,90 @@ public class BibliotecaSalasLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            SalaEntity salas = factory.manufacturePojo(SalaEntity.class);
-            em.persist(salas);
-            salasData.add(salas);
+            VideoEntity videos = factory.manufacturePojo(VideoEntity.class);
+            em.persist(videos);
+            videosData.add(videos);
         }
         for (int i = 0; i < 3; i++) {
             BibliotecaEntity entity = factory.manufacturePojo(BibliotecaEntity.class);
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-                salasData.get(i).setBiblioteca(entity);
+                videosData.get(i).setBiblioteca(entity);
             }
         }
     }
     
     /**
-     * Prueba para asociar una sala existente a un Biblioteca.
+     * Prueba para asociar un Video existente a una biblioteca.
      */
     @Test
-    public void addSalasTest() {
+    public void addVideoTest() {
         BibliotecaEntity entity = data.get(0);
-        SalaEntity salaEntity = salasData.get(1);
-        SalaEntity response = bibliotecaSalasLogic.addSala(salaEntity.getId(), entity.getId());
+        VideoEntity videoEntity = videosData.get(1);
+        VideoEntity response = editorialBooksLogic.addVideo(videoEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
-        Assert.assertEquals(salaEntity.getId(), response.getId());
+        Assert.assertEquals(videoEntity.getId(), response.getId());
     }
     
-     /**
-     * Prueba para obtener una colección de instancias de slas asociadas a una
+    /**
+     * Prueba para obtener una colección de instancias de videos asociadas a una
      * instancia Biblioteca.
      */
     @Test
-    public void getSalasTest() {
-        List<SalaEntity> list = bibliotecaSalasLogic.getSalas(data.get(0).getId());
+    public void getVideosTest() {
+        List<VideoEntity> list = editorialBooksLogic.getVideos(data.get(0).getId());
 
         Assert.assertEquals(1, list.size());
     }
     
     /**
-     * Prueba para obtener una instancia de sala asociada a una instancia
-     * Biblioteca
+     * Prueba para obtener una instancia de videos asociada a una instancia
+     * Biblioteca.
      *
      * @throws co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException
      */
     @Test
-    public void getSalaTest() throws BusinessLogicException {
+    public void getVideoTest() throws BusinessLogicException {
         BibliotecaEntity entity = data.get(0);
-        SalaEntity salaEntity = salasData.get(0);
-        SalaEntity response = bibliotecaSalasLogic.getSala(entity.getId(), salaEntity.getId());
+        VideoEntity videoEntity = videosData.get(0);
+        VideoEntity response = editorialBooksLogic.getVideo(entity.getId(), videoEntity.getId());
 
-        Assert.assertEquals(salaEntity.getId(), response.getId());
-        Assert.assertEquals(salaEntity.getCapacidad(), response.getCapacidad());
-        Assert.assertEquals(salaEntity.getDisponibilidad(), response.getDisponibilidad());
-        Assert.assertEquals(salaEntity.getUbicacion(), response.getUbicacion());
-        
+        Assert.assertEquals(videoEntity.getId(), response.getId());
+        Assert.assertEquals(videoEntity.getIdioma(), response.getIdioma());
+        Assert.assertEquals(videoEntity.getDirector(), response.getDirector());
+        Assert.assertEquals(videoEntity.getNombre(), response.getNombre());
+        Assert.assertEquals(videoEntity.getSubtitulos(), response.getSubtitulos());
+        Assert.assertEquals(videoEntity.getUnidadesDis(), response.getUnidadesDis());
     }
     
-     /**
-     * Prueba para obtener una instancia de Salas asociada a una instancia
+    /**
+     * Prueba para obtener una instancia de videos asociada a una instancia
      * Biblioteca que no le pertenece.
      *
      * @throws co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException
      */
     @Test(expected = BusinessLogicException.class)
-    public void getLibroNoAsociadoTest() throws BusinessLogicException {
+    public void getVideoNoAsociadoTest() throws BusinessLogicException {
         BibliotecaEntity entity = data.get(0);
-        SalaEntity salaEntity = salasData.get(1);
-        bibliotecaSalasLogic.getSala(entity.getId(), salaEntity.getId());
+        VideoEntity bookEntity = videosData.get(1);
+        editorialBooksLogic.getVideo(entity.getId(), bookEntity.getId());
     }
     
      /**
-     * Prueba para remplazar las instancias de Salas asociadas a una instancia
+     * Prueba para remplazar las instancias de Videos asociadas a una instancia
      * de Biblioteca.
      */
     @Test
-    public void replaceSalasTest() {
+    public void replaceVideosTest() {
         BibliotecaEntity entity = data.get(0);
-        List<SalaEntity> list = salasData.subList(1, 3);
-        bibliotecaSalasLogic.replaceSalas(entity.getId(), list);
+        List<VideoEntity> list = videosData.subList(1, 3);
+        editorialBooksLogic.replaceVideos(entity.getId(), list);
 
         entity = bibliotecaLogic.getBiblioteca(entity.getId());
-        Assert.assertFalse(entity.getSalas().contains(salasData.get(0)));
-        Assert.assertTrue(entity.getSalas().contains(salasData.get(1)));
-        Assert.assertTrue(entity.getSalas().contains(salasData.get(2)));
+        Assert.assertFalse(entity.getVideos().contains(videosData.get(0)));
+        Assert.assertTrue(entity.getVideos().contains(videosData.get(1)));
+        Assert.assertTrue(entity.getVideos().contains(videosData.get(2)));
     }
-
-
 }
