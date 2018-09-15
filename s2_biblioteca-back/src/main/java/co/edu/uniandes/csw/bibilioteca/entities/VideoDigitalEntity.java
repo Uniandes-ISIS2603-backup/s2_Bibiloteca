@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -23,11 +24,11 @@ public class VideoDigitalEntity extends BaseEntity implements Serializable {
     private Boolean subtitulos;
     
     @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private PrestamoEntity prestamo;
 
 @PodamExclude
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private ReservaEntity reserva;
 
     public String getNombre() {
