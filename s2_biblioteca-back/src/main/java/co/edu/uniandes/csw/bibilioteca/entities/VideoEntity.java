@@ -31,15 +31,9 @@ import uk.co.jemos.podam.common.PodamExclude;
    @OneToOne
    private ArrayList<PrestamoEntity> prestamos = new ArrayList<>();
 
-    public BibliotecaEntity getBiblioteca() {
-        return biblioteca;
-    }
-
-    public void setBiblioteca(BibliotecaEntity biblioteca) {
-        this.biblioteca = biblioteca;
-    }
-
-
+   public BibliotecaEntity getBiblioteca() {
+     return biblioteca;
+   }
 
    public String getNombre(){
      return nombre;
@@ -88,6 +82,10 @@ import uk.co.jemos.podam.common.PodamExclude;
 
    public void setSubtitulos(Boolean pSubtitulos){
      subtitulos = pSubtitulos;
+   }
+   
+   public void setBiblioteca(BibliotecaEntity pbiblioteca) {
+       biblioteca = pbiblioteca;
    }
    
    public void setReservas(ArrayList<ReservaEntity> listaRE){
