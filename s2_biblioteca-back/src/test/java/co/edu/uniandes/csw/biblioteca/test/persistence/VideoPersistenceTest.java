@@ -75,15 +75,46 @@ public class VideoPersistenceTest {
     }
     
     @Test
-    public void createEditorialTest() {
-    PodamFactory factory = new PodamFactoryImpl();
-    VideoEntity newVE = factory.manufacturePojo(VideoEntity.class);
-    VideoEntity result = vp.create(newVE);
+    public void createVideoTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        VideoEntity newVE = factory.manufacturePojo(VideoEntity.class);
+        VideoEntity result = vp.create(newVE);
 
-    Assert.assertNotNull(result);
+        Assert.assertNotNull(result);
 
-    VideoEntity entity = em.find(VideoEntity.class, result.getId());
+        VideoEntity entity = em.find(VideoEntity.class, result.getId());
 
-    Assert.assertEquals(newVE.getNombre(), entity.getNombre());
+        Assert.assertEquals(newVE.getNombre(), entity.getNombre());
+    }
+    
+    @Test
+    public void getVideosTest(){
+        List<VideoEntity> listVideo = vp.findAll();
+        Assert.assertEquals(listVE.size(), listVideo.size());
+        for(VideoEntity ve : listVideo){
+            boolean encontro = false;
+            for(VideoEntity ve2 : listVE){
+                if(ve.getId().equals(ve2.getId())){
+                    encontro = true;
+                }
+            }
+            Assert.assertTrue(encontro);
+        }
+    }
+    
+    @Test
+    public void getVideoTest(){
+        VideoEntity ve  = listVE.get(0);
+        VideoEntity ve2 = vp.find(ve.getId());
+        Assert.assertNotNull(ve2);
+        Assert.assertEquals(ve, ve2);
+    }
+    
+    @Test
+    public void deleteVideoTest(){
+        VideoEntity ve = listVE.get(0);
+        vp.delete(ve.getId());
+        VideoEntity ve2 = em.find(VideoEntity.class, ve.getId());
+        Assert.assertNull(ve2);
     }
 }
