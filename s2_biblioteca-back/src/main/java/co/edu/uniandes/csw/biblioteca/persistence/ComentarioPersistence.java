@@ -74,5 +74,28 @@ public class ComentarioPersistence {
         LOGGER.log(Level.INFO,"Elimanando comentario con id={0}",comentarioId);
     }
     
+        public ComentarioEntity findUsuario (Long usuarioId,Long comentarioId)
+    {
+        LOGGER.log(Level.INFO,"Consultando comentario con id={0} del usuario con id = "+usuarioId,comentarioId);
+        TypedQuery q = em.createQuery("select p from ComentarioEntity p where (p.usuario.id = :usuarioId) and (p.id = :comentarioId)", ComentarioEntity.class);
+        q.setParameter("usuarioId", usuarioId);
+        q.setParameter("comentarioId", comentarioId);
+        List<ComentarioEntity> resultado = q.getResultList();
+        ComentarioEntity comentario = null;
+        if(resultado == null)
+        {
+            comentario = null;
+        }
+        else if(resultado.isEmpty())
+        {
+            comentario = null;
+        }
+        else
+        {
+            comentario = resultado.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar el comentario con id = {0} del usuario con id =" + usuarioId  , comentarioId);
+        return comentario;
+    }
     
 }
