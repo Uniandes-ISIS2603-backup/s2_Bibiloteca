@@ -117,4 +117,28 @@ public class VideoPersistenceTest {
         VideoEntity ve2 = em.find(VideoEntity.class, ve.getId());
         Assert.assertNull(ve2);
     }
+    
+    @Test
+    public void updateVideoTest(){
+        VideoEntity ve = listVE.get(0);
+        PodamFactory factory = new PodamFactoryImpl();
+        VideoEntity ve2 = factory.manufacturePojo(VideoEntity.class);
+        ve2.setId(ve.getId());
+        vp.update(ve2);
+        VideoEntity ve3 = em.find(VideoEntity.class, ve.getId());
+        
+        Assert.assertEquals(ve2, ve3);
+    }
+    
+    @Test
+    public void findVideoByName(){
+        VideoEntity ve = listVE.get(0);
+        VideoEntity ve2 = vp.findByName(ve.getNombre());
+        
+        Assert.assertNotNull(ve2);
+        Assert.assertEquals(ve.getNombre(), ve2.getNombre());
+        
+        ve2 = vp.findByName(null);
+        Assert.assertNull(ve2);
+    }
 }
