@@ -38,7 +38,7 @@ public class VideoDigitalLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del videoDigital");
         // Verifica la regla de negocio que dice que no puede haber dos videosDigitales con el mismo nombre
         if (persistence.findNombre(videoDigitalEntity.getNombre()) != null) {
-            throw new BusinessLogicException("Ya existe una VideoDigital con el nombre \"" + videoDigitalEntity.getNombre() + "\"");
+            throw new BusinessLogicException("Ya existe un VideoDigital con el nombre \"" + videoDigitalEntity.getNombre() + "\"");
         }
         // Invoca la persistencia para crear la videoDigital
         persistence.create(videoDigitalEntity);
@@ -48,7 +48,7 @@ public class VideoDigitalLogic {
 
     /**
      *
-     * Obtener todas los videoDigitales existentes en la base de datos.
+     * Obtener todos los videoDigitales existentes en la base de datos.
      *
      * @return una lista de videosDigitales.
      */
