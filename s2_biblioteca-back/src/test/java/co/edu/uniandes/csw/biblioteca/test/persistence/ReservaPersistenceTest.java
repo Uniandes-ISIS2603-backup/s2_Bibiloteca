@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.biblioteca.test.persistence;
 
 import co.edu.uniandes.csw.bibilioteca.entities.ReservaEntity;
 import co.edu.uniandes.csw.biblioteca.persistence.ReservaPersistence;
+import com.sun.messaging.jmq.util.log.SysLog;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -233,4 +234,5 @@ public class ReservaPersistenceTest {
         newEntity = reservaPersistence.findByDate(null);
         Assert.assertNull(newEntity);
     }
+    
 }

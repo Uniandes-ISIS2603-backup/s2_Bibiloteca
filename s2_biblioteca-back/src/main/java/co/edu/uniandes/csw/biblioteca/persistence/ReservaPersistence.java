@@ -119,7 +119,7 @@ public class ReservaPersistence {
      */
     public ReservaEntity findByDate(Date pFechaReserva)
     {
-        LOGGER.log(Level.INFO, "Consultando reserva por fecha ", pFechaReserva);
+       // LOGGER.log(Level.INFO, "Consultando reserva por fecha ", pFechaReserva);
         TypedQuery query = entityManager.createQuery("Select e From ReservaEntity e where e.fechaReserva = :pFechaReserva", ReservaEntity.class);
         query = query.setParameter("pFechaReserva", pFechaReserva);
         List<ReservaEntity> sameDate = query.getResultList();
@@ -136,7 +136,46 @@ public class ReservaPersistence {
         {
             result = sameDate.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar reserva por fecha ", pFechaReserva);
+       // LOGGER.log(Level.INFO, "Saliendo de consultar reserva por fecha ", pFechaReserva);
+        return result;
+    }
+    
+        /**
+     * Busca si hay alguna reserva con el id de un recurso que se envía por parametro
+     * @param pId: id del recurso de la reserva que se está buscando
+     * @param pTipo: tipo del recurso de la reserva que se esta buscando
+     * @return null si no existe ninguna reserva con el id dado.
+     * Si existe alguna busca la que tenga el mismo id en el tipo de recurso para
+     * retornar un dato exacto.
+     */
+    public ReservaEntity findByIdRecursoReservado(long pId,String pTipo  )
+    {
+        LOGGER.log(Level.INFO, "Consultando reserva por id del recurso reservado ", pId);
+        TypedQuery query = entityManager.createQuery("Select e From ReservaEntity e where e.idRecursoReservado = :pId", ReservaEntity.class);
+        query = query.setParameter("pId", pId);
+        List<ReservaEntity> sameId = query.getResultList();
+        ReservaEntity result = null;
+        if (sameId == null) 
+        {
+            result = null;
+        } 
+        else if (sameId.isEmpty()) 
+        {
+            result = null;
+        } 
+        else 
+        {
+            for(ReservaEntity temp: sameId)
+            {
+
+                if(temp.getTipoRecurso().equals(pTipo))
+                {
+                    result = temp;
+                }
+
+            }
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar reserva por id de recurso ", pId);
         return result;
     }
     
