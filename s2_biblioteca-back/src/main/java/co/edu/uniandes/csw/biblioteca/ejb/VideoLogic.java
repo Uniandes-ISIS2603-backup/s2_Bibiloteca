@@ -65,7 +65,7 @@ public class VideoLogic {
             throw new BusinessLogicException("El video no se puede borrar porque tiene reservas");
         }
         if(listPE != null && !listPE.isEmpty()){
-            throw new BusinessLogicException("El video no se puede borrar porque tiene reservas");
+            throw new BusinessLogicException("El video no se puede borrar porque tiene prestamos");
         }
         videoPersis.delete(videoID);
     }
