@@ -7,13 +7,13 @@ package co.edu.uniandes.csw.biblioteca.test.logic;
 
 import co.edu.uniandes.csw.bibilioteca.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
-import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.ReservaEntity;
 import co.edu.uniandes.csw.biblioteca.ejb.ComentarioLogic;
 import co.edu.uniandes.csw.biblioteca.ejb.LibroLogic;
-import co.edu.uniandes.csw.biblioteca.ejb.LibroPrestamoLogic;
+import co.edu.uniandes.csw.biblioteca.ejb.LibroReservaLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.ComentarioPersistence;
-import co.edu.uniandes.csw.biblioteca.persistence.PrestamoPersistence;
+import co.edu.uniandes.csw.biblioteca.persistence.ReservaPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -36,7 +36,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Daniel Montoya
  */
 @RunWith(Arquillian.class)
-public class LibroPrestamoLogicTest {
+public class LibroReservaLogicTest {
 
     private PodamFactory factory = new PodamFactoryImpl();
 
@@ -50,21 +50,21 @@ public class LibroPrestamoLogicTest {
     private UserTransaction utx;
 
     @Inject
-    private LibroPrestamoLogic libroPrestamoLogica;
+    private LibroReservaLogic libroReservaLogica;
 
     //@Inject 
-    //private PrestamoLogic prestamo;
+    //private ReservaLogic reserva;
     private List<LibroEntity> data = new ArrayList<>();
 
-    private List<PrestamoEntity> dataPrestamos = new ArrayList<>();
+    private List<ReservaEntity> dataReservas = new ArrayList<>();
 
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(PrestamoEntity.class.getPackage())
+                .addPackage(ReservaEntity.class.getPackage())
                 .addPackage(LibroLogic.class.getPackage())
-                .addPackage(LibroPrestamoLogic.class.getPackage())
-                .addPackage(PrestamoPersistence.class.getPackage())
+                .addPackage(LibroReservaLogic.class.getPackage())
+                .addPackage(ReservaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -90,46 +90,45 @@ public class LibroPrestamoLogicTest {
     }
 
     private void clearData() {
-        em.createQuery("delete from PrestamoEntity").executeUpdate();
+        em.createQuery("delete from ReservaEntity").executeUpdate();
         em.createQuery("delete from LibroEntity").executeUpdate();
         em.createQuery("delete from BibliotecaEntity").executeUpdate();
     }
 
     private void insertData() {
         for (int j = 0; j < 3; j++) {
-            PrestamoEntity prestamo = factory.manufacturePojo(PrestamoEntity.class);
-            em.persist(prestamo);
-            dataPrestamos.add(prestamo);
+            ReservaEntity reserva = factory.manufacturePojo(ReservaEntity.class);
+            em.persist(reserva);
+            dataReservas.add(reserva);
         }
         for (int i = 0; i < 3; i++) {
             LibroEntity entity = factory.manufacturePojo(LibroEntity.class);
             em.persist(entity);
             if (i == 0) {
-                entity.setPrestamos(dataPrestamos);
+                entity.setReservas(dataReservas);
             }
             data.add(entity);
-            
+
         }
     }
 
     @Test
-    public void addPrestamoTest() throws BusinessLogicException {
+    public void addReservaTest() throws BusinessLogicException {
         LibroEntity libro = data.get(0);
-        PrestamoEntity prestamo = dataPrestamos.get(0);
-        PrestamoEntity resultado = libroPrestamoLogica.addPrestamo(libro.getId(), prestamo.getId());
+        ReservaEntity reserva = dataReservas.get(0);
+        ReservaEntity resultado = libroReservaLogica.addReserva(libro.getId(), reserva.getId());
         Assert.assertNotNull(resultado);
-        PrestamoEntity prestamoEncontrado = em.find(PrestamoEntity.class, resultado.getId());
-        Assert.assertEquals(prestamo.getId(), prestamoEncontrado.getId());
+        ReservaEntity reservaEncontrado = em.find(ReservaEntity.class, resultado.getId());
+        Assert.assertEquals(reserva.getId(), reservaEncontrado.getId());
     }
 
     @Test
-    public void deletePrestamoTest() throws BusinessLogicException {
+    public void deleteReservaTest() throws BusinessLogicException {
         LibroEntity libro = data.get(1);
-        libro.setPrestamos(dataPrestamos);
-        libroPrestamoLogica.deletePrestamo(libro.getId(), dataPrestamos.get(0).getId());
-        PrestamoEntity prestamo = libroPrestamoLogica.getPrestamo(libro.getId(), dataPrestamos.get(0).getId());
-        Assert.assertNull(prestamo);
+        libro.setReservas(dataReservas);
+        libroReservaLogica.deleteReserva(libro.getId(), dataReservas.get(0).getId());
+        ReservaEntity reserva = libroReservaLogica.getReserva(libro.getId(), dataReservas.get(0).getId());
+        Assert.assertNull(reserva);
     }
-
 
 }

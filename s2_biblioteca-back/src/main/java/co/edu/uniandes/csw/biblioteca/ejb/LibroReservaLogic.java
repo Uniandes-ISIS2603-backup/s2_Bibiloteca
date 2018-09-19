@@ -41,8 +41,10 @@ public class LibroReservaLogic {
         if (reserva == null) {
             throw new BusinessLogicException("La reserva con id = " + reservaId + " no existe");
         }
-        libro.getReservas().add(reserva);
-        return reserva;
+        List<ReservaEntity> reservas = libro.getReservas();
+        reservas.add(reserva);
+        libro.setReservas(reservas);
+        return libro.getReservas().get(reservas.size()-1);
     }
 
     public List<ReservaEntity> getReservas(Long libroId) throws BusinessLogicException {
