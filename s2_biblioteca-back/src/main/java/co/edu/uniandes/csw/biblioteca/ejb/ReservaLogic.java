@@ -90,6 +90,11 @@ public class ReservaLogic {
         return reservas;
     }
 
+    public ReservaEntity getReserva(Long reservaId)
+    {
+        ReservaEntity entity = persistencia.find(reservaId);
+        return entity;
+    }
 
 
     
