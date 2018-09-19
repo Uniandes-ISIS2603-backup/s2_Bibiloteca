@@ -90,10 +90,23 @@ public class ReservaLogic {
         return reservas;
     }
 
-    public ReservaEntity getReserva(Long reservaId)
+    /**
+     * Obtener una reserva por medio de su id.
+     * @param pReservaID: id de la reserva a ser buscada.
+     * @return la reserva solicitada por medio de su id.
+     */
+    public ReservaEntity getReserva(Long pReservaID) 
     {
-        ReservaEntity entity = persistencia.find(reservaId);
-        return entity;
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la reserva con id = {0}", pReservaID);
+        // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
+        ReservaEntity reservaEntity = persistencia.find(pReservaID);
+        
+        if (reservaEntity == null) 
+        {
+            LOGGER.log(Level.SEVERE, "La editorial con el id = {0} no existe", pReservaID);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar la editorial con id = {0}", pReservaID);
+        return reservaEntity;
     }
 
 
