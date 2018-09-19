@@ -8,7 +8,8 @@ package co.edu.uniandes.csw.biblioteca.ejb;
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.SalaPersistence;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.List;
 import java.util.logging.Level;
 import javax.ejb.Stateless;
@@ -20,7 +21,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class SalaLogic {
-    
+    private static final Logger LOGGER = Logger.getLogger(UsuarioLogic.class.getName());
     @Inject
     private SalaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
     
