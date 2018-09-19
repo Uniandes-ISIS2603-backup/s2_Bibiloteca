@@ -6,9 +6,13 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -24,12 +28,10 @@ public class VideoDigitalEntity extends BaseEntity implements Serializable {
     private Boolean subtitulos;
     
     @PodamExclude
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private PrestamoEntity prestamo;
+    @OneToMany(mappedBy = "videoDigital", cascade = CascadeType.PERSIST, orphanRemoval = false)
+    private List<UsuarioEntity> usuarios = new ArrayList<UsuarioEntity>();
+    
 
-@PodamExclude
-    @OneToOne(cascade = CascadeType.PERSIST)
-    private ReservaEntity reserva;
 
     public String getNombre() {
         return nombre;
@@ -58,10 +60,13 @@ public class VideoDigitalEntity extends BaseEntity implements Serializable {
     public Boolean getSubtitulos() {
         return subtitulos;
     }
-
     public void setSubtitulos(Boolean subtitulos) {
         this.subtitulos = subtitulos;
     }
-
-    
+    public List<UsuarioEntity> getUsuarios(){
+       return usuarios;
+   }
+ public void setUsuarios(List<UsuarioEntity> listUsuarios){
+       usuarios = listUsuarios;
+   }
 }
