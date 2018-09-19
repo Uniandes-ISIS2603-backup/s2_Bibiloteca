@@ -54,6 +54,12 @@ public class VideoLogic {
         if(ve.getNombre() == null || ve.getDirector() == null || ve.getIdioma() == null){
             throw new BusinessLogicException("El nombre, director o idioma no pueden ser nulos");
         }
+        if(ve.getBiblioteca() == null || biblioPersis.find(ve.getBiblioteca().getId()) == null){
+            throw new BusinessLogicException("El video tiene que pertenecer a una biblioteca existente");
+        }
+        if(videoPersis.find(ve.getId()) != null || videoPersis.findByName(ve.getNombre()) != null){
+            throw new BusinessLogicException("El video ya existe");
+        }
         VideoEntity newVE = videoPersis.update(ve);
         return newVE;
     }

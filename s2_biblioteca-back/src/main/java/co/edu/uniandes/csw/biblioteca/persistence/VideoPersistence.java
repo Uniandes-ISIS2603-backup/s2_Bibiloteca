@@ -32,7 +32,7 @@ public class VideoPersistence {
     }
     
     public VideoEntity findByName(String pNombre){
-        TypedQuery querty = em.createQuery("Select e From VideoEntity e where e.name = :name", VideoEntity.class);
+        TypedQuery querty = em.createQuery("Select e From VideoEntity e where e.nombre = :name", VideoEntity.class);
         querty = querty.setParameter("name", pNombre);
         List<VideoEntity> results = querty.getResultList();
         VideoEntity re;
