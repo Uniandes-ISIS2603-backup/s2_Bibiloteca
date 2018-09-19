@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -53,5 +54,32 @@ public class UsuarioPersistence {
         LOGGER.log(Level.INFO,"Borrando usuario con id={0}",usuarioId);
         UsuarioEntity usuario = em.find(UsuarioEntity.class, usuarioId);
         em.remove(usuario);
+    }
+     public UsuarioEntity findNombre(String nombre)
+    {
+        LOGGER.log(Level.INFO,"Consultando usuarios con el nombre",nombre);
+        
+        TypedQuery query = em.createQuery("Select e From UsuarioEntity u where u.nombre = :nombre", UsuarioEntity.class);
+        
+        query = query.setParameter("nombre", nombre);
+        
+        List<UsuarioEntity> usuariosConNombre = query.getResultList();
+        
+        UsuarioEntity result;
+        
+        if(usuariosConNombre == null)
+        {
+            result = null;
+        }
+        else if(usuariosConNombre.isEmpty())
+        {
+            result = null;
+        }
+        else
+        {
+            result = usuariosConNombre.get(0);
+        }
+        LOGGER.log(Level.INFO,"Saliendo de consultar usuarios por nombre ", nombre);
+        return result;
     }
 }
