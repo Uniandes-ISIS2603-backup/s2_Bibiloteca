@@ -5,7 +5,8 @@
  */
 package co.edu.uniandes.csw.biblioteca.resources;
 
-import co.edu.uniandes.csw.biblioteca.dtos.PrestamoDetailDTO;
+import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
+import co.edu.uniandes.csw.biblioteca.dtos.PrestamoDTO;
 import co.edu.uniandes.csw.biblioteca.ejb.LibroPrestamoLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -37,32 +38,32 @@ public class LibroPrestamoResource {
     
     @POST
     @Path("{prestamosId: \\d+}")
-    public PrestamoDetailDTO addPrestamo(@PathParam("librosId") Long librosId, @PathParam("prestamosId") Long prestamosId) throws BusinessLogicException
+    public PrestamoDTO addPrestamo(@PathParam("librosId") Long librosId, @PathParam("prestamosId") Long prestamosId) throws BusinessLogicException
     {
         if(prestamoLogic.getPrestamo(prestamosId)==null)
         {
             throw new WebApplicationException("El recurso /prestamos/" + prestamosId + " no existe.", 404);
         }
-        PrestamoDetailDTO resp = new PrestamoDetailDTO(libroPrestamo.addPrestamo(librosId, prestamosId));
+        PrestamoDTO resp = new PrestamoDTO(libroPrestamo.addPrestamo(librosId, prestamosId));
         return resp;
     }
     
     @GET
-    public List<PrestamoDetailDTO> getPrestamos(@PathParam("librosId") Long librosId) throws BusinessLogicException
+    public List<PrestamoDTO> getPrestamos(@PathParam("librosId") Long librosId) throws BusinessLogicException
     {
-        List<PrestamoDetailDTO> lista = prestamoListEntity2DTO(libroPrestamo.getPrestamos(librosId));
+        List<PrestamoDTO> lista = prestamoListEntity2DTO(libroPrestamo.getPrestamos(librosId));
         return lista; 
     }
     
     @GET
     @Path("{prestamosId: \\d+}")
-    public PrestamoDetailDTO getPrestamo(@PathParam("librosId") Long librosId, @PathParam("prestamosId") Long prestamosId) throws BusinessLogicException
+    public PrestamoDTO getPrestamo(@PathParam("librosId") Long librosId, @PathParam("prestamosId") Long prestamosId) throws BusinessLogicException
     {
         if(prestamoLogic.getPrestamo(prestamosId)==null)
         {
             throw new WebApplicationException("El recurso /prestamos/" + prestamosId + " no existe.", 404);
         }
-        PrestamoDetailDTO prestamo = new PrestamoDetailDTO(libroPrestamo.getPrestamo(librosId, prestamosId));
+        PrestamoDTO prestamo = new PrestamoDTO(libroPrestamo.getPrestamo(librosId, prestamosId));
         return prestamo;
     }
     
@@ -78,20 +79,20 @@ public class LibroPrestamoResource {
     }
     
     
-    private List<PrestamoDetailDTO> prestamoListEntity2DTO(List<PrestamoEntity> lista)
+    private List<PrestamoDTO> prestamoListEntity2DTO(List<PrestamoEntity> lista)
     {
-        List<PrestamoDetailDTO> resp = new ArrayList<>();
+        List<PrestamoDTO> resp = new ArrayList<>();
         for(PrestamoEntity entity : lista)
         {
-            resp.add(new PrestamoDetailDTO(entity));
+            resp.add(new PrestamoDTO(entity));
             
         }
         return resp;
     }
-    private List<PrestamoEntity> prestamoListDTO2Entity(List<PrestamoDetailDTO> lista)
+    private List<PrestamoEntity> prestamoListDTO2Entity(List<PrestamoDTO> lista)
     {
         List<PrestamoEntity> resp = new ArrayList<>();
-        for(PrestamoDetailDTO prestamo : lista)
+        for(PrestamoDTO prestamo : lista)
         {
             resp.add(prestamo.toEntity());
         }
