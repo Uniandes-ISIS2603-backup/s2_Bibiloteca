@@ -13,6 +13,7 @@ import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import java.util.List;
 import java.util.logging.Level;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -52,5 +53,32 @@ public class SalaPersistence {
         LOGGER.log(Level.INFO,"Borrando sala con id={0}",salaId);
         SalaEntity sala = em.find(SalaEntity.class, salaId);
         em.remove(sala);
+    }
+     public SalaEntity findUbicacion(String ubicacion)
+    {
+        LOGGER.log(Level.INFO,"Consultando salas con la ubicacion",ubicacion);
+        
+        TypedQuery query = em.createQuery("Select e From SalaEntity e where e.ubicacion = :ubicacion", SalaEntity.class);
+        
+        query = query.setParameter("ubicacion", ubicacion);
+        
+        List<SalaEntity> salasConUbicacion = query.getResultList();
+        
+        SalaEntity result;
+        
+        if(salasConUbicacion == null)
+        {
+            result = null;
+        }
+        else if(salasConUbicacion.isEmpty())
+        {
+            result = null;
+        }
+        else
+        {
+            result = salasConUbicacion.get(0);
+        }
+        LOGGER.log(Level.INFO,"Saliendo de consultar salas por ubicacion", ubicacion);
+        return result;
     }
 }
