@@ -104,10 +104,6 @@ public class PrestamoDTO implements Serializable
             {
                 this.video = new VideoDTO(prestamoEntity.getVideo());    
             }
-            else if ( prestamoEntity.getVideoDigital() != null)
-            {
-                this.videoDigital = new VideoDigitalDTO(prestamoEntity.getVideoDigital());    
-            }
             else if ( prestamoEntity.getSala() != null)
             {
                 this.sala = new SalaDTO(prestamoEntity.getSala());    
@@ -149,10 +145,7 @@ public class PrestamoDTO implements Serializable
         {
             prestamoEntity.setVideo(this.video.toEntity());    
         }
-        else if ( prestamoEntity.getVideoDigital() != null)
-        {
-           prestamoEntity.setVideoDigital(this.videoDigital.toEntity());   
-        }
+        
         else if ( prestamoEntity.getSala() != null)
         {
             prestamoEntity.setSala(this.sala.toEntity());   

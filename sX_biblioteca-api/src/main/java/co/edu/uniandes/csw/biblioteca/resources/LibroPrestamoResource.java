@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.biblioteca.resources;
 import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
 import co.edu.uniandes.csw.biblioteca.dtos.PrestamoDTO;
 import co.edu.uniandes.csw.biblioteca.ejb.LibroPrestamoLogic;
+import co.edu.uniandes.csw.biblioteca.ejb.PrestamoLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;

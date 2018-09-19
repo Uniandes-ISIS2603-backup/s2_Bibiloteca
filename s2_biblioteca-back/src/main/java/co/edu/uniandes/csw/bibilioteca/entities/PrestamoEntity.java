@@ -64,13 +64,7 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     @OneToOne
     private VideoEntity video;
     
-     /**
-     * Relacion con el videoDigital 
-     */
-    @PodamExclude
-    @OneToOne
-    private VideoDigitalEntity videoDigital;
-        
+           
      /**
      * Relacion con la Sala.
      */
@@ -182,22 +176,7 @@ public class PrestamoEntity extends BaseEntity implements Serializable
         this.video = pVideo;
     }
 
-    /**
-     * Método que da el video digital del prestamo. 
-     * @return Video digital 
-     */
-    public VideoDigitalEntity getVideoDigital() {
-        return videoDigital;
-    }
-
-    /**
-     * Método para cambiar el video digital del libro. 
-     * @param pVideoDigital VideoDigitalEntity con el valor para videoDigital
-     */
-    public void setVideoDigital(VideoDigitalEntity pVideoDigital) {
-        this.videoDigital = pVideoDigital;
-    }
-
+    
     /**
      * Método que da la sala del prestamo. 
      * @return Sala
