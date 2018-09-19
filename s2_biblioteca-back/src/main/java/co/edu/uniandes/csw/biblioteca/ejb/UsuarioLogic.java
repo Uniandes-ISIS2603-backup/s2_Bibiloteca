@@ -34,11 +34,11 @@ public class UsuarioLogic {
      * @throws BusinessLogicException Si el usuario a persistir ya existe.
      */
     public UsuarioEntity createUsuario(UsuarioEntity usuarioEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación de la editorial");
+        LOGGER.log(Level.INFO, "Inicia proceso de creación del usuario");
         // Verifica la regla de negocio que dice que no puede haber dos usuarios con el mismo nombre
-        //if (persistence.findByName(usuarioEntity.getNombre()) != null) {
-          //  throw new BusinessLogicException("Ya existe un usuario con el nombre \"" + usuarioEntity.getNombre() + "\"");
-        //}
+        if (persistence.findNombre(usuarioEntity.getNombre()) != null) {
+           throw new BusinessLogicException("Ya existe un usuario con el nombre \"" + usuarioEntity.getNombre() + "\"");
+        }
         // Invoca la persistencia para crear la editorial
         persistence.create(usuarioEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la editorial");
