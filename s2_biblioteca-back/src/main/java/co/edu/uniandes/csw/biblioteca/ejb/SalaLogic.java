@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.biblioteca.ejb;
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.SalaPersistence;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 import java.util.logging.Level;
