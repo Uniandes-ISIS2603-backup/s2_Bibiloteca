@@ -20,7 +20,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class UsuarioLogic {
-         private static final Logger LOGGER = Logger.getLogger(BibliotecaLogic.class.getName());
+         private static final Logger LOGGER = Logger.getLogger(UsuarioLogic.class.getName());
 
     @Inject
     private UsuarioPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
@@ -39,9 +39,9 @@ public class UsuarioLogic {
         if (persistence.findNombre(usuarioEntity.getNombre()) != null) {
            throw new BusinessLogicException("Ya existe un usuario con el nombre \"" + usuarioEntity.getNombre() + "\"");
         }
-        // Invoca la persistencia para crear la editorial
+        // Invoca la persistencia para crear el usuario.
         persistence.create(usuarioEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación de la editorial");
+        LOGGER.log(Level.INFO, "Termina proceso de creación del usuario");
         return usuarioEntity;
     }
     
@@ -52,10 +52,10 @@ public class UsuarioLogic {
      * @return una lista de editoriales.
      */
     public List<UsuarioEntity> getUsuarios() {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las bibliotecas");
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los usuarios");
         // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
         List<UsuarioEntity> usuarios = persistence.findAll();
-        LOGGER.log(Level.INFO, "Termina proceso de consultar todas las Biblioteca");
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todos los usuarios");
         return usuarios;
     }
     
