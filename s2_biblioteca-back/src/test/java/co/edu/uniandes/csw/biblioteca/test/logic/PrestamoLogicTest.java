@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.biblioteca.test.logic;
 
 import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.ReservaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.VideoEntity;
 import co.edu.uniandes.csw.biblioteca.ejb.PrestamoLogic;
@@ -42,6 +43,8 @@ public class PrestamoLogicTest
     @Inject
     private PrestamoLogic prestamoLogic;
 
+    
+    
     @PersistenceContext
     private EntityManager em;
     
@@ -238,5 +241,55 @@ public class PrestamoLogicTest
         prestamoLogic.deletePrestamo( entity.getId());
         PrestamoEntity deleted = em.find(PrestamoEntity.class, entity.getId());
         Assert.assertNull(deleted);
+    }
+    
+       
+    /**
+     * Prueba para crear un Prestamo sin disponibilidad
+     *
+     * @throws co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createPrestamoConLibroSinDisponibilidadTest() throws BusinessLogicException 
+    {
+        // Probar un prestamo para Un libro
+        PrestamoEntity newEntity = factory.manufacturePojo(PrestamoEntity.class);
+        dataLibro.get(0).setUnidadesDisponibles(0);
+        newEntity.setLibro(dataLibro.get(0));
+        PrestamoEntity result = prestamoLogic.createPrestamo(newEntity);
+               
+                     
+       
+    }
+    
+     /**
+     * Prueba para crear un Prestamo sin disponibilidad
+     *
+     * @throws co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createPrestamoConVideoSinDisponibilidadTest() throws BusinessLogicException 
+    {
+         // Probar un prestamo para un video
+        PrestamoEntity newEntity1 = factory.manufacturePojo(PrestamoEntity.class);
+        dataVideo.get(0).setUnidadesDis(0);
+        newEntity1.setVideo(dataVideo.get(0));
+        
+        PrestamoEntity result1 = prestamoLogic.createPrestamo(newEntity1);
+    }
+    
+    /**
+     * Prueba para crear un Prestamo sin disponibilidad
+     *
+     * @throws co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException
+     */
+    @Test (expected = BusinessLogicException.class)
+    public void createPrestamoConSalaSinDisponibilidadTest() throws BusinessLogicException 
+    {
+          // Probar un prestamo para una Sala
+        PrestamoEntity newEntity2 = factory.manufacturePojo(PrestamoEntity.class);
+        dataSala.get(0).setDisponibilidad(false);
+        newEntity2.setSala(dataSala.get(0));
+        PrestamoEntity result2 = prestamoLogic.createPrestamo(newEntity2);
     }
 }
