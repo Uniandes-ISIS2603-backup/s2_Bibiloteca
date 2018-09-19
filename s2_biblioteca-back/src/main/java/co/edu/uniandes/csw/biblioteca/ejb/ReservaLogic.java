@@ -46,7 +46,51 @@ public class ReservaLogic {
     //__________________________________________________________________________
     
     
-   
+    /**
+     * Crea una reserva en la persistencia.
+     * @param reservaEntity La entidad que representa la reserva a
+     * persistir.
+     * @return La entidad de la reserva luego de persistirla.
+     * @throws BusinessLogicException Si la reserva no se persiste por una regla
+     * de negocio.
+     */
+    public ReservaEntity createReserva(ReservaEntity reservaEntity) throws BusinessLogicException 
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de creación de la resserva");
+        
+        // se pregunta a la persistencia si existe una reserva para el recurso dado
+        ReservaEntity validacion = persistencia.findByIdRecursoReservado(reservaEntity.getIdRecursoReservado(), reservaEntity.getTipoRecurso());
+        
+        // Verifica la regla de negocio en la cual dice que no puede haber 
+        // dos reservas para el mismo recurso hechas por un mismo usuario
+        if (validacion != null && validacion.getUsuario().getId().equals(reservaEntity.getUsuario().getId())) 
+        {
+            throw new BusinessLogicException("Ya existe una reserva del recurso para el usuario \"" + reservaEntity.getUsuario().getNombre() + "\"" );
+        }
+        else
+        {
+            // Invoca la persistencia para crear la editorial
+            persistencia.create(reservaEntity);
+            LOGGER.log(Level.INFO, "Termina proceso de creación de la reserva");
+        
+        }
+
+        return reservaEntity;
     }
+
+    /**
+     * Obteniene todas las reservas existentes en la base de datos.
+     * @return una lista de reservas.
+     */
+    public List<ReservaEntity> getReservas()
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las reservas");
+        List<ReservaEntity> reservas = persistencia.findAll();
+        LOGGER.log(Level.INFO, "Termina el  de consultar todas las reservas");
+        return reservas;
+    }
+
+
+
     
 }
