@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "49b67073-b8a6-466d-a080-cb1c8b8213c4",
+		"name": "Nicolas Alvarado Video",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getVideos",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/videos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postVideo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\":1.0,\n        \"nombre\":\"el canto\",\n        \"director\":\"alirio\",\n        \"unidadesDisponibles\":3,\n        \"idioma\":\"espanol\",\n        \"subtitulos\":true,\n        \"biblioteca\":\n        {\n        \t\"id\":3.0,\n        \t\"zona\":\"g\",\n        \t\"nombre\":\"la b\",\n        \t\"direccion\":\"calle 1 con carrera 1\",\n        \t\"horaApertura\":\"8:00\",\n        \t\"horaCierre\":\"10:00\"\n        }\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/videos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteVideo",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/videos/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videos",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

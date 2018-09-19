@@ -142,14 +142,14 @@ public class VideoPrestamoReservaLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void deleteVideoConPrestamo() throws BusinessLogicException{
         VideoEntity ve = listVE.get(2);
-        ve.setPrestamos(listPE);
+        vpl.addPrestamo(ve.getId(),listPE.get(0).getId());
         vl.deleteVideo(ve.getId());
     }
     
     @Test(expected = BusinessLogicException.class)
     public void deleteVideoConReserva() throws BusinessLogicException{
         VideoEntity ve =listVE.get(3);
-        ve.setReservas(listRE);
+        vrl.addReserva(ve.getId(), listRE.get(0).getId());
         vl.deleteVideo(ve.getId());
     }
 }

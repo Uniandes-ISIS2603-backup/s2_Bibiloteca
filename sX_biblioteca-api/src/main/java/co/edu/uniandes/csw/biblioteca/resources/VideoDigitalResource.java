@@ -10,7 +10,7 @@ import co.edu.uniandes.csw.biblioteca.dtos.VideoDigitalDTO;
 import co.edu.uniandes.csw.biblioteca.dtos.VideoDigitalDetailDTO;
 import co.edu.uniandes.csw.biblioteca.ejb.VideoDigitalLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+//import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 import java.util.ArrayList;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
