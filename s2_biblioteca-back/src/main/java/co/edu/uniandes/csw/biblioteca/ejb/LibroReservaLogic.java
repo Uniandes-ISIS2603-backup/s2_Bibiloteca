@@ -51,7 +51,7 @@ public class LibroReservaLogic {
         if (libro != null) {
             return libro.getReservas();
         } else {
-            throw new BusinessLogicException("El libro no existe");
+            throw new BusinessLogicException("El libro no existe.");
         }
     }
 
