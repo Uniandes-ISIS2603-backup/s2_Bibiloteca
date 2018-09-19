@@ -35,7 +35,7 @@ public class UsuarioPersistence {
     public List<UsuarioEntity> findAll()
     {
         LOGGER.log(Level.INFO, "Consultando todos los usuarios");
-        Query q = em.createQuery("Select from UsuarioEntity");
+        Query q = em.createQuery("Select u from UsuarioEntity u");
         return  q.getResultList();
         
     }
