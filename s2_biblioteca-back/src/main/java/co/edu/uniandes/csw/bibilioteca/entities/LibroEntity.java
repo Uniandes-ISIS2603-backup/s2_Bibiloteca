@@ -7,10 +7,12 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import org.eclipse.persistence.jpa.config.Cascade;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -19,42 +21,50 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Daniel Montoya
  */
 @Entity
-public class LibroEntity extends BaseEntity implements Serializable{
-    
-     //Nombre del libro
-    private String nombre; 
-    
+public class LibroEntity extends BaseEntity implements Serializable {
+
+    //Nombre del libro
+    private String nombre;
+
     //Codigo id del libro
-    private String isbn; 
-    
+    private String isbn;
+
     //Autor del libro
     private String autor;
-    
+
     //Editorial del libro
     private String editorial;
-    
+
     //Edicion del libro
     private String edicion;
-    
+
     //Idioma del libro
     private String idioma;
-    
+
     //Unidades que quedan disponibles del libro 
     private Integer unidadesDisponibles;
-    
+
     //Numero de usuarios en lista de Espera
     private Integer usuariosListaEspera;
-    
+
     //Calificacion promedio de los review
     private Integer calificacionPromedio;
-    
+
     @PodamExclude
     @OneToMany(mappedBy = "libro", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private ArrayList<ComentarioEntity> comentarios = new ArrayList<>();
+    private List<ComentarioEntity> comentarios = new ArrayList<>();
 
     @PodamExclude
     @ManyToOne(cascade = CascadeType.PERSIST)
     private BibliotecaEntity biblioteca;
+
+    @PodamExclude
+    @OneToMany(mappedBy = "libro", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<PrestamoEntity> prestamos = new ArrayList<>();
+
+    @PodamExclude
+    @OneToMany(mappedBy = "libro", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ReservaEntity> reservas = new ArrayList<>();
 
     public BibliotecaEntity getBiblioteca() {
         return biblioteca;
@@ -63,7 +73,7 @@ public class LibroEntity extends BaseEntity implements Serializable{
     public void setBiblioteca(BibliotecaEntity biblioteca) {
         this.biblioteca = biblioteca;
     }
-    
+
     public String getNombre() {
         return nombre;
     }
@@ -136,16 +146,29 @@ public class LibroEntity extends BaseEntity implements Serializable{
         this.calificacionPromedio = calificacionPromedio;
     }
 
-    public ArrayList<ComentarioEntity> getComentarios() {
+    public List<ComentarioEntity> getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(ArrayList<ComentarioEntity> comentarios) {
+    public void setComentarios(List<ComentarioEntity> comentarios) {
         this.comentarios = comentarios;
     }
-    
-    
-    
-    
+
+    public List<PrestamoEntity> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(List<PrestamoEntity> prestamos) {
+        this.prestamos = prestamos;
+    }
+
+    public List<ReservaEntity> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<ReservaEntity> reservas) {
+        this.reservas = reservas;
+    }
+
     
 }
