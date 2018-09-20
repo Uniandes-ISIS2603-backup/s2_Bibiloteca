@@ -6,7 +6,11 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * Clase que representa una entidad
@@ -54,6 +58,10 @@ public class LibroDigitalEntity extends BaseEntity implements Serializable  {
      * Calificacion promedio de los review
      */
     private Integer calificacionPromedio;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "librodigital", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
     
     //__________________________________________________________________________
     //Metodos
@@ -185,5 +193,12 @@ public class LibroDigitalEntity extends BaseEntity implements Serializable  {
         this.calificacionPromedio = calificacionPromedio;
     }
     
+    public ArrayList<UsuarioEntity> getUsuarios(){
+        return usuarios;
+    }
+    
+    public void setUsuarios(ArrayList<UsuarioEntity> listUE){
+        usuarios = listUE;
+    }
      
 }
