@@ -45,6 +45,7 @@ public class LibroReservaLogic {
         reservas.add(reserva);
         libro.setReservas(reservas);
         return libro.getReservas().get(reservas.size()-1);
+
     }
 
     public List<ReservaEntity> getReservas(Long libroId) throws BusinessLogicException {
