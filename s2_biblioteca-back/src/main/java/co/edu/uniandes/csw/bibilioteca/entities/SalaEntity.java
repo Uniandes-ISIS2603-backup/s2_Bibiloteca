@@ -62,6 +62,7 @@ public class SalaEntity extends BaseEntity implements Serializable {
     public void setBiblioteca(BibliotecaEntity biblioteca) {
         this.biblioteca = biblioteca;
     }
+
     
 
 }

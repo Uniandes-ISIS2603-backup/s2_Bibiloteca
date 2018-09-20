@@ -140,7 +140,7 @@ public class ReservaPersistence {
         return result;
     }
     
-        /**
+     /**
      * Busca si hay alguna reserva con el id de un recurso que se envía por parametro
      * @param pId: id del recurso de la reserva que se está buscando
      * @param pTipo: tipo del recurso de la reserva que se esta buscando
@@ -155,6 +155,7 @@ public class ReservaPersistence {
         query = query.setParameter("pId", pId);
         List<ReservaEntity> sameId = query.getResultList();
         ReservaEntity result = null;
+        
         if (sameId == null) 
         {
             result = null;
@@ -165,16 +166,28 @@ public class ReservaPersistence {
         } 
         else 
         {
-            for(ReservaEntity temp: sameId)
+            boolean termine = false;
+            int cont = 0;
+            while(!termine)
             {
 
-                if(temp.getTipoRecurso().equals(pTipo))
+                if(sameId.get(cont).getTipoRecurso().equals(pTipo))
                 {
-                    result = temp;
+                    result = sameId.get(cont);
+                    termine = true;
                 }
-
+                else if(cont >= sameId.size())
+                {
+                    termine = true;
+                }
+                else
+                {
+                    cont ++;
+                }
+                
             }
         }
+
         LOGGER.log(Level.INFO, "Saliendo de consultar reserva por id de recurso ", pId);
         return result;
     }

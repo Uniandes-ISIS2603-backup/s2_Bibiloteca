@@ -140,15 +140,18 @@ public class ReservaEntity extends BaseEntity implements Serializable {
      */
     public void setTipoRecurso(String tipoRecurso) 
     {
+        /*
         if(tipoRecurso.equals("LIBRO") || tipoRecurso.equals("VIDEO")|| tipoRecurso.equals("SALA")|| tipoRecurso.equals("VIDEODIGITAL")|| tipoRecurso.equals("LIBRODIGITAL"))
         {
+            */
             this.tipoRecurso = tipoRecurso;
-        }
+       
+        /*
         else
         {
              this.tipoRecurso = "";
         }
-        
+        */
     }
     /**
      * obtiene el estado actual de una reserva

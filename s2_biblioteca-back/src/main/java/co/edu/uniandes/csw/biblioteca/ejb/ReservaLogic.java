@@ -63,17 +63,15 @@ public class ReservaLogic {
         
         // Verifica la regla de negocio en la cual dice que no puede haber 
         // dos reservas para el mismo recurso hechas por un mismo usuario
-        if (validacion != null && validacion.getUsuario().getId().equals(reservaEntity.getUsuario().getId())) 
+        if (validacion != null) 
         {
             throw new BusinessLogicException("Ya existe una reserva del recurso para el usuario \"" + reservaEntity.getUsuario().getNombre() + "\"" );
         }
-        else
-        {
-            // Invoca la persistencia para crear la editorial
-            persistencia.create(reservaEntity);
-            LOGGER.log(Level.INFO, "Termina proceso de creación de la reserva");
+        // Invoca la persistencia para crear la editorial
+        persistencia.create(reservaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de creación de la reserva");
         
-        }
+        
 
         return reservaEntity;
     }
@@ -107,6 +105,36 @@ public class ReservaLogic {
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar la editorial con id = {0}", pReservaID);
         return reservaEntity;
+    }
+    
+    
+    /**
+     * Actualizar una editorial.
+     * @param pReservaId: id de la reserva para buscarla en la base de
+     * datos.
+     * @param reservaEntity: reserva con los cambios para ser actualizada,
+     * por ejemplo el tipo de recurso.
+     * @return la reserva con los cambios actualizados en la base de datos.
+     */
+    public ReservaEntity updateReserva(Long pReservaId, ReservaEntity reservaEntity) 
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la reserva con id = {0}", pReservaId);
+        // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
+        ReservaEntity newEntity = persistencia.update(reservaEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la reserva con id = {0}", reservaEntity.getId());
+        return newEntity;
+    }
+
+    /**
+     * Borra una reserva
+     * @param pReservaId: id de la reserva a borrar
+     */
+    public void deleteReserva(Long pReservaId)
+    {
+        LOGGER.log(Level.INFO, "Inicia proceso de borrar la reserva con id = {0}", pReservaId);
+        // Note que, por medio de la inyección de dependencias se llama al método "delete(id)" que se encuentra en la persistencia
+        persistencia.delete(pReservaId);
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la reserva con id = {0}", pReservaId);
     }
 
 
