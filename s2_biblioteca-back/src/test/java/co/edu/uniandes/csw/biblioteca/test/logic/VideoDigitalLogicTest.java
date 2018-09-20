@@ -4,6 +4,7 @@ package co.edu.uniandes.csw.biblioteca.test.logic;
 
 import co.edu.uniandes.csw.bibilioteca.entities.VideoDigitalEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.LibroEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
 import co.edu.uniandes.csw.biblioteca.ejb.VideoDigitalLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.VideoDigitalPersistence;
@@ -49,8 +50,7 @@ public class VideoDigitalLogicTest
     private UserTransaction utx;
     
     private List<VideoDigitalEntity> data = new ArrayList<VideoDigitalEntity>();
-    
-    private List<LibroEntity> librosData = new ArrayList();
+        private List<UsuarioEntity> usuariosData = new ArrayList();
     
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -91,7 +91,7 @@ public class VideoDigitalLogicTest
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        eman.createQuery("delete from LibroEntity").executeUpdate();
+        eman.createQuery("delete from UsuarioEntity").executeUpdate();
         eman.createQuery("delete from VideoDigitalEntity").executeUpdate();
     }
 
@@ -102,10 +102,17 @@ public class VideoDigitalLogicTest
     private void insertData() {
        
         for (int i = 0; i < 3; i++) {
-            VideoDigitalEntity entityVideoDigital = factory.manufacturePojo(VideoDigitalEntity.class);
-            eman.persist(entityVideoDigital);
-            data.add(entityVideoDigital);
-            
+            UsuarioEntity usuarios = factory.manufacturePojo(UsuarioEntity.class);
+            eman.persist(usuarios);
+            usuariosData.add(usuarios);
+        }
+        for (int i = 0; i < 3; i++) {
+            VideoDigitalEntity entity = factory.manufacturePojo(VideoDigitalEntity.class);
+            eman.persist(entity);
+            data.add(entity);
+            if (i == 0) {
+                //usuariosData.get(i).setVideoDigital(entity);
+            }
         }
     }
     
