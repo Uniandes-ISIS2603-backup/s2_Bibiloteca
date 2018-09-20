@@ -60,7 +60,7 @@ public class LibroDigitalEntity extends BaseEntity implements Serializable  {
     private Integer calificacionPromedio;
     
     @PodamExclude
-    @OneToMany(mappedBy = "librodigital", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToMany
     private ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
     
     //__________________________________________________________________________
