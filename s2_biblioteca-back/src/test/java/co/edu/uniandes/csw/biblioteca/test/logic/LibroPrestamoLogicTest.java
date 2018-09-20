@@ -48,23 +48,22 @@ public class LibroPrestamoLogicTest {
 
     @Inject
     private UserTransaction utx;
-    
+
     @Inject
     private LibroPrestamoLogic libroPrestamoLogica;
-    
+
     //@Inject 
     //private PrestamoLogic prestamo;
-    
     private List<LibroEntity> data = new ArrayList<>();
-    
+
     private List<PrestamoEntity> dataPrestamos = new ArrayList<>();
-    
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(PrestamoEntity.class.getPackage())
                 .addPackage(LibroLogic.class.getPackage())
+                .addPackage(LibroPrestamoLogic.class.getPackage())
                 .addPackage(PrestamoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
@@ -93,33 +92,44 @@ public class LibroPrestamoLogicTest {
     private void clearData() {
         em.createQuery("delete from PrestamoEntity").executeUpdate();
         em.createQuery("delete from LibroEntity").executeUpdate();
+        em.createQuery("delete from BibliotecaEntity").executeUpdate();
     }
 
     private void insertData() {
-        for (int i = 0; i < 3; i++) {
-            LibroEntity entity = factory.manufacturePojo(LibroEntity.class);
-            em.persist(entity);
-            data.add(entity);
-        }
-        for (int j = 0 ; j < 3 ; j++)
-        {
+        for (int j = 0; j < 3; j++) {
             PrestamoEntity prestamo = factory.manufacturePojo(PrestamoEntity.class);
             em.persist(prestamo);
             dataPrestamos.add(prestamo);
-            if(j==0)
-            {
-                data.get(j).setPrestamos(dataPrestamos);
+        }
+        for (int i = 0; i < 3; i++) {
+            LibroEntity entity = factory.manufacturePojo(LibroEntity.class);
+            em.persist(entity);
+            if (i == 0) {
+                entity.setPrestamos(dataPrestamos);
             }
+            data.add(entity);
+            
         }
     }
-    
+
     @Test
-    public void addPrestamoTest() throws BusinessLogicException
-    {
-        PrestamoEntity entity = factory.manufacturePojo(PrestamoEntity.class);
-        //PrestamoEntity intermedio = 
-        PrestamoEntity resultado = libroPrestamoLogica.addPrestamo(data.get(0).getId(), entity.getId());
+    public void addPrestamoTest() throws BusinessLogicException {
+        LibroEntity libro = data.get(0);
+        PrestamoEntity prestamo = dataPrestamos.get(0);
+        PrestamoEntity resultado = libroPrestamoLogica.addPrestamo(libro.getId(), prestamo.getId());
         Assert.assertNotNull(resultado);
+        PrestamoEntity prestamoEncontrado = em.find(PrestamoEntity.class, resultado.getId());
+        Assert.assertEquals(prestamo.getId(), prestamoEncontrado.getId());
     }
+
+    @Test
+    public void deletePrestamoTest() throws BusinessLogicException {
+        LibroEntity libro = data.get(1);
+        libro.setPrestamos(dataPrestamos);
+        libroPrestamoLogica.deletePrestamo(libro.getId(), dataPrestamos.get(0).getId());
+        PrestamoEntity prestamo = libroPrestamoLogica.getPrestamo(libro.getId(), dataPrestamos.get(0).getId());
+        Assert.assertNull(prestamo);
+    }
+
 
 }
