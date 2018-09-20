@@ -111,7 +111,7 @@ public class ComentarioResource {
  */    
  @PUT
  @Path("{comentarioId: \\d+}")
- public ComentarioDTO updateComentario(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId, @PathParam("usuarioId") Long usuarioId ,ComentarioDTO comentario) throws BusinessLogicException  {
+ public ComentarioDTO updateComentario(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId ,ComentarioDTO comentario) throws BusinessLogicException  {
      if(!comentarioId.equals(comentario.getId()))
      {
          throw new BusinessLogicException("Los ids del Review no coinciden.");
@@ -121,7 +121,7 @@ public class ComentarioResource {
      {
          throw new WebApplicationException("El recurso /libros/" + libroId + "/comentarios/" + comentarioId + " no existe.", 404);
      }
-     ComentarioDTO comentarioDTO = new ComentarioDTO(comentarioLogic.updateComentario(libroId, comentario.toEntity(), usuarioId));
+     ComentarioDTO comentarioDTO = new ComentarioDTO(comentarioLogic.updateComentario(libroId, comentario.toEntity(), comentario.getUsuario().getId()));
      return comentarioDTO;
     
  }
@@ -134,7 +134,7 @@ public class ComentarioResource {
      */
  @DELETE
  @Path("{comentarioId: \\d+}")
-    public void deleteReview(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException  {
+    public void deleteComentario(@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId) throws BusinessLogicException  {
         ComentarioEntity comentario = comentarioLogic.getComentarioLibro(libroId, comentarioId);
         if(comentario == null)
         {

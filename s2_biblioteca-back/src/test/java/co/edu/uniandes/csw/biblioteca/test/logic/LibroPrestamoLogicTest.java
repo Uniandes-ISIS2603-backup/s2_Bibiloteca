@@ -131,5 +131,4 @@ public class LibroPrestamoLogicTest {
         Assert.assertNull(prestamo);
     }
 
-
 }

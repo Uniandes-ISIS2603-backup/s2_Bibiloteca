@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "97078dfa-6076-4276-9899-a66e093c0189",
+		"name": "PruebasLibro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Libro",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 1,\n\t\"nombre\" : \"Cien anos de soledad\",\n\t\"isbn\" : \"9781483086866\",\n\t\"autor\" : \"Gabriel Garcia Marquez\",\n\t\"editorial\" : \"Norma\",\n\t\"edicion\" : \"Segunda edicion\",\n\t\"idioma\" : \"Espanol\",\n\t\"unidadesDisponibles\" : 4,\n\t\"usuariosListaEspera\" : 0,\n\t\"calificacionPromedio\" : 3,\n\t\"biblioteca\" : [\n\t\t{\n\t\t\t\"zona\" : 1,\n\t\t\t\"nombre\" : \"Biblioteca ML\",\n\t\t\t\"direccion\" : \"cra 3\",\n\t\t\t\"horaApertura\" : \"7 am\",\n\t\t\t\"horaCierre\" : \"10 pm\"\n\t\t}]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Libro",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Libros",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Libro",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "950741ee-f683-4df3-a8ea-ad6b44f8ba6b",
+		"name": "Pruebas Comentario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Comentario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"numeroEstrellas\" : 5,\n    \"texto\" : \"Excelente libro\",\n    \"nombreUsuario\" : \"Daniel Montoya\",\n    \"fecha\" : \"01-01-2010\",\n    \"libro\" : [\n    \t{\n    \t\t\t\"id\" : 1,\n\t\"nombre\" : \"Cien anos de soledad\",\n\t\"isbn\" : \"9781483086866\",\n\t\"autor\" : \"Gabriel Garcia Marquez\",\n\t\"editorial\" : \"Norma\",\n\t\"edicion\" : \"Segunda edicion\",\n\t\"idioma\" : \"Espanol\",\n\t\"unidadesDisponibles\" : 4,\n\t\"usuariosListaEspera\" : 0,\n\t\"calificacionPromedio\" : 3,\n\t\"biblioteca\" : [\n\t\t{\n\t\t\t\"zona\" : 1,\n\t\t\t\"nombre\" : \"Biblioteca ML\",\n\t\t\t\"direccion\" : \"cra 3\",\n\t\t\t\"horaApertura\" : \"7 am\",\n\t\t\t\"horaCierre\" : \"10 pm\"\n\t\t}]\n    \t}],\n    \"usuario\" : [\n    \t{\n    \t\t\"id\" : 1,\n    \t\t\"nombre\" : \"Daniel Montoya\",\n    \t\t\"email\" : \"danielmontoya@uniandes.edu.co\",\n    \t\t\"telefono\" : \"2313243\",\n    \t\t\"multa\" : 0\n    \t}]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Comentarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Comentario",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"numeroEstrellas\" : 5,\n    \"texto\" : \"Excelente libro\",\n    \"nombreUsuario\" : \"Daniel Montoya\",\n    \"fecha\" : \"01-01-2010\",\n    \"libro\" : [\n    \t{\n    \t\t\n    \t}],\n    \"usuario\" : [\n    \t{\n    \t\t\n    \t}]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros/1/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Comentario",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"numeroEstrellas\" : 5,\n    \"texto\" : \"Excelente libro\",\n    \"nombreUsuario\" : \"Daniel Montoya\",\n    \"fecha\" : \"01-01-2010\",\n    \"libro\" : [\n    \t{\n    \t\t\t\"id\" : 1,\n\t\"nombre\" : \"Cien anos de soledad\",\n\t\"isbn\" : \"9781483086866\",\n\t\"autor\" : \"Gabriel Garcia Marquez\",\n\t\"editorial\" : \"Norma\",\n\t\"edicion\" : \"Segunda edicion\",\n\t\"idioma\" : \"Espanol\",\n\t\"unidadesDisponibles\" : 4,\n\t\"usuariosListaEspera\" : 0,\n\t\"calificacionPromedio\" : 3,\n\t\"biblioteca\" : [\n\t\t{\n\t\t\t\"zona\" : 1,\n\t\t\t\"nombre\" : \"Biblioteca ML\",\n\t\t\t\"direccion\" : \"cra 3\",\n\t\t\t\"horaApertura\" : \"7 am\",\n\t\t\t\"horaCierre\" : \"10 pm\"\n\t\t}]\n    \t}],\n    \"usuario\" : [\n    \t{\n    \t\t\"id\" : 1,\n    \t\t\"nombre\" : \"Daniel Montoya\",\n    \t\t\"email\" : \"danielmontoya@uniandes.edu.co\",\n    \t\t\"telefono\" : \"2313243\",\n    \t\t\"multa\" : 0\n    \t}]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros/1/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Comentario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros/1/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"libros",
+						"1",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
