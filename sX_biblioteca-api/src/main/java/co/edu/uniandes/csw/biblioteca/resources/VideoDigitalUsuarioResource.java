@@ -100,7 +100,7 @@ public class VideoDigitalUsuarioResource
     }
 
     /**
-     * Actualiza la lista de usuarioes de un videoDigital con la lista que se recibe en
+     * Actualiza la lista de usuarios de un videoDigital con la lista que se recibe en
      * el cuerpo.
      *
      * @param videodigitalid El ID del videoDigital al cual se le va a asociar la lista de
