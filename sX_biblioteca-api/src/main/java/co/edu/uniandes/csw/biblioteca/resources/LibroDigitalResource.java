@@ -23,7 +23,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author Juan Bautista
+ * @author Nicolás Alvarado
  */ 
     @Path("librosdigitales")
     @Produces("application/json")
@@ -31,6 +31,8 @@ import javax.ws.rs.Produces;
     @RequestScoped
 public class LibroDigitalResource {
     
+     // Inyectar la lógica porque es la que va a ser usada para generar los servicios REST
+        
     @POST
     public LibroDigitalDTO createLibroDigital(LibroDigitalDTO pLibroDigital) 
     {
@@ -38,7 +40,8 @@ public class LibroDigitalResource {
     }
     @GET
     @Path("{librosdigitalesid: \\d+}")
-    public LibroDigitalDTO getLibroDigital(@PathParam("librosdigitalesid") Long librosdigitalesId)
+    
+    public LibroDigitalDTO getLibroDigitalById(@PathParam("librosdigitalesid") Long librosdigitalesId)
     {
        return null; 
     }
