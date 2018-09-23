@@ -93,4 +93,10 @@ public class UsuarioLogic {
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el usuario con id = {0}", usuarioEntity.getId());
         return newEntity;
     }
+     public void deleteUsuario(Long usuarioId)
+    {
+        LOGGER.log(Level.INFO,"Comienza el proceso de eliminar el usuario con id = {0}",usuarioId);
+        persistence.delete(usuarioId);
+        LOGGER.log(Level.INFO, "El proceso de borrado del usuario con id = {0} ha terminado",usuarioId);
+    }
 }
