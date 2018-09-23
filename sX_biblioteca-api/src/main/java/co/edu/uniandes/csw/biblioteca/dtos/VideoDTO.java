@@ -40,7 +40,7 @@ public class VideoDTO implements Serializable {
             }
         }
     }
-
+    
     public VideoDTO() {
 
     }
@@ -64,7 +64,7 @@ public class VideoDTO implements Serializable {
         }
         return ve;
     }
-
+    
     public Long getId() {
         return id;
     }

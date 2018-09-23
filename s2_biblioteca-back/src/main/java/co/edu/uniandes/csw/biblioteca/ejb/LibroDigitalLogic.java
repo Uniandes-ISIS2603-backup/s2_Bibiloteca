@@ -22,7 +22,7 @@ public class LibroDigitalLogic {
         if(lde.getNombre() == null || lde.getIsbn() == null || lde.getAutor() == null || lde.getEditorial() == null || lde.getEdicion() == null || lde.getIdioma() == null){
             throw new BusinessLogicException("El nombre, isbn, autor, editorial, edicion o idioma no pueden ser nulos.");
         }
-        if(ldp.find(lde.getId()) != null){
+        if(ldp.find(lde.getId()) != null || ldp.findByServiceName(lde.getNombre()) != null){
             throw new BusinessLogicException("El libro ya existe");
         }
         ldp.create(lde);

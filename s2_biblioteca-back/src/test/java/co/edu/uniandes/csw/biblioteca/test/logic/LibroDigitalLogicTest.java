@@ -86,4 +86,18 @@ public class LibroDigitalLogicTest {
         Assert.assertEquals(lde, lde2);
     }
     
+    @Test(expected = BusinessLogicException.class)
+    public void createLibroDigitalNoName() throws BusinessLogicException{
+        LibroDigitalEntity lde = pf.manufacturePojo(LibroDigitalEntity.class);
+        lde.setNombre(null);
+        ldl.createLibroDigital(lde);
+    }
+    
+    @Test(expected = BusinessLogicException.class)
+    public void createLibroDigitalRepetido() throws BusinessLogicException{
+        LibroDigitalEntity lde = pf.manufacturePojo(LibroDigitalEntity.class);
+        lde.setNombre(listLDE.get(0).getNombre());
+        ldl.createLibroDigital(lde);
+    }
+    
 }
