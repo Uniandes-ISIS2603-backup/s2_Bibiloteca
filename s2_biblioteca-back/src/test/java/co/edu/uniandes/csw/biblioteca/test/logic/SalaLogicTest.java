@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.csw.biblioteca.test.persistence;
+package co.edu.uniandes.csw.biblioteca.test.logic;
 
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
+import co.edu.uniandes.csw.biblioteca.ejb.SalaLogic;
+import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.SalaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,136 +28,110 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Juan Nicolás García
+ * @author estudiante
  */
 @RunWith(Arquillian.class)
-public class SalaPersistenceTest {
-      @Inject
-    private SalaPersistence salaPersistence;
-    
+public class SalaLogicTest {
+    private PodamFactory factory = new PodamFactoryImpl();
+    @Inject
+    private SalaLogic salaLogica;
     @PersistenceContext
     private EntityManager em;
-    
-    @Inject
-    UserTransaction ux;
-    
+     @Inject
+    private UserTransaction utx;
+
     private List<SalaEntity> data = new ArrayList<>();
     
-        /**
-     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
-     * El jar contiene las clases, el descriptor de la base de datos y el
-     * archivo beans.xml para resolver la inyección de dependencias.
-     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(SalaEntity.class.getPackage())
+                .addPackage(SalaLogic.class.getPackage())
                 .addPackage(SalaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-
-    /**
+     /**
      * Configuración inicial de la prueba.
      */
     @Before
     public void configTest() {
         try {
-            ux.begin();
-            em.joinTransaction();
+            utx.begin();
             clearData();
             insertData();
-            ux.commit();
+            utx.commit();
         } catch (Exception e) {
             e.printStackTrace();
             try {
-                ux.rollback();
+                utx.rollback();
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
         }
     }
-
-    /**
-     * Limpia las tablas que están implicadas en la prueba.
-     */
-    private void clearData() {
+     private void clearData() {
         em.createQuery("delete from SalaEntity").executeUpdate();
     }
 
-    /**
-     * Inserta los datos iniciales para el correcto funcionamiento de las
-     * pruebas.
-     */
     private void insertData() {
-        PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             SalaEntity entity = factory.manufacturePojo(SalaEntity.class);
-
             em.persist(entity);
             data.add(entity);
         }
     }
-    
     @Test
-    public void createSalaTest(){
-        PodamFactory factory = new PodamFactoryImpl();
-        SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
-        SalaEntity resultado = salaPersistence.create(newEntity);
-        
+    public void createSalaTest() throws BusinessLogicException {
+        SalaEntity nuevaSalaEntity = factory.manufacturePojo(SalaEntity.class);
+        SalaEntity resultado = salaLogica.createSala(nuevaSalaEntity);
         Assert.assertNotNull(resultado);
-        
-        SalaEntity entity = em.find(SalaEntity.class,resultado.getId());
-    
-    }
-    
-    @Test
-    public void getSalaTest(){
-        SalaEntity entity = data.get(0);
-        SalaEntity nuevaEntity = salaPersistence.find(entity.getId());
-        Assert.assertNotNull(nuevaEntity);
+        SalaEntity salaEntity = em.find(SalaEntity.class, resultado.getId());
+        Assert.assertEquals(nuevaSalaEntity.getId(), salaEntity.getId());
        
     }
-    
     @Test
-    public void getSalasTest()
-    {
-        List<SalaEntity> lista = salaPersistence.findAll();
-        Assert.assertEquals(lista.size(), data.size());
-        for(SalaEntity i : lista)
-        {
+    public void getSalasTest() {
+        List<SalaEntity> lista = salaLogica.getSalas();
+        Assert.assertEquals(data.size(), lista.size());
+        for (SalaEntity entity : lista) {
             boolean encontrado = false;
-            for(SalaEntity j : data)
-            {
-                if(i.getId().equals(j.getId()))
+            for (SalaEntity comp : data) {
+                if (entity.getId().equals(comp.getId())) {
                     encontrado = true;
+                }
             }
             Assert.assertTrue(encontrado);
         }
+    }
+
+    @Test
+    public void getSalaTest()
+    {
+        SalaEntity entity = data.get(0);
+        SalaEntity resultado = salaLogica.getSala(entity.getId());
+        Assert.assertNotNull(resultado);
+        Assert.assertEquals(entity.getId(), resultado.getId());
+        Assert.assertEquals(entity.getUbicacion(),resultado.getUbicacion());
+    }
+     @Test
+    public void updateSalaTest() throws BusinessLogicException
+    {
+        SalaEntity entity = data.get(0);
+        SalaEntity pojo = factory.manufacturePojo(SalaEntity.class);
+        pojo.setId(entity.getId());
+        salaLogica.updateSala(pojo.getId(), pojo);
+        SalaEntity resultado = em.find(SalaEntity.class,entity.getId());
+        Assert.assertEquals(pojo.getId(),resultado.getId());
+        Assert.assertEquals(pojo.getUbicacion(),resultado.getUbicacion());
     }
     
     @Test
     public void deleteSalaTest()
     {
         SalaEntity entity = data.get(0);
-        salaPersistence.delete(entity.getId());
+        salaLogica.deleteSala(entity.getId());
         SalaEntity borrado = em.find(SalaEntity.class,entity.getId());
         Assert.assertNull(borrado);
-    }
-    
-    @Test
-    public void updateSalaTest()
-    {
-        SalaEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-        SalaEntity nueva = factory.manufacturePojo(SalaEntity.class);
-        
-        nueva.setId(entity.getId());
-        
-        salaPersistence.update(nueva);
-        
-        SalaEntity resp = em.find(SalaEntity.class, entity.getId());
-        Assert.assertEquals(resp.getId(), nueva.getId());
-        
     }
 }

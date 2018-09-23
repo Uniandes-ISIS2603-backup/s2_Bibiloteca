@@ -21,7 +21,9 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class SalaPersistence {
+    
         private static final Logger LOGGER = Logger.getLogger(SalaPersistence.class.getName());
+        
     @PersistenceContext(unitName = "DnsPU")
     protected EntityManager em;
     public SalaEntity create(SalaEntity sala)
@@ -38,10 +40,10 @@ public class SalaPersistence {
         return  q.getResultList();
         
     }
-    public SalaEntity find (Long salaID)
+    public SalaEntity find (Long salaId)
     {
-        LOGGER.log(Level.INFO, "Consultando sala con id = {0}",salaID );
-        return em.find(SalaEntity.class, salaID);
+        LOGGER.log(Level.INFO, "Consultando sala con id = {0}",salaId );
+        return em.find(SalaEntity.class, salaId);
     }
     public SalaEntity update(SalaEntity salaEntity)
     {

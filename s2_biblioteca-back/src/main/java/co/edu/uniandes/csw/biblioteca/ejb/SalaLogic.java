@@ -92,4 +92,10 @@ public class SalaLogic {
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la sala con id = {0}", salaEntity.getId());
         return newEntity;
     }
+     public void deleteSala(Long salaId)
+    {
+        LOGGER.log(Level.INFO,"Comienza el proceso de eliminar la sala con id = {0}",salaId);
+        persistence.delete(salaId);
+        LOGGER.log(Level.INFO, "El proceso de borrado de la sala con id = {0} ha terminado",salaId);
+    }
 }
