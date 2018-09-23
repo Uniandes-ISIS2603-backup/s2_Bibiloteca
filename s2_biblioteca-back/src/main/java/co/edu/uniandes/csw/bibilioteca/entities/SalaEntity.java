@@ -6,10 +6,12 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -27,9 +29,10 @@ public class SalaEntity extends BaseEntity implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private BibliotecaEntity biblioteca;
     
-    @PodamExclude
-    @OneToOne
-    private ReservaEntity reserva;
+    
+   @PodamExclude
+    @OneToMany(mappedBy = "sala", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ReservaEntity> reservas = new ArrayList<>();
 
     public String getUbicacion() {
         return ubicacion;
@@ -61,6 +64,13 @@ public class SalaEntity extends BaseEntity implements Serializable {
 
     public void setBiblioteca(BibliotecaEntity biblioteca) {
         this.biblioteca = biblioteca;
+    }
+    public List<ReservaEntity> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<ReservaEntity> reservas) {
+        this.reservas = reservas;
     }
 
     
