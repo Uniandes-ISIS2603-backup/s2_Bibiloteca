@@ -104,7 +104,7 @@ public class BibliotecaLogic
      * @param bibliotecaId: id de la biblioteca a borrar
      * @throws BusinessLogicException Si la biblioteca a eliminar tiene libros o video o salas. 
      */
-    public void deleteEditorial(Long bibliotecaId) throws BusinessLogicException 
+    public void deleteBiblioteca(Long bibliotecaId) throws BusinessLogicException 
     {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar la biblioteca con id = {0}", bibliotecaId);
         // Note que, por medio de la inyección de dependencias se llama al método "delete(id)" que se encuentra en la persistencia.
