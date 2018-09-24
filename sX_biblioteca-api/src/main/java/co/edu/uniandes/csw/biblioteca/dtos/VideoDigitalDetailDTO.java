@@ -27,7 +27,7 @@ public class VideoDigitalDetailDTO extends VideoDigitalDTO implements Serializab
         if(videoDigitalEntity.getUsuarios() != null){
             usuarios = new ArrayList<UsuarioDTO>();
             for(UsuarioEntity e : videoDigitalEntity.getUsuarios()){
-                usuarios.add(new UsuarioDTO(e));
+            usuarios.add(new UsuarioDTO(e));
             }
         }
     }
