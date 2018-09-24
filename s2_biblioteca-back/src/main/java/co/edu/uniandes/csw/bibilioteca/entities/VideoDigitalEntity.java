@@ -28,7 +28,7 @@ public class VideoDigitalEntity extends BaseEntity implements Serializable {
     private Boolean subtitulos;
     
     @PodamExclude
-    @OneToMany
+    @ManyToMany
     private List<UsuarioEntity> usuarios = new ArrayList<UsuarioEntity>();
     
 
