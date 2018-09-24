@@ -61,6 +61,7 @@ public class PrestamoLogic
     public PrestamoEntity createPrestamo(PrestamoEntity prestamoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del prestamo");
         // Verifica la regla de negocio que dice que no puede haber un prestamo si el libro no está disponible o está reservado. 
+        System.out.println(prestamoEntity.getLibro());
         if( prestamoEntity.getLibro() != null)
         {
             LibroEntity libro = prestamoEntity.getLibro();
@@ -117,10 +118,14 @@ public class PrestamoLogic
                 videoPersistence.update(video);
             }
         }
+        else
+        {
+             throw new BusinessLogicException("Algo está mal estupido  \""  + "\" está reservado ");
+        }
         
-        // Invoca la persistencia para crear la editorial
+        // Invoca la persistencia para crear el prestamo
         persistence.create(prestamoEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación de la editorial");
+        LOGGER.log(Level.INFO, "Termina proceso de creación del prestamo");
         return prestamoEntity;
     }
     
@@ -128,7 +133,7 @@ public class PrestamoLogic
      *
      * Obtener todas los prestamos existentes en la base de datos.
      *
-     * @return una lista de editoriales.
+     * @return una lista de los prestamos.
      */
     public List<PrestamoEntity> getPrestamos() 
     {
@@ -143,11 +148,11 @@ public class PrestamoLogic
      *
      * Obtener un prestamo por medio de su id.
      *
-     * @param prestamoId: id de la editorial para ser buscada.
+     * @param prestamoId: id del prestamo para ser buscado.
      * @return el prestamo solicitado por medio de su id.
      */
     public PrestamoEntity getPrestamo(Long prestamoId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la editorial con id = {0}", prestamoId);
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el prestamo con id = {0}", prestamoId);
         // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
         PrestamoEntity prestamoEntity = persistence.find(prestamoId);
         if (prestamoEntity == null) 
