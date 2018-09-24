@@ -36,6 +36,61 @@
 			"response": []
 		},
 		{
+			"name": "CrearUsuario",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\" : \"Cien anos de soledad\",\n\t\"email\" : \"prueba@postman.com\",\n\t\"telefono\" : \"3333333333\",\n\t\"multa\" : 0,\n\t\"id\":1\t\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/usuarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agregarUsuarioAVideoDigital",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/videosdigitales/3/usuarios/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"videosdigitales",
+						"3",
+						"usuarios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "GetVideosDigitales",
 			"request": {
 				"method": "GET",
@@ -154,6 +209,18 @@
 					]
 				},
 				"description": "Se espera null"
+			},
+			"response": []
+		},
+		{
+			"name": "GetUsuarioVideoDigital",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		}
