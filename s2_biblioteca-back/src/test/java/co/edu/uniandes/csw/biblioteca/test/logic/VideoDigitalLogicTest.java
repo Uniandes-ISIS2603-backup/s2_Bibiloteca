@@ -111,7 +111,7 @@ public class VideoDigitalLogicTest
             eman.persist(entity);
             data.add(entity);
             if (i == 0) {
-                //usuariosData.get(i).setVideoDigital(entity);
+//           usuariosData.get(i).(entity);
             }
         }
     }
