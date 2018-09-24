@@ -18,7 +18,7 @@ import javax.persistence.Query;
  * Clase que maneja la persistencia para Prestamo. Se conecta a través del Entity
  * Manager de javax.persistance con la base de datos SQL.
  *
- * @author David Eduardo Saavedra Hernandeza
+ * @author David Eduardo Saavedra Hernandez
  */
 @Stateless
 public class PrestamoPersistence 
@@ -37,7 +37,7 @@ public class PrestamoPersistence
     public PrestamoEntity create(PrestamoEntity prestamoEntity) {
         LOGGER.log(Level.INFO, "Creando un prestamo nuevo");
         em.persist(prestamoEntity);
-        LOGGER.log(Level.INFO, "Libro creado");
+        LOGGER.log(Level.INFO, "Prestamo creado");
         return prestamoEntity;
     }
     
