@@ -63,7 +63,7 @@ public class VideoDigitalUsuarioResource
     }
 
     /**
-     * Busca y devuelve todos los usuarioes que existen en un videoDigital.
+     * Busca y devuelve todos los usuarios que existen en un videoDigital.
      *
      * @param videodigitalid El ID del videoDigital del cual se buscan los usuarioes
      * @return JSONArray {@link UsuarioDetailDTO} - Los usuarioes encontrados en el
