@@ -53,7 +53,10 @@ public class SalaDTO implements Serializable {
 
         return sala;
     }
-
+    public Long getId()
+    {
+        return id;
+    }
     public String getUbicacion() {
         return ubicacion;
     }
