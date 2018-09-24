@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "22c6b9e0-2820-4351-b35a-3da3e93812c5",
+		"name": "SalaCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear sala",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"ubicacion\" : \"Norte\",\n \"disponibilidad\" : true,\n \"capacidad\" : 4}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1/salas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"1",
+						"salas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener salas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1/salas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"1",
+						"salas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener sala",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1/salas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"1",
+						"salas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar sala",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1/salas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"1",
+						"salas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar sala",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1/salas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"1",
+						"salas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

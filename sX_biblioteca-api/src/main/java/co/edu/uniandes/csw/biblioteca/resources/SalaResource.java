@@ -22,8 +22,10 @@ import javax.ws.rs.Produces;
  *
  * @author Juan Nicolás García
  */
+@Path("salas")
 @Produces("application/json")
 @Consumes("application/json")
+@RequestScoped
 public class SalaResource {
     @Inject
     private SalaLogic salaLogic;
