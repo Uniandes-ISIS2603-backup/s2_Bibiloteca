@@ -102,6 +102,23 @@ public class BibliotecaDTO implements Serializable
     }
     
     /**
+     * Devuelve el ID de la biblioteca.
+     *
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * Modifica el ID de la biblioteca.
+     *
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
+    }
+    /**
      * Devuelve la zona de la Bblioteca
      *
      * @return la zona 

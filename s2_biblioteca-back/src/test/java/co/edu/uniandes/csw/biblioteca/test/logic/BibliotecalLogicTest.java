@@ -180,9 +180,9 @@ public class BibliotecalLogicTest
      * @throws co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException
      */
     @Test
-    public void deleteEditorialTest() throws BusinessLogicException {
+    public void deleteBibliotecaTest() throws BusinessLogicException {
         BibliotecaEntity entity = data.get(1);
-        bibliotecaLogic.deleteEditorial(entity.getId());
+        bibliotecaLogic.deleteBiblioteca(entity.getId());
         BibliotecaEntity deleted = em.find(BibliotecaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }

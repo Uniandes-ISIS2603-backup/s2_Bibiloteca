@@ -102,7 +102,7 @@ public class BibliotecaPersistence {
     public BibliotecaEntity findByName(String name) 
     {
         
-        LOGGER.log(Level.INFO, "Consultando editorial por nombre ", name);
+        LOGGER.log(Level.INFO, "Consultando biblioteca por nombre ", name);
         // Se crea un query para buscar editoriales con el nombre que recibe el método como argumento. ":name" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select e From BibliotecaEntity e where e.nombre = :nombre", BibliotecaEntity.class);
         // Se remplaza el placeholder ":name" con el valor del argumento 
@@ -117,7 +117,7 @@ public class BibliotecaPersistence {
         } else {
             result = sameName.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar editorial por nombre ", name);
+        LOGGER.log(Level.INFO, "Saliendo de consultar biblioteca por nombre ", name);
         return result;
     }
 }
