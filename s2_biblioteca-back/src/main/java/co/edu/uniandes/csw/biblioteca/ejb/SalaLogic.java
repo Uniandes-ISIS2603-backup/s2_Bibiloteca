@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.biblioteca.ejb;
 
+import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
+import co.edu.uniandes.csw.biblioteca.persistence.BibliotecaPersistence;
 import co.edu.uniandes.csw.biblioteca.persistence.SalaPersistence;
 import java.util.logging.Logger;
 import java.util.List;
@@ -22,8 +24,9 @@ import javax.inject.Inject;
 public class SalaLogic {
     private static final Logger LOGGER = Logger.getLogger(UsuarioLogic.class.getName());
     @Inject
-    private SalaPersistence persistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
-    
+    private SalaPersistence salaPersistence; // Variable para acceder a la persistencia de la aplicación. Es una inyección de dependencias.
+    @Inject
+    private BibliotecaPersistence bibliotecaPersistence;
     /**
      * Crea una sala en la persistencia.
      *
@@ -32,48 +35,51 @@ public class SalaLogic {
      * @return La entidad de la sala luego de persistirla.
      * @throws BusinessLogicException Si la sala a persistir ya existe.
      */
-    public SalaEntity createSala(SalaEntity salaEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación del usuario");
-        // Verifica la regla de negocio que dice que no puede haber dos salas con la misma ubicacion.
-        if (persistence.findUbicacion(salaEntity.getUbicacion()) != null) {
-           throw new BusinessLogicException("Ya existe una sala con la ubicacion \"" + salaEntity.getUbicacion() + "\"");
+     public SalaEntity createSala(Long bibliotecaId, SalaEntity sala) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia el proceso de crear un comentario");
+        BibliotecaEntity bibliotecaDeSala = bibliotecaPersistence.find(bibliotecaId);
+	boolean existe = false;
+        for (SalaEntity salaEx : bibliotecaDeSala.getSalas()) {
+            if(salaEx.getUbicacion().equals(sala.getUbicacion()))
+		existe = true;
+            }
+        
+        if (existe == false) {
+            sala.setBiblioteca(bibliotecaDeSala);
+            LOGGER.log(Level.INFO, "La sala fue creado exitosamente");
+            return salaPersistence.create(sala);
+        } else {
+            throw new BusinessLogicException("No puede crear la sala en la biblioteca con id = " + bibliotecaId + " por que ya existe una con la misma ubicación");
         }
-        // Invoca la persistencia para crear la sala
-        persistence.create(salaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación de la sala");
-        return salaEntity;
     }
+        
     
     /**
      *
-     * Obtener todas las salas existentes en la base de datos.
+     * Obtener todas las salas existentes de una biblioteca en la base de datos.
      *
+     * @param bibliotecaId
      * @return una lista de salas.
      */
-    public List<SalaEntity> getSalas() {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las salas");
-        // Note que, por medio de la inyección de dependencias se llama al método "findAll()" que se encuentra en la persistencia.
-        List<SalaEntity> salas = persistence.findAll();
-        LOGGER.log(Level.INFO, "Termina proceso de consultar todas las salas");
-        return salas;
+     public List<SalaEntity> getSalasPorBiblioteca(Long bibliotecaId) {
+        LOGGER.log(Level.INFO, "Se comienza a buscar todas las salas de una biblioteca con id={0}", bibliotecaId);
+        BibliotecaEntity biblio = bibliotecaPersistence.find(bibliotecaId);
+        LOGGER.log(Level.INFO, "Termina la consulta de las salas de la biblioteca con id={0}", bibliotecaId);
+        return biblio.getSalas();
+
     }
     
      /**
      *
      * Obtener una sala por medio de su id.
      *
+     * @param bibliotecaId
      * @param salaId: id del Usuario para ser buscado.
      * @return la sala solicitada por medio de su id.
      */
-    public SalaEntity getSala(Long salaId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar la sala con id = {0}", salaId);
-        // Note que, por medio de la inyección de dependencias se llama al método "find(id)" que se encuentra en la persistencia.
-        SalaEntity salaEntity = persistence.find(salaId);
-        if (salaEntity == null) {
-            LOGGER.log(Level.SEVERE, "La sala con el id = {0} no existe", salaId);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar la sala con id = {0}", salaId);
-        return salaEntity;
+     public SalaEntity getSalaBiblioteca(Long bibliotecaId, Long salaId) {
+        LOGGER.log(Level.INFO, "Se comienza a buscar todas las salas con id={0}, de una biblioteca con id= " + bibliotecaId, salaId);
+        return salaPersistence.find(bibliotecaId, salaId);
     }
     
      /**
@@ -85,17 +91,24 @@ public class SalaLogic {
      * por ejemplo la disponibilidad.
      * @return el usuario con los cambios actualizados en la base de datos.
      */
-    public SalaEntity updateSala(Long salaId, SalaEntity salaEntity) {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la sala con id = {0}", salaId);
-        // Note que, por medio de la inyección de dependencias se llama al método "update(entity)" que se encuentra en la persistencia.
-        SalaEntity newEntity = persistence.update(salaEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar la sala con id = {0}", salaEntity.getId());
-        return newEntity;
+       public SalaEntity updateSala(Long bibliotecaId, SalaEntity sala) {
+        LOGGER.log(Level.INFO, "Se comienza la actualizar la sala con id={0} de la biblioteca con id = "+ bibliotecaId,sala.getId());
+        BibliotecaEntity biblio = bibliotecaPersistence.find(bibliotecaId);
+        sala.setBiblioteca(biblio);
+        salaPersistence.update(sala);
+        LOGGER.log(Level.INFO, "Se termina la actualizacion de la sala con id = {0}",sala.getId());
+        return sala;
     }
-     public void deleteSala(Long salaId)
+    
+    public void deleteSala(Long bibliotecaId, Long salaId) throws BusinessLogicException
     {
-        LOGGER.log(Level.INFO,"Comienza el proceso de eliminar la sala con id = {0}",salaId);
-        persistence.delete(salaId);
-        LOGGER.log(Level.INFO, "El proceso de borrado de la sala con id = {0} ha terminado",salaId);
+        LOGGER.log(Level.INFO,"Inicia proceso de borrar la sala con id = {0} de la biblioteca con id = " + bibliotecaId, salaId);
+        SalaEntity eliminar = getSalaBiblioteca(bibliotecaId, salaId);
+        if(eliminar == null)
+        {
+            throw new BusinessLogicException("La sala con id = "+ salaId + " no esta asociado a la biblioteca con id = " + salaId);
+        }
+        salaPersistence.delete(eliminar.getId());
+        LOGGER.log(Level.INFO, "Termina proceso de borrar la sala con id = {0} de la biblioteca con id = " + bibliotecaId, salaId);
     }
 }

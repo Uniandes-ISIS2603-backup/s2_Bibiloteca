@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.biblioteca.test.persistence;
 
+import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import co.edu.uniandes.csw.biblioteca.persistence.SalaPersistence;
 import java.util.ArrayList;
@@ -40,6 +41,7 @@ public class SalaPersistenceTest {
     UserTransaction ux;
     
     private List<SalaEntity> data = new ArrayList<>();
+    private List<BibliotecaEntity> dataBiblioteca = new ArrayList<>();
     
         /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -81,6 +83,7 @@ public class SalaPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete from SalaEntity").executeUpdate();
+        em.createQuery("delete from BibliotecaEntity").executeUpdate();
     }
 
     /**
@@ -90,31 +93,46 @@ public class SalaPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
+            BibliotecaEntity entity = factory.manufacturePojo(BibliotecaEntity.class);
+            em.persist(entity);
+            dataBiblioteca.add(entity);
+        }
+        for (int i = 0; i < 3; i++) {
             SalaEntity entity = factory.manufacturePojo(SalaEntity.class);
-
+            if (i == 0) {
+                entity.setBiblioteca(dataBiblioteca.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
     }
     
+ /**
+     * Prueba crear una nueva sala
+     */
     @Test
-    public void createSalaTest(){
+    public void createSalaTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
-        SalaEntity resultado = salaPersistence.create(newEntity);
-        
+        SalaEntity nuevaEntity = factory.manufacturePojo(SalaEntity.class);
+        SalaEntity resultado = salaPersistence.create(nuevaEntity);
+
         Assert.assertNotNull(resultado);
+
+       SalaEntity entity = em.find(SalaEntity.class, resultado.getId());
+
+        Assert.assertEquals(nuevaEntity.getUbicacion(), entity.getUbicacion());
         
-        SalaEntity entity = em.find(SalaEntity.class,resultado.getId());
-    
     }
     
+    /**
+     * Prueba la consulta de una sala
+     */
     @Test
-    public void getSalaTest(){
+    public void getSalaTest() {
         SalaEntity entity = data.get(0);
-        SalaEntity nuevaEntity = salaPersistence.find(entity.getId());
+        SalaEntity nuevaEntity = salaPersistence.find(dataBiblioteca.get(0).getId(), entity.getId());
         Assert.assertNotNull(nuevaEntity);
-       
+        Assert.assertEquals(entity.getUbicacion(), nuevaEntity.getUbicacion());
     }
     
     @Test
@@ -134,28 +152,32 @@ public class SalaPersistenceTest {
         }
     }
     
+    /**
+     * Prueba eliminar una sala
+     */
     @Test
-    public void deleteSalaTest()
-    {
+    public void deleteSalaTest(){
         SalaEntity entity = data.get(0);
         salaPersistence.delete(entity.getId());
-        SalaEntity borrado = em.find(SalaEntity.class,entity.getId());
-        Assert.assertNull(borrado);
+        SalaEntity eliminado = em.find(SalaEntity.class,entity.getId());
+        Assert.assertNull(eliminado);
     }
     
+    /**
+     * Prueba actualizar una sala
+     */
     @Test
-    public void updateSalaTest()
-    {
+    public void updateSalaTest(){
         SalaEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        SalaEntity nueva = factory.manufacturePojo(SalaEntity.class);
+        SalaEntity newEntity = factory.manufacturePojo(SalaEntity.class);
+        newEntity.setId(entity.getId());
+        salaPersistence.update(newEntity);
         
-        nueva.setId(entity.getId());
+        SalaEntity respuesta = em.find(SalaEntity.class,entity.getId());
         
-        salaPersistence.update(nueva);
+        Assert.assertEquals(respuesta.getUbicacion(), newEntity.getUbicacion());
         
-        SalaEntity resp = em.find(SalaEntity.class, entity.getId());
-        Assert.assertEquals(resp.getId(), nueva.getId());
         
     }
 }

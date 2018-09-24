@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.biblioteca.test.logic;
 
+import co.edu.uniandes.csw.bibilioteca.entities.BibliotecaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import co.edu.uniandes.csw.biblioteca.ejb.SalaLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
@@ -41,6 +42,7 @@ public class SalaLogicTest {
     private UserTransaction utx;
 
     private List<SalaEntity> data = new ArrayList<>();
+    private List<BibliotecaEntity> dataBiblioteca = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDeployment() {
@@ -72,47 +74,62 @@ public class SalaLogicTest {
     }
      private void clearData() {
         em.createQuery("delete from SalaEntity").executeUpdate();
+        em.createQuery("delete from BibliotecaEntity").executeUpdate();
     }
 
     private void insertData() {
-        for (int i = 0; i < 3; i++) {
-            SalaEntity entity = factory.manufacturePojo(SalaEntity.class);
-            em.persist(entity);
-            data.add(entity);
+        for(int i = 0 ; i<3 ; i++)
+        {
+            BibliotecaEntity biblio = factory.manufacturePojo(BibliotecaEntity.class);
+            em.persist(biblio);
+            dataBiblioteca.add(biblio);
+        }
+        
+        for(int k = 0 ; k < 3 ; k++)
+        {
+            SalaEntity sala = factory.manufacturePojo(SalaEntity.class);
+            sala.setBiblioteca(dataBiblioteca.get(1));
+            em.persist(sala);
+            data.add(sala);
         }
     }
-    @Test
-    public void createSalaTest() throws BusinessLogicException {
-        SalaEntity nuevaSalaEntity = factory.manufacturePojo(SalaEntity.class);
-        SalaEntity resultado = salaLogica.createSala(nuevaSalaEntity);
+     @Test
+    public void createSalaTest() throws BusinessLogicException
+    {
+        SalaEntity nuevaEntity = factory.manufacturePojo(SalaEntity.class);
+        nuevaEntity.setBiblioteca(dataBiblioteca.get(1));
+        SalaEntity resultado = salaLogica.createSala(dataBiblioteca.get(1).getId(), nuevaEntity);
         Assert.assertNotNull(resultado);
-        SalaEntity salaEntity = em.find(SalaEntity.class, resultado.getId());
-        Assert.assertEquals(nuevaSalaEntity.getId(), salaEntity.getId());
-       
+        SalaEntity entity = em.find(SalaEntity.class, resultado.getId());
+        Assert.assertEquals(nuevaEntity.getId(), entity.getId());
     }
     @Test
-    public void getSalasTest() {
-        List<SalaEntity> lista = salaLogica.getSalas();
+    public void getSalasPorBibliotecaTest()
+    {
+        List<SalaEntity> lista = salaLogica.getSalasPorBiblioteca(dataBiblioteca.get(1).getId());
         Assert.assertEquals(data.size(), lista.size());
-        for (SalaEntity entity : lista) {
-            boolean encontrado = false;
-            for (SalaEntity comp : data) {
-                if (entity.getId().equals(comp.getId())) {
-                    encontrado = true;
+        for(SalaEntity entity : lista)
+        {
+            boolean encontrado = false; 
+            for(SalaEntity comp : data)
+            {
+                if(entity.getId().equals(comp.getId()))
+                {
+                 encontrado = true;   
                 }
             }
             Assert.assertTrue(encontrado);
         }
+        
     }
 
-    @Test
-    public void getSalaTest()
+          @Test
+    public void getSalaBibliotecaTest()
     {
         SalaEntity entity = data.get(0);
-        SalaEntity resultado = salaLogica.getSala(entity.getId());
+        SalaEntity resultado = salaLogica.getSalaBiblioteca(dataBiblioteca.get(1).getId(), entity.getId());
         Assert.assertNotNull(resultado);
         Assert.assertEquals(entity.getId(), resultado.getId());
-        Assert.assertEquals(entity.getUbicacion(),resultado.getUbicacion());
     }
      @Test
     public void updateSalaTest() throws BusinessLogicException
@@ -126,12 +143,11 @@ public class SalaLogicTest {
         Assert.assertEquals(pojo.getUbicacion(),resultado.getUbicacion());
     }
     
-    @Test
-    public void deleteSalaTest()
-    {
+        @Test
+    public void deleteSalaTest() throws BusinessLogicException {
         SalaEntity entity = data.get(0);
-        salaLogica.deleteSala(entity.getId());
-        SalaEntity borrado = em.find(SalaEntity.class,entity.getId());
-        Assert.assertNull(borrado);
+        salaLogica.deleteSala(dataBiblioteca.get(1).getId(), entity.getId());
+        SalaEntity deleted = em.find(SalaEntity.class, entity.getId());
+        Assert.assertNull(deleted);
     }
 }

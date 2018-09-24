@@ -44,7 +44,7 @@ public class BibliotecaSalasLogic
     {
         LOGGER.log(Level.INFO, "Inicia proceso de agregarle una sala a la biblioteca con id = {0}", bibliotecaId);
         BibliotecaEntity bibliotecaEntity = bibliotecaPersistence.find(bibliotecaId);
-        SalaEntity salaEntity = salaPersistence.find(salaId);
+        SalaEntity salaEntity = salaPersistence.find(bibliotecaId, salaId);
         salaEntity.setBiblioteca(bibliotecaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de agregarle una sala a la biblioteca con id = {0}", bibliotecaId);
         return salaEntity;
@@ -74,7 +74,7 @@ public class BibliotecaSalasLogic
     public SalaEntity getSala(Long bibliotecaId, Long salaId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la sala con id = {0} de la biblioteca con id = " + bibliotecaId, salaId);
         List<SalaEntity> salas = bibliotecaPersistence.find(bibliotecaId).getSalas();
-        SalaEntity salaEntity = salaPersistence.find(salaId);
+        SalaEntity salaEntity = salaPersistence.find(bibliotecaId, salaId);
         int index = salas.indexOf(salaEntity);
         LOGGER.log(Level.INFO, "Termina proceso de consultar la sala con id = {0} de la biblioteca con id = " + bibliotecaId, salaId);
         if (index >= 0) {

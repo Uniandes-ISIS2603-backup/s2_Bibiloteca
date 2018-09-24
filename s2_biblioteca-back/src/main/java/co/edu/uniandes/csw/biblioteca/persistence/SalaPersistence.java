@@ -35,15 +35,32 @@ public class SalaPersistence {
     }
     public List<SalaEntity> findAll()
     {
-        LOGGER.log(Level.INFO, "Consultando todas las salas");
-        Query q = em.createQuery("Select u from SalaEntity u");
-        return  q.getResultList();
-        
+        LOGGER.log(Level.INFO,"Consultando todos las salas");
+        Query q = em.createQuery("select u from SalaEntity u");
+        return q.getResultList();
     }
-    public SalaEntity find (Long salaId)
+      public SalaEntity find (Long bibliotecaId,Long salaId)
     {
-        LOGGER.log(Level.INFO, "Consultando sala con id = {0}",salaId );
-        return em.find(SalaEntity.class, salaId);
+        LOGGER.log(Level.INFO,"Consultando sala con id={0} de la biblioteca con id = "+bibliotecaId,salaId);
+        TypedQuery q = em.createQuery("select p from SalaEntity p where (p.biblioteca.id = :bibliotecaId) and (p.id = :salaId)", SalaEntity.class);
+        q.setParameter("bibliotecaId", bibliotecaId);
+        q.setParameter("salaId", salaId);
+        List<SalaEntity> resultado = q.getResultList();
+        SalaEntity sala = null;
+        if(resultado == null)
+        {
+            sala = null;
+        }
+        else if(resultado.isEmpty())
+        {
+            sala = null;
+        }
+        else
+        {
+            sala = resultado.get(0);
+        }
+        LOGGER.log(Level.INFO, "Saliendo de consultar la sala con id = {0} de la biblioteca con id =" + bibliotecaId  , salaId);
+        return sala;
     }
     public SalaEntity update(SalaEntity salaEntity)
     {
