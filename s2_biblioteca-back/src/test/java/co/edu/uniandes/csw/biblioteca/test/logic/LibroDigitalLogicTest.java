@@ -108,7 +108,7 @@ public class LibroDigitalLogicTest {
         for(LibroDigitalEntity lde : listLDE){
             boolean encontro = false;
             for(LibroDigitalEntity lde2 : listNEW){
-                if(lde == lde2){
+                if(lde.equals(lde2)){
                     encontro = true;
                 }
             }
