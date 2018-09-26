@@ -5,6 +5,7 @@ import co.edu.uniandes.csw.biblioteca.ejb.LibroDigitalLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.LibroDigitalPersistence;
 import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -98,6 +99,37 @@ public class LibroDigitalLogicTest {
         LibroDigitalEntity lde = pf.manufacturePojo(LibroDigitalEntity.class);
         lde.setNombre(listLDE.get(0).getNombre());
         ldl.createLibroDigital(lde);
+    }
+    
+    @Test
+    public void getLibrosDigitalesTest(){
+        List<LibroDigitalEntity> listNEW = ldl.getLibrosDigitales();
+        Assert.assertEquals(listLDE.size(), listNEW.size());
+        for(LibroDigitalEntity lde : listLDE){
+            boolean encontro = false;
+            for(LibroDigitalEntity lde2 : listNEW){
+                if(lde == lde2){
+                    encontro = true;
+                }
+            }
+            Assert.assertTrue(encontro);
+        }
+    }
+    
+    @Test
+    public void getLibroDigitalTest(){
+        LibroDigitalEntity lde = listLDE.get(0);
+        LibroDigitalEntity lde2 = ldl.getLibroDigital(lde.getId());
+        Assert.assertNotNull(lde2);
+        Assert.assertEquals(lde2, lde);
+    }
+    
+    @Test
+    public void deleteLibroDigitalTest(){
+        LibroDigitalEntity lde = listLDE.get(0);
+        ldl.deleteVideoDigital(lde.getId());
+        LibroDigitalEntity lde2 = em.find(LibroDigitalEntity.class, lde.getId());
+        Assert.assertNull(lde2);
     }
     
 }
