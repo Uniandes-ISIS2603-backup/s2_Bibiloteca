@@ -41,21 +41,21 @@ public class VideoResource {
     private VideoReservaLogic videoReservaL;
      
     @POST
-    @Consumes({MediaType.APPLICATION_JSON})
+    //@Consumes({MediaType.APPLICATION_JSON})
     public VideoDTO createVideo(VideoDTO video) throws BusinessLogicException{
         VideoDTO vdto = new VideoDTO(videoLogic.createVideo(video.toEntity()));
         return vdto;
     }
 
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    //@Produces({MediaType.APPLICATION_JSON})
     public ArrayList<VideoDTO> getVideos(){
         ArrayList<VideoDTO> listVideo = listVEntity2DetailDTO(videoLogic.getVideos());
         return listVideo;
     }
     
     @GET
-    @Produces({MediaType.APPLICATION_JSON})
+    //@Produces({MediaType.APPLICATION_JSON})
     @Path("{videosId: \\d+}")
     public VideoDTO getVideo(@PathParam("videosId") Long videosId){
         VideoEntity ve = videoLogic.getVideo(videosId);
@@ -88,7 +88,7 @@ public class VideoResource {
     }
     
     @POST
-    @Path("{prestamoId: \\d+}")
+    @Path("{videosId: \\d+}/prestamos/{prestamoId: \\d+}")
     public PrestamoDTO addPrestamo(@PathParam("videoId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
         PrestamoEntity pe = prestamoLogic.getPrestamo(pPrestamoId);
         if(pe == null){
@@ -99,7 +99,7 @@ public class VideoResource {
     }
     
     @POST
-    @Path("{reservaId: \\d+}")
+    @Path("{videosId: \\d+}/reservas/{reservaId: \\d+}")
     public ReservaDTO addReserva(@PathParam("videoId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
         ReservaEntity re = reservaLogic.getReserva(pReservaId);
         if(re == null){
@@ -117,7 +117,7 @@ public class VideoResource {
     }
     
     @GET
-    @Path("{prestamoId: \\d+}")
+    @Path("{videosId: \\d+}/prestamos/{prestamoId: \\d+}")
     public PrestamoDTO getPrestamo(@PathParam("videoId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
         PrestamoEntity pe = prestamoLogic.getPrestamo(pPrestamoId);
         if(pe == null){
@@ -135,7 +135,7 @@ public class VideoResource {
     }
     
     @GET
-    @Path("{reservaId: \\d+}")
+    @Path("{videosId: \\d+}/reservas/{reservaId: \\d+}")
     public ReservaDTO getReserva(@PathParam("videoId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
         ReservaEntity re = reservaLogic.getReserva(pReservaId);
         if(re == null){
@@ -146,7 +146,7 @@ public class VideoResource {
     }
     
     @DELETE
-    @Path("{prestamoId: \\d+}")
+    @Path("{videosId: \\d+}/prestamos/{prestamoId: \\d+}")
     public void deletePrestamo(@PathParam("videoId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
         PrestamoEntity pe = prestamoLogic.getPrestamo(pPrestamoId);
         if(pe == null){
@@ -156,7 +156,7 @@ public class VideoResource {
     }
     
     @DELETE
-    @Path("{reservaId: \\d+}")
+    @Path("{videosId: \\d+}/reservas/{reservaId: \\d+}")
     public void deleteReserva(@PathParam("videoId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
         ReservaEntity re = reservaLogic.getReserva(pReservaId);
         if(re == null){

@@ -6,7 +6,9 @@ package co.edu.uniandes.csw.biblioteca.resources;
  */ 
 
 import co.edu.uniandes.csw.bibilioteca.entities.LibroDigitalEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
 import co.edu.uniandes.csw.biblioteca.dtos.LibroDigitalDTO;
+import co.edu.uniandes.csw.biblioteca.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.biblioteca.ejb.LibroDigitalLogic;
 import co.edu.uniandes.csw.biblioteca.ejb.LibroDigitalUsuarioLogic;
 import co.edu.uniandes.csw.biblioteca.ejb.UsuarioLogic;
@@ -22,7 +24,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
-@Path("librosdigitales")
+@Path("librosDigitales")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -43,10 +45,15 @@ public class LibroDigitalResource {
     }
     
     @GET
-    @Path("{librosdigitalesid: \\d+}")
-    public LibroDigitalDTO getLibroDigitalById(@PathParam("librosdigitalesid") Long librosdigitalesId)
+    @Path("{librosDigitalesId: \\d+}")
+    public LibroDigitalDTO getLibroDigitalById(@PathParam("librosDigitalesId") Long librosdigitalesId)
     {
-       return null; 
+       LibroDigitalEntity lde = ldl.getLibroDigital(librosdigitalesId);
+       if(lde == null){
+           throw new WebApplicationException("En libro no existe",404);
+       }
+       LibroDigitalDTO lddto = new LibroDigitalDTO(lde);
+       return lddto;
     }
     
     @GET
@@ -57,23 +64,79 @@ public class LibroDigitalResource {
     }
     
     @PUT
-     @Path("{librosdigitalesid: \\d+}")
-    public LibroDigitalDTO actualizarLibroDigital(@PathParam("librosdigitalesid") Long pLibrosdigitalesid, LibroDigitalDTO pLibroDigital)
+    @Path("{librosDigitalesId: \\d+}")
+    public LibroDigitalDTO actualizarLibroDigital(@PathParam("librosdigitalesid") Long pLibrosdigitalesid, LibroDigitalDTO pLibroDigital) throws BusinessLogicException
     {
-       return pLibroDigital; 
+       pLibroDigital.setId(pLibrosdigitalesid);
+       if(ldl.getLibroDigital(pLibrosdigitalesid) == null){
+           throw new WebApplicationException("El libro no existe",404);
+       }
+       LibroDigitalDTO lddto = new LibroDigitalDTO(ldl.updateLibroDigital(pLibroDigital.toEntity()));
+       return lddto;
     }
     
     @DELETE
-     @Path("{librosdigitalesid: \\d+}")
+     @Path("{librosDigitalesId: \\d+}")
     public void eliminarLibroDigital(@PathParam("librosdigitalesid") Long librosdigitalesid)
     {
-       
+       LibroDigitalEntity lde = ldl.getLibroDigital(librosdigitalesid);
+       if(lde == null){
+           throw new WebApplicationException("El libro no existe",404);
+       }
+       ldl.deleteVideoDigital(librosdigitalesid);
+    }
+    
+    @POST
+    @Path("{librosDigitalesId: \\d+}/{usuariosId: \\d+}")
+    public UsuarioDTO addUsuario(@PathParam("libroDigitalId") Long libroId, @PathParam("usuarioId") Long usuarioId) throws BusinessLogicException{
+        UsuarioEntity ue = ul.getUsuario(usuarioId);
+        if(ue == null){
+            throw new WebApplicationException("El usuario no existe",404);
+        }
+        UsuarioDTO udto = new UsuarioDTO(ldul.addUsuario(libroId, usuarioId));
+        return udto;
+    }
+    
+    @GET
+    @Path("{libroDigitalesId: \\d+}/usuarios")
+    public List<UsuarioDTO> getUsuarios(@PathParam("libroDigitalId") Long libroId){
+        List<UsuarioDTO> listUDTO = listUEntity2DetailDTO(ldul.getUsuarios(libroId));
+        return listUDTO;
+    }
+    
+    @GET
+    @Path("{librosDigitalesId: \\d+}/{usuariosId: \\d+}")
+    public UsuarioDTO getUsuario(@PathParam("libroDigitalId") Long libroId, @PathParam("usuarioId") Long usuarioId){
+        UsuarioEntity ue = ul.getUsuario(usuarioId);
+        if(ue == null){
+            throw new WebApplicationException("El usuario no existe",404);
+        }
+        UsuarioDTO udto = new UsuarioDTO(ldul.getUsuario(libroId, usuarioId));
+        return udto;
+    }
+    
+    @DELETE
+    @Path("{librosDigitalesId: \\d+}/{usuariosId: \\d+}")
+    public void deleteUsuario(@PathParam("libroDigitalId") Long libroId, @PathParam("usuarioId") Long usuarioId){
+        UsuarioEntity ue = ul.getUsuario(usuarioId);
+        if(ue == null){
+            throw new WebApplicationException("El usuario no existe",404);
+        }
+        ldul.deleteUsuario(libroId, usuarioId);
     }
     
     private ArrayList<LibroDigitalDTO> listLDEntity2DetailDTO(List<LibroDigitalEntity> entityList) {
         ArrayList<LibroDigitalDTO> list = new ArrayList<>();
         for (LibroDigitalEntity entity : entityList) {
             list.add(new LibroDigitalDTO(entity));
+        }
+        return list;
+    }
+    
+    private ArrayList<UsuarioDTO> listUEntity2DetailDTO(List<UsuarioEntity> entityList) {
+        ArrayList<UsuarioDTO> list = new ArrayList<>();
+        for (UsuarioEntity entity : entityList) {
+            list.add(new UsuarioDTO(entity));
         }
         return list;
     }
