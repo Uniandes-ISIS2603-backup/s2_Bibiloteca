@@ -1,54 +1,59 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.biblioteca.resources;
-
-import co.edu.uniandes.csw.biblioteca.dtos.LibroDigitalDTO;
-import javax.enterprise.context.RequestScoped;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.*;
-import javax.enterprise.context.RequestScoped;
-import java.util.Collection;
-
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 
 /**
  *
  * @author Nicolás Alvarado
  */ 
-    @Path("librosdigitales")
-    @Produces("application/json")
-    @Consumes("application/json")
-    @RequestScoped
+
+import co.edu.uniandes.csw.bibilioteca.entities.LibroDigitalEntity;
+import co.edu.uniandes.csw.biblioteca.dtos.LibroDigitalDTO;
+import co.edu.uniandes.csw.biblioteca.ejb.LibroDigitalLogic;
+import co.edu.uniandes.csw.biblioteca.ejb.LibroDigitalUsuarioLogic;
+import co.edu.uniandes.csw.biblioteca.ejb.UsuarioLogic;
+import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+
+@Path("librosdigitales")
+@Produces("application/json")
+@Consumes("application/json")
+@RequestScoped
 public class LibroDigitalResource {
     
-     // Inyectar la lógica porque es la que va a ser usada para generar los servicios REST
+    @Inject
+    private LibroDigitalLogic ldl;
+    @Inject
+    private UsuarioLogic ul;
+    @Inject
+    private LibroDigitalUsuarioLogic ldul;
         
     @POST
-    public LibroDigitalDTO createLibroDigital(LibroDigitalDTO pLibroDigital) 
+    public LibroDigitalDTO createLibroDigital(LibroDigitalDTO pLibroDigital) throws BusinessLogicException 
     {
-        return pLibroDigital;
+        LibroDigitalDTO lddto = new LibroDigitalDTO(ldl.createLibroDigital(pLibroDigital.toEntity()));
+        return lddto;
     }
+    
     @GET
     @Path("{librosdigitalesid: \\d+}")
-    
     public LibroDigitalDTO getLibroDigitalById(@PathParam("librosdigitalesid") Long librosdigitalesId)
     {
        return null; 
     }
+    
     @GET
-    public Collection<LibroDigitalDTO> getLibrosDigitales()
+    public ArrayList<LibroDigitalDTO> getLibrosDigitales()
     {
-       return null; 
+       ArrayList<LibroDigitalDTO> listLibros = listLDEntity2DetailDTO(ldl.getLibrosDigitales());
+       return listLibros;
     }
     
     @PUT
@@ -63,6 +68,14 @@ public class LibroDigitalResource {
     public void eliminarLibroDigital(@PathParam("librosdigitalesid") Long librosdigitalesid)
     {
        
+    }
+    
+    private ArrayList<LibroDigitalDTO> listLDEntity2DetailDTO(List<LibroDigitalEntity> entityList) {
+        ArrayList<LibroDigitalDTO> list = new ArrayList<>();
+        for (LibroDigitalEntity entity : entityList) {
+            list.add(new LibroDigitalDTO(entity));
+        }
+        return list;
     }
     
 }

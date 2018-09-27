@@ -43,7 +43,6 @@ public class VideoResource {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     public VideoDTO createVideo(VideoDTO video) throws BusinessLogicException{
-        
         VideoDTO vdto = new VideoDTO(videoLogic.createVideo(video.toEntity()));
         return vdto;
     }
@@ -117,11 +116,16 @@ public class VideoResource {
         return listP;
     }
     
-    //@GET
-    //@Path("{prestamoId: \\d+}")
-    //public PrestamoDTO getPrestamo(){
-        
-    //}
+    @GET
+    @Path("{prestamoId: \\d+}")
+    public PrestamoDTO getPrestamo(@PathParam("videoId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
+        PrestamoEntity pe = prestamoLogic.getPrestamo(pPrestamoId);
+        if(pe == null){
+            throw new WebApplicationException("El prestamo no existe",404);
+        }
+        PrestamoDTO pdto = new PrestamoDTO(videoPrestamoL.getPrestamo(pVideoId, pPrestamoId));
+        return pdto;
+    }
     
     @GET
     @Path("{videoId: \\d+}/reservas")
@@ -129,7 +133,38 @@ public class VideoResource {
         List<ReservaDTO> listR = listREntity2DetailDTO(videoReservaL.getReservas(videosId));
         return listR;
     }
-     
+    
+    @GET
+    @Path("{reservaId: \\d+}")
+    public ReservaDTO getReserva(@PathParam("videoId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
+        ReservaEntity re = reservaLogic.getReserva(pReservaId);
+        if(re == null){
+            throw new WebApplicationException("La reserva no existe",404);
+        }
+        ReservaDTO rdto = new ReservaDTO(videoReservaL.getReserva(pVideoId, pReservaId));
+        return rdto;
+    }
+    
+    @DELETE
+    @Path("{prestamoId: \\d+}")
+    public void deletePrestamo(@PathParam("videoId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
+        PrestamoEntity pe = prestamoLogic.getPrestamo(pPrestamoId);
+        if(pe == null){
+            throw new WebApplicationException("El prestamo no existe",404);
+        }
+        videoPrestamoL.removePrestamo(pVideoId, pPrestamoId);
+    }
+    
+    @DELETE
+    @Path("{reservaId: \\d+}")
+    public void deleteReserva(@PathParam("videoId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
+        ReservaEntity re = reservaLogic.getReserva(pReservaId);
+        if(re == null){
+            throw new WebApplicationException("La reserva no existe",404);
+        }
+        videoReservaL.removeReserva(pVideoId, pReservaId);
+    }
+    
     private ArrayList<VideoDTO> listVEntity2DetailDTO(List<VideoEntity> entityList) {
         ArrayList<VideoDTO> list = new ArrayList<>();
         for (VideoEntity entity : entityList) {
