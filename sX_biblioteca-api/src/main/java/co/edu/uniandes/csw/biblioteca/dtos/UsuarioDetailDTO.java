@@ -9,8 +9,12 @@ import co.edu.uniandes.csw.bibilioteca.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.ReservaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.VideoDigitalEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -20,13 +24,19 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
     ArrayList<ComentarioDTO> comentarios;
     ArrayList<PrestamoDTO> prestamos;
     ArrayList<ReservaDTO> reservas;
-
+    List<VideoDigitalDTO> videosDigitales;
     public UsuarioDetailDTO(){
         super();
     }
     
     public UsuarioDetailDTO(UsuarioEntity usuario){
         super(usuario);
+         if (usuario.getVideosDigitales() != null) {
+            videosDigitales = new ArrayList<>();
+            for (VideoDigitalEntity entityVideoDigital : usuario.getVideosDigitales()) {
+                videosDigitales.add(new VideoDigitalDTO(entityVideoDigital));
+            }
+         }
         if(usuario.getComentarios() != null)
         {
             comentarios = new ArrayList<>();
@@ -51,7 +61,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
                 reservas.add(new ReservaDTO(reserva));
             }
         }
-    }
+         }
 
     public ArrayList<ComentarioDTO> getComentarios() {
         return comentarios;
@@ -71,11 +81,25 @@ public void setComentarios(ArrayList<ComentarioDTO> comentarios) {
     public void setReservas(ArrayList<ReservaDTO> reservas) {
         this.reservas = reservas;
     }
-    
+     public List<VideoDigitalDTO> getVideosDigitales() {
+        return videosDigitales;
+    }
+
+   
+    public void setVideosDigitales(List<VideoDigitalDTO> videosDigitales) {
+        this.videosDigitales = videosDigitales;
+    }
     @Override
     public UsuarioEntity toEntity()
     {
         UsuarioEntity usuarioEntity = super.toEntity();
+      if (videosDigitales != null) {
+            List<VideoDigitalEntity> videosDigitalesEntity = new ArrayList<>();
+            for (VideoDigitalDTO dtoVideoDigital : videosDigitales) {
+                videosDigitalesEntity.add(dtoVideoDigital.toEntity());
+            }
+            usuarioEntity.setVideosDigitales(videosDigitalesEntity);
+        }
         if(comentarios != null)
         {
             ArrayList<ComentarioEntity> comentariosEntity = new ArrayList<>();
@@ -104,5 +128,9 @@ public void setComentarios(ArrayList<ComentarioDTO> comentarios) {
             usuarioEntity.setReservas(reservasEntity);
         }
         return usuarioEntity;
+    }
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

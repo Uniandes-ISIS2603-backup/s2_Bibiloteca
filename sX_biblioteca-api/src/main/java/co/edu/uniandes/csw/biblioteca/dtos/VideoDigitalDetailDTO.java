@@ -16,7 +16,8 @@ import java.util.List;
  * @author estudiante
  */
 public class VideoDigitalDetailDTO extends VideoDigitalDTO implements Serializable {
- List<UsuarioDTO> usuarios;
+ 
+    List<UsuarioDTO> usuarios;
     
     public VideoDigitalDetailDTO(){
         super();
@@ -36,7 +37,7 @@ public class VideoDigitalDetailDTO extends VideoDigitalDTO implements Serializab
     public VideoDigitalEntity toEntity(){
         VideoDigitalEntity videoDigitalEntity = super.toEntity();
         if(usuarios != null){
-            ArrayList<UsuarioEntity> listaUsuarios= new ArrayList<>();
+            List<UsuarioEntity> listaUsuarios= new ArrayList<>();
             for(UsuarioDTO e : usuarios){
                 listaUsuarios.add(e.toEntity());
             }
