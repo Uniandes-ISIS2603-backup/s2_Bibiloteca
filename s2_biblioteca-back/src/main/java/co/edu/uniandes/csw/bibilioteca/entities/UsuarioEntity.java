@@ -7,8 +7,10 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -39,6 +41,10 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @OneToMany(mappedBy = "usuario" , cascade = CascadeType.PERSIST )
     private ArrayList<ComentarioEntity> comentarios;
+    
+    @PodamExclude
+    @ManyToMany(mappedBy = "usuarios")
+    private List<VideoDigitalEntity> videosDigitales = new ArrayList<>();
 
     /**
      * Relación con el usuario.
@@ -96,6 +102,22 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
         this.multa = multa;
     }
     
-    
+     /**
+     * Obtiene la colección de videos digitales.
+     *
+     * @return colección videos digitales.
+     */
+    public List<VideoDigitalEntity> getVideosDigitales() {
+        return videosDigitales;
+    }
+
+    /**
+     * Establece el valor de la colección de videosDigitales.
+     *
+     * @param videosDigitales nuevo valor de la colección.
+     */
+    public void setVideosDigitales(List<VideoDigitalEntity> videosDigitales) {
+        this.videosDigitales = videosDigitales;
+    }
     
 }
