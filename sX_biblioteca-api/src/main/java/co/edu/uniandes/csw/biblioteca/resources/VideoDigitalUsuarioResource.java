@@ -26,7 +26,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 /**
- *
+ *Clase que implementa el recurso "videosdigitales/{id}/usuarios".
  * @author Juan Bautista
  */
 @Consumes(MediaType.APPLICATION_JSON)
@@ -55,7 +55,7 @@ public class VideoDigitalUsuarioResource
     public UsuarioDetailDTO addUsuario(@PathParam("videodigitalid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource addUsuario: input: videodigitalid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no tu existe.", 404);
         }
         UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(videoDigitalUsuarioLogic.addUsuario(videodigitalid, usuariosId));
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource addUsuario: output: {0}", detailDTO.toString());
@@ -70,6 +70,7 @@ public class VideoDigitalUsuarioResource
      * videoDigital. Si no hay ninguno retorna una lista vacía.
      */
     @GET
+    
     public List<UsuarioDetailDTO> getUsuarios(@PathParam("videodigitalid") Long videodigitalid) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuarios: input: {0}", videodigitalid);
         List<UsuarioDetailDTO> lista = usuariosListEntity2DTO(videoDigitalUsuarioLogic.getUsuarios(videodigitalid));
