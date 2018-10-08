@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -120,7 +121,7 @@ public class VideoDigitalResource {
      * Error de lógica que se genera cuando no se encuentra el video digital.
      */
     @Path("{videodigitalid: \\d+}/usuarios")
-    public Class<VideoDigitalUsuarioResource> getVideoDigitalUsuarioResource(@PathParam("videodigitald") Long videodigitalid) {
+    public Class<VideoDigitalUsuarioResource> getVideoDigitalUsuarioResource(@PathParam("videodigitalid") Long videodigitalid) {
         if (videoDigitalLogic.getVideoDigital(videodigitalid) == null) {
             throw new WebApplicationException("El recurso /videoDigital/" + videodigitalid + " no existe.", 404);
         }
