@@ -23,13 +23,15 @@ import javax.ws.rs.Produces;
  *
  * @author Juan Nicolás García
  */
-@Path("usuarios")
+@Path("/usuarios")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class UsuarioResource {
    @Inject
     private UsuarioLogic usuarioLogica;
+   
+   
 
     /**
      *
@@ -83,6 +85,13 @@ public class UsuarioResource {
             throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
         }
         usuarioLogica.deleteUsuario(usuariosId);
+    }
+    @Path("{usuariosId: \\d+}/videosDigitales")
+    public Class<UsuarioVideoDigitalResource> getUsuarioVideosDiggitalesResource(@PathParam("usuariosId") Long usuariosId) {
+        if (usuarioLogica.getUsuario(usuariosId) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+        }
+        return UsuarioVideoDigitalResource.class;
     }
    private List<UsuarioDetailDTO> listEntity2DetailDTO(List<UsuarioEntity> lista) {
         List<UsuarioDetailDTO> resp = new ArrayList<>();
