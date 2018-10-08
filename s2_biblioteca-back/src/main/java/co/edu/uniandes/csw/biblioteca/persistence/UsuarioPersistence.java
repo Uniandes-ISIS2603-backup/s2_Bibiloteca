@@ -59,7 +59,7 @@ public class UsuarioPersistence {
     {
         LOGGER.log(Level.INFO,"Consultando usuarios con el nombre",nombre);
         
-        TypedQuery query = em.createQuery("Select u From UsuarioEntity u where u.nombre = :nombre", UsuarioEntity.class);
+        TypedQuery query = em.createQuery("Select e From UsuarioEntity e where e.nombre = :nombre", UsuarioEntity.class);
         
         query = query.setParameter("nombre", nombre);
         
