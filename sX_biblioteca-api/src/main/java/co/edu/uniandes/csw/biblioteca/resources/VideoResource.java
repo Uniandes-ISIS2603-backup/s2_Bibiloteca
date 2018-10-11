@@ -68,7 +68,7 @@ public class VideoResource {
     
     @PUT
     @Path("{videosid: \\d+}")
-    public VideoDTO updateVideo(@PathParam("videoId") Long videoId, VideoDTO pvd) throws BusinessLogicException{
+    public VideoDTO updateVideo(@PathParam("videosid") Long videoId, VideoDTO pvd) throws BusinessLogicException{
         pvd.setId(videoId);
         if(videoLogic.getVideo(videoId) == null){
             throw new WebApplicationException("El video no existe",404);
@@ -89,7 +89,7 @@ public class VideoResource {
     
     @POST
     @Path("{videosId: \\d+}/prestamos/{prestamoId: \\d+}")
-    public PrestamoDTO addPrestamo(@PathParam("videoId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
+    public PrestamoDTO addPrestamo(@PathParam("videosId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
         PrestamoEntity pe = prestamoLogic.getPrestamo(pPrestamoId);
         if(pe == null){
             throw new WebApplicationException("El prestamo no existe",404);
@@ -100,7 +100,7 @@ public class VideoResource {
     
     @POST
     @Path("{videosId: \\d+}/reservas/{reservaId: \\d+}")
-    public ReservaDTO addReserva(@PathParam("videoId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
+    public ReservaDTO addReserva(@PathParam("videosId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
         ReservaEntity re = reservaLogic.getReserva(pReservaId);
         if(re == null){
             throw new WebApplicationException("La reserva no existe",404);
@@ -111,14 +111,14 @@ public class VideoResource {
     
     @GET
     @Path("{videoId: \\d+}/prestamos")
-    public List<PrestamoDTO> getPrestamos(@PathParam("videosId") Long videosId){
+    public List<PrestamoDTO> getPrestamos(@PathParam("videoId") Long videosId){
         List<PrestamoDTO> listP = listPEntity2DetailDTO(videoPrestamoL.getPrestamos(videosId));
         return listP;
     }
     
     @GET
     @Path("{videosId: \\d+}/prestamos/{prestamoId: \\d+}")
-    public PrestamoDTO getPrestamo(@PathParam("videoId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
+    public PrestamoDTO getPrestamo(@PathParam("videosId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
         PrestamoEntity pe = prestamoLogic.getPrestamo(pPrestamoId);
         if(pe == null){
             throw new WebApplicationException("El prestamo no existe",404);
@@ -129,14 +129,14 @@ public class VideoResource {
     
     @GET
     @Path("{videoId: \\d+}/reservas")
-    public List<ReservaDTO> getReservas(@PathParam("videosId") Long videosId){
+    public List<ReservaDTO> getReservas(@PathParam("videoId") Long videosId){
         List<ReservaDTO> listR = listREntity2DetailDTO(videoReservaL.getReservas(videosId));
         return listR;
     }
     
     @GET
     @Path("{videosId: \\d+}/reservas/{reservaId: \\d+}")
-    public ReservaDTO getReserva(@PathParam("videoId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
+    public ReservaDTO getReserva(@PathParam("videosId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
         ReservaEntity re = reservaLogic.getReserva(pReservaId);
         if(re == null){
             throw new WebApplicationException("La reserva no existe",404);
@@ -147,7 +147,7 @@ public class VideoResource {
     
     @DELETE
     @Path("{videosId: \\d+}/prestamos/{prestamoId: \\d+}")
-    public void deletePrestamo(@PathParam("videoId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
+    public void deletePrestamo(@PathParam("videosId") Long pVideoId, @PathParam("prestamoId") Long pPrestamoId){
         PrestamoEntity pe = prestamoLogic.getPrestamo(pPrestamoId);
         if(pe == null){
             throw new WebApplicationException("El prestamo no existe",404);
@@ -157,7 +157,7 @@ public class VideoResource {
     
     @DELETE
     @Path("{videosId: \\d+}/reservas/{reservaId: \\d+}")
-    public void deleteReserva(@PathParam("videoId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
+    public void deleteReserva(@PathParam("videosId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
         ReservaEntity re = reservaLogic.getReserva(pReservaId);
         if(re == null){
             throw new WebApplicationException("La reserva no existe",404);
