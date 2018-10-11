@@ -88,7 +88,7 @@ public class LibroDigitalResource {
     
     @POST
     @Path("{librosDigitalesId: \\d+}/{usuariosId: \\d+}")
-    public UsuarioDTO addUsuario(@PathParam("libroDigitalesId") Long libroId, @PathParam("usuariosId") Long usuarioId) throws BusinessLogicException{
+    public UsuarioDTO addUsuario(@PathParam("librosDigitalesId") Long libroId, @PathParam("usuariosId") Long usuarioId) throws BusinessLogicException{
         UsuarioEntity ue = ul.getUsuario(usuarioId);
         if(ue == null){
             throw new WebApplicationException("El usuario no existe",404);
