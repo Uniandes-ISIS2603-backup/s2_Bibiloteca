@@ -1,12 +1,26 @@
 {
 	"info": {
-		"_postman_id": "3510be4f-9622-4174-92c3-15ddfbbc6670",
+		"_postman_id": "0b3435ff-ea48-4710-bc3a-c4cc49934fc2",
 		"name": "BibliotecaCollection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
 			"name": "CrearBiblioteca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0da44dfd-deb7-4fe9-a91f-991a02ca5260",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -17,15 +31,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"nombre\" : \"Julio Mario Santodomingo\", \"zona\": \"Aguas\",\"direccion\": \"Cl. 21 #120\",\"horaApertura\":\"6:30 A.M\", \"horaCierre\": \"10:00 P.M\", \"identificador\":\"1\"} "
+					"raw": "{\"nombre\" : \"Julio Mario SantodomingoS\", \"zona\": \"Aguas\",\"direccion\": \"Cl. 21 #120\",\"horaApertura\":\"6:30 A.M\", \"horaCierre\": \"10:00 P.M\"} "
 				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/bibliotecas",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
@@ -37,11 +51,28 @@
 			"response": []
 		},
 		{
-			"name": "GetBibliotecas",
+			"name": "Obtener todas las bibliotecas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6e4ca42d-3859-4307-a646-dc3a962ec789",
+						"type": "text/javascript",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"editorials count\"] = data.length > 1;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas",
 					"protocol": "http",
@@ -60,23 +91,40 @@
 			"response": []
 		},
 		{
-			"name": "GetBiblioteca",
+			"name": "Obtener una biblioteca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f02ae8ff-53d8-44c0-bfb6-bf3c30a24386",
+						"type": "text/javascript",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/bibliotecas/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
 						"bibliotecas",
-						"1"
+						"{{new_id_e}}"
 					]
 				},
 				"description": "Se espera null"
@@ -84,7 +132,21 @@
 			"response": []
 		},
 		{
-			"name": "ActualizarBiblioteca",
+			"name": "Editar una biblioteca",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "66e60b9c-2b40-40ec-8045-91beb37bf8d6",
+						"type": "text/javascript",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -95,20 +157,20 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"nombre\" : \"Julio  Santodomingo\", \"zona\": \"guas\",\"direccion\": \"Cl.#120\",\"horaApertura\":\"6:0 A.M\", \"horaCierre\": \"10:0 P.M\", \"identificador\":\"123\"} "
+					"raw": "{\"nombre\" : \"Julio  Santodomingo\", \"zona\": \"guas\",\"direccion\": \"Cl.#120\",\"horaApertura\":\"6:0 A.M\", \"horaCierre\": \"10:0 P.M\"} "
 				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/bibliotecas/{{new_id_e}}",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
 						"bibliotecas",
-						"1"
+						"{{new_id_e}}"
 					]
 				},
 				"description": "Estoy esperando lo que le mandé\n"
@@ -116,26 +178,196 @@
 			"response": []
 		},
 		{
-			"name": "EliminarBiblioteca",
+			"name": "Crear una Biblioteca 2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2137c900-364e-4761-ba01-f2939cf98746",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_e2\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
 			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\" : \"La Santia\", \"zona\": \"Suba\",\"direccion\": \"Cl. 22 #320-25\",\"horaApertura\":\"6:30 A.M\", \"horaCierre\": \"10:00 P.M\"} "
+				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/5",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/bibliotecas",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear una biblioteca con el mismo nombre",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "714203d9-7eea-4909-897b-10ddc3f28a16",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"No crea con el mismo nombre\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"Ya existe una Biblioteca con el nombre\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"nombre\" : \"La Santia\", \"zona\": \"Suba\",\"direccion\": \"Cl. 22 #320-25\",\"horaApertura\":\"6:30 A.M\", \"horaCierre\": \"10:00 P.M\"} "
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/bibliotecas",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar una biblioteca que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d0ffdf9a-a751-4356-a91b-06b4d1b3ee7c",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /bibliotecas/0 no existe.\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\" : \"Julio  Santodomingo\",\n\t\"zona\": \"guas\",\n\t\"direccion\": \"Cl.#120\",\n\t\"horaApertura\":\"6:0 A.M\",\n\t\"horaCierre\": \"10:0 P.M\"\n\t\n} "
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/bibliotecas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
 						"bibliotecas",
-						"5"
+						"0"
 					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una biblioteca que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b2c90c5-6e78-4dec-8377-2497ea4d1bee",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /bibliotecas/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/bibliotecas/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar una biblioteca ",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
 				},
-				"description": "No me debe retornar nada. "
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/bibliotecas/{{new_id_e}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"bibliotecas",
+						"{{new_id_e}}"
+					]
+				}
 			},
 			"response": []
 		}
