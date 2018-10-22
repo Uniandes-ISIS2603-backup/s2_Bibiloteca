@@ -107,12 +107,11 @@ public class VideoDigitalResource {
         LOGGER.info("VideoDigitalResource deleteVideoDigital: output: void");
     }
         /**
-     * Conexión con el servicio de autores para un libro.
+     * Conexión con el servicio de usuarios para un video digital.
      * {@link VideoDigitalUsuarioResource}
      *
      * Este método conecta la ruta de /videoDigital con las rutas de /usuarios que
-     * dependen del libro, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de las reseñas.
+     * dependen del videoDigital, es una redirección al servicio que maneja el segmento
      *
      * @param videodigitalid El ID del video digital con respecto al cual se accede al
      * servicio.

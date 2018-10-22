@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author estudiante
+ * @author juan Bautista
  */
 @Stateless
 public class VideoDigitalLogic {
