@@ -3,12 +3,16 @@
   <persistence-unit name="DnsPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!--Toca entity por entity, exclude-unlisted-clases = false no funciona-->
-    <class>co.edu.uniandes.csw.bookstore.entities.BookEntity</class>
-    <class>co.edu.uniandes.csw.bookstore.entities.EditorialEntity</class>
-    <class>co.edu.uniandes.csw.bookstore.entities.ReviewEntity</class>
-    <class>co.edu.uniandes.csw.bookstore.entities.AuthorEntity</class>
-    <class>co.edu.uniandes.csw.bookstore.entities.PrizeEntity</class>
-    <class>co.edu.uniandes.csw.bookstore.entities.OrganizationEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.BibliotecaEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.ComentarioEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.LibroDigitalEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.PrestamoEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.ReservaEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.SalaEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.ServicioEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.UsuarioEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.VideoDigitalEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.VideoEntity</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
