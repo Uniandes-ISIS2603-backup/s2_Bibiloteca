@@ -55,7 +55,7 @@ public class VideoDigitalUsuarioResource
     public UsuarioDetailDTO addUsuario(@PathParam("videodigitalid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource addUsuario: input: videodigitalid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no tu existe.", 404);
+            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
         }
         UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(videoDigitalUsuarioLogic.addUsuario(videodigitalid, usuariosId));
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource addUsuario: output: {0}", detailDTO.toString());

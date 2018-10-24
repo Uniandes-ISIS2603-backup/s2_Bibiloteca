@@ -60,8 +60,8 @@ public class VideoDigitalResource {
         return nuevoVideoDigitalDTO;
     }
     @GET
-    @Path("{videodigitalid: \\d+}")
-    public VideoDigitalDTO getVideoDigital(@PathParam("videodigitalid") Long videodigitalid)
+    @Path("{id: \\d+}")
+    public VideoDigitalDTO getVideoDigital(@PathParam("id") Long videodigitalid)
     {
         LOGGER.log(Level.INFO, "VideoDigitalResource getVideoDigital: input: {0}", videodigitalid);
         VideoDigitalEntity videoDigitalEntity = videoDigitalLogic.getVideoDigital(videodigitalid);
@@ -82,8 +82,8 @@ public class VideoDigitalResource {
     }
     
     @PUT
-     @Path("{videodigitalid: \\d+}")
-    public VideoDigitalDTO actualizarVideoDigital(@PathParam("videodigitalid") Long videodigitalid, VideoDigitalDTO pVideoDigital)
+     @Path("{id: \\d+}")
+    public VideoDigitalDTO actualizarVideoDigital(@PathParam("id") Long videodigitalid, VideoDigitalDTO pVideoDigital)
     {
         LOGGER.log(Level.INFO, "VideoDigitalResource updateVideoDigital: input: id:{0} , pVideoDigital: {1}", new Object[]{videodigitalid, pVideoDigital.toString()});
         pVideoDigital.setId(videodigitalid);

@@ -10,6 +10,8 @@ import co.edu.uniandes.csw.bibilioteca.entities.VideoDigitalEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -26,7 +28,7 @@ public class VideoDigitalDetailDTO extends VideoDigitalDTO implements Serializab
     public VideoDigitalDetailDTO(VideoDigitalEntity videoDigitalEntity){
         super(videoDigitalEntity);
         if(videoDigitalEntity.getUsuarios() != null){
-            usuarios = new ArrayList<UsuarioDTO>();
+            usuarios = new ArrayList<>();
             for(UsuarioEntity e : videoDigitalEntity.getUsuarios()){
             usuarios.add(new UsuarioDTO(e));
             }
@@ -54,5 +56,5 @@ public class VideoDigitalDetailDTO extends VideoDigitalDTO implements Serializab
     public void setUsuario (List<UsuarioDTO> listUsuarios){
         usuarios = listUsuarios;
     }
-  
+   
 }

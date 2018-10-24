@@ -31,30 +31,23 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
     
     public UsuarioDetailDTO(UsuarioEntity usuario){
         super(usuario);
-         if (usuario.getVideosDigitales() != null) {
+         if (usuario != null) {
             videosDigitales = new ArrayList<>();
             for (VideoDigitalEntity entityVideoDigital : usuario.getVideosDigitales()) {
                 videosDigitales.add(new VideoDigitalDTO(entityVideoDigital));
             }
-         }
-        if(usuario.getComentarios() != null)
-        {
-            comentarios = new ArrayList<>();
+        comentarios = new ArrayList<>();
             for(ComentarioEntity comentario : usuario.getComentarios())
             {
                 comentarios.add(new ComentarioDTO(comentario));
             }
-        }
-	if(usuario.getPrestamos() != null)
-        {
+       
             prestamos = new ArrayList<>();
             for(PrestamoEntity prestamo : usuario.getPrestamos())
             {
                 prestamos.add(new PrestamoDTO(prestamo));
             }
-        }
-	if(usuario.getReservas() != null)
-        {
+       
             reservas = new ArrayList<>();
             for(ReservaEntity reserva : usuario.getReservas())
             {

@@ -5,7 +5,8 @@
     <!--Toca entity por entity, exclude-unlisted-clases = false no funciona-->
     <class>co.edu.uniandes.csw.biblioteca.entities.BibliotecaEntity</class>
     <class>co.edu.uniandes.csw.biblioteca.entities.ComentarioEntity</class>
-    <class>co.edu.uniandes.csw.biblioteca.entities.LibroDigitalEntity</class>
+    <class>co.edu.uniandes.csw.biblioteca.entities.LibroDigitalEntity</class>    
+    <class>co.edu.uniandes.csw.bibilioteca.entities.LibroEntity</class>
     <class>co.edu.uniandes.csw.biblioteca.entities.PrestamoEntity</class>
     <class>co.edu.uniandes.csw.biblioteca.entities.ReservaEntity</class>
     <class>co.edu.uniandes.csw.biblioteca.entities.SalaEntity</class>
