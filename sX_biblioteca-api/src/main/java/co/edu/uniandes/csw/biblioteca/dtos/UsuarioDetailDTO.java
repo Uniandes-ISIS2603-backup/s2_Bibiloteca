@@ -24,7 +24,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
     ArrayList<ComentarioDTO> comentarios;
     ArrayList<PrestamoDTO> prestamos;
     ArrayList<ReservaDTO> reservas;
-    List<VideoDigitalDTO> videosDigitales;
+    private List<VideoDigitalDTO> videosDigitales;
     public UsuarioDetailDTO(){
         super();
     }

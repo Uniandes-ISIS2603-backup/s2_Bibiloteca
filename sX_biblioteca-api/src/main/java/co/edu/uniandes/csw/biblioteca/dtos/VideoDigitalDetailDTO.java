@@ -19,7 +19,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class VideoDigitalDetailDTO extends VideoDigitalDTO implements Serializable {
  
-    List<UsuarioDTO> usuarios;
+    private List<UsuarioDTO> usuarios;
     
     public VideoDigitalDetailDTO(){
         super();
