@@ -52,9 +52,9 @@ public class UsuarioVideoDigitalResource {
      * Error de lógica que se genera cuando no se encuentra el video digital.
      */
     @POST
-    @Path("{videodigitalid: \\d+}")
-    public VideoDigitalDetailDTO addVideoDigital(@PathParam("usuariosId") Long usuariosId, @PathParam("videodigitalid") Long videodigitalid) {
-        LOGGER.log(Level.INFO, "UsuarioVideoDigitalResource addVideoDigital: input: usuariosId {0} , videodigitalid {1}", new Object[]{usuariosId, videodigitalid});
+    @Path("{videosdigitalesid: \\d+}")
+    public VideoDigitalDetailDTO addVideoDigital(@PathParam("usuariosId") Long usuariosId, @PathParam("videosdigitalesid") Long videodigitalid) {
+        LOGGER.log(Level.INFO, "UsuarioVideoDigitalResource addVideoDigital: input: usuariosId {0} , videosdigitalesid {1}", new Object[]{usuariosId, videodigitalid});
         if (videoDigitalLogic.getVideoDigital(videodigitalid) == null) {
             throw new WebApplicationException("El recurso /videoDigital/" + videodigitalid + " no existe.", 404);
         }

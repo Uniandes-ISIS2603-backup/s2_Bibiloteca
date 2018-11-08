@@ -29,9 +29,9 @@ public class LibroLogic {
     public LibroEntity createLibro(LibroEntity libro) throws BusinessLogicException
     {
         LOGGER.log(Level.INFO, "Comienza la creacion del libro");
-        if(persistencia.find(libro.getId())!=null || persistencia.findISBN(libro.getIsbn()) != null)
+        if(persistencia.findISBN(libro.getIsbn()) != null)
         {
-            throw new BusinessLogicException("El libro con el id "+libro.getId()+" ya existe");
+            throw new BusinessLogicException("El libro con el id "+libro.getIsbn()+" ya existe");
         }
         else
         {
