@@ -52,7 +52,7 @@ public class VideoDigitalUsuarioResource
      */
     @POST
     @Path("{usuariosId: \\d+}")
-    public UsuarioDetailDTO addUsuario(@PathParam("videodigitalid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
+    public UsuarioDetailDTO addUsuario(@PathParam("videosdigitalesid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource addUsuario: input: videodigitalid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
             throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
@@ -71,7 +71,7 @@ public class VideoDigitalUsuarioResource
      */
     @GET
     
-    public List<UsuarioDetailDTO> getUsuarios(@PathParam("videodigitalid") Long videodigitalid) {
+    public List<UsuarioDetailDTO> getUsuarios(@PathParam("videosdigitalesid") Long videodigitalid) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuarios: input: {0}", videodigitalid);
         List<UsuarioDetailDTO> lista = usuariosListEntity2DTO(videoDigitalUsuarioLogic.getUsuarios(videodigitalid));
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuarios: output: {0}", lista.toString());
@@ -90,7 +90,7 @@ public class VideoDigitalUsuarioResource
      */
     @GET
     @Path("{usuariosId: \\d+}")
-    public UsuarioDetailDTO getUsuario(@PathParam("videodigitalid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
+    public UsuarioDetailDTO getUsuario(@PathParam("videosdigitalesid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuario: input: videodigitalid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
             throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
@@ -113,7 +113,7 @@ public class VideoDigitalUsuarioResource
      * Error de lógica que se genera cuando no se encuentra el usuario.
      */
     @PUT
-    public List<UsuarioDetailDTO> replaceUsuarios(@PathParam("videodigitalid") Long videodigitalid, List<UsuarioDetailDTO> usuarios) {
+    public List<UsuarioDetailDTO> replaceUsuarios(@PathParam("videosdigitalesid") Long videodigitalid, List<UsuarioDetailDTO> usuarios) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource replaceUsuarios: input: videodigitalid {0} , usuarios {1}", new Object[]{videodigitalid, usuarios.toString()});
         for (UsuarioDetailDTO usuario : usuarios) {
             if (usuarioLogic.getUsuario(usuario.getId()) == null) {
@@ -135,7 +135,7 @@ public class VideoDigitalUsuarioResource
      */
     @DELETE
     @Path("{usuariosId: \\d+}")
-    public void removeUsuario(@PathParam("videodigitalid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
+    public void removeUsuario(@PathParam("videosdigitalesid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource removeUsuario: input: videodigitalid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
             throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
