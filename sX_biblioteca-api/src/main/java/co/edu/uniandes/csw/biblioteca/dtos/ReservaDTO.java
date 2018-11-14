@@ -41,7 +41,7 @@ public class ReservaDTO implements Serializable {
     /**
      * identificador de la reserva
      */
-    private long id;
+    private Long id;
     
     /**
      * fecha de una reserva
@@ -62,7 +62,7 @@ public class ReservaDTO implements Serializable {
      * estado de una reserva
      * hace referencia a la disponibilidad del recurso reservado
      */
-    private boolean  estado;
+    private Boolean  estado;
     
     /**
      * usuario al que esta relacionada una reserva
@@ -183,7 +183,7 @@ public class ReservaDTO implements Serializable {
      */
     public void setTipoRecurso(String tipoRecurso) 
     {
-        if(tipoRecurso.equals("LIBRO") || tipoRecurso.equals("VIDEO")|| tipoRecurso.equals("SALA")|| tipoRecurso.equals("VIDEODIGITAL")|| tipoRecurso.equals("LIBRODIGITAL"))
+        if(tipoRecurso.equals("LIBRO") || tipoRecurso.equals("VIDEO")|| tipoRecurso.equals("SALA"))
         {
             this.tipoRecurso = tipoRecurso;
         }
@@ -198,7 +198,7 @@ public class ReservaDTO implements Serializable {
      * obiene el estado actual de una reserva
      * @return  true = disponible & false != disponible
      */
-    public boolean getEstado() 
+    public Boolean getEstado() 
     {
         return estado;
     }
@@ -207,7 +207,7 @@ public class ReservaDTO implements Serializable {
      * asigna el estado de una reserva
      * @param estado 
      */
-    public void setEstado(boolean estado) 
+    public void setEstado(Boolean estado) 
     {
         this.estado = estado;
     }
