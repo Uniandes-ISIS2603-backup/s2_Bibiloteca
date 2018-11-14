@@ -101,6 +101,9 @@ public class LibroDigitalResource {
     @Path("{libroDigitalId: \\d+}/usuarios")
     public List<UsuarioDTO> getUsuarios(@PathParam("libroDigitalId") Long libroId){
         List<UsuarioDTO> listUDTO = listUEntity2DetailDTO(ldul.getUsuarios(libroId));
+        if(listUDTO == null){
+            throw new WebApplicationException("El libro no existe",404);
+        }
         return listUDTO;
     }
     

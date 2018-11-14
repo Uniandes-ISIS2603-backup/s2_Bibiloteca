@@ -6,12 +6,14 @@ import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.LibroDigitalPersistence;
 import co.edu.uniandes.csw.biblioteca.persistence.UsuarioPersistence;
 import java.util.ArrayList;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Nicolas Alvarado
  */
+@Stateless
 public class LibroDigitalUsuarioLogic {
     
     @Inject

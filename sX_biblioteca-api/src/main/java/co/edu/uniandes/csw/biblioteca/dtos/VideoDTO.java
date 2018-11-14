@@ -77,7 +77,7 @@ public class VideoDTO implements Serializable {
         return director;
     }
 
-    public Integer getUnidadesDis() {
+    public Integer getUnidadesDisponibles() {
         return unidadesDisponibles;
     }
 
@@ -105,7 +105,7 @@ public class VideoDTO implements Serializable {
         director = pDirector;
     }
 
-    public void setUnidadesDis(Integer pUnidades) {
+    public void setUnidadesDisponibles(Integer pUnidades) {
         unidadesDisponibles = pUnidades;
     }
 

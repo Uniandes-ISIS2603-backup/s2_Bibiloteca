@@ -113,6 +113,9 @@ public class VideoResource {
     @Path("{videoId: \\d+}/prestamos")
     public List<PrestamoDTO> getPrestamos(@PathParam("videoId") Long videosId){
         List<PrestamoDTO> listP = listPEntity2DetailDTO(videoPrestamoL.getPrestamos(videosId));
+        if(listP == null){
+            throw new WebApplicationException("El video no existe",404);
+        }
         return listP;
     }
     
@@ -131,6 +134,9 @@ public class VideoResource {
     @Path("{videoId: \\d+}/reservas")
     public List<ReservaDTO> getReservas(@PathParam("videoId") Long videosId){
         List<ReservaDTO> listR = listREntity2DetailDTO(videoReservaL.getReservas(videosId));
+        if(listR == null){
+            throw new WebApplicationException("El video no existe",404);
+        }
         return listR;
     }
     
