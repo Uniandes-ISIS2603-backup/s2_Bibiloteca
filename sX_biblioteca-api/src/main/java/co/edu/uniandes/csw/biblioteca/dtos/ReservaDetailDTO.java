@@ -36,10 +36,7 @@ public class ReservaDetailDTO extends ReservaDTO implements Serializable {
      */
     private SalaDTO sala;
     
-    /**
-     * relacion de una reserva con el video digital
-     */
-     private VideoDigitalDTO videoDigital;
+    
      
     /**
      * Constructor por defecto
@@ -72,11 +69,7 @@ public class ReservaDetailDTO extends ReservaDTO implements Serializable {
             {
                 video =  new VideoDTO(pReservaEntity.getVideo());
             }
-            
-            if (pReservaEntity.getVideoDigital() != null ) 
-            {
-                videoDigital =  new VideoDigitalDTO(pReservaEntity.getVideoDigital());
-            }
+          
             
         }
     }
@@ -117,16 +110,33 @@ public class ReservaDetailDTO extends ReservaDTO implements Serializable {
             reservaEntity.setSala(null);
         }
         
-        if(this.videoDigital != null)
-        {
-            reservaEntity.setVideoDigital(this.videoDigital.toEntity());
-        }
-        else
-        {
-            reservaEntity.setVideoDigital(null);
-        }
+      
         
         return reservaEntity;
+    }
+
+    public VideoDTO getVideo() {
+        return video;
+    }
+
+    public void setVideo(VideoDTO video) {
+        this.video = video;
+    }
+
+    public LibroDTO getLibro() {
+        return libro;
+    }
+
+    public void setLibro(LibroDTO libro) {
+        this.libro = libro;
+    }
+
+    public SalaDTO getSala() {
+        return sala;
+    }
+
+    public void setSala(SalaDTO sala) {
+        this.sala = sala;
     }
 
     
