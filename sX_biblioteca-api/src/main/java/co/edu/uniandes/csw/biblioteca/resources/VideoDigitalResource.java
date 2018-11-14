@@ -96,8 +96,8 @@ public class VideoDigitalResource {
     }
     
     @DELETE
-     @Path("{videodigitalid: \\d+}")
-    public void eliminarVideoDigital(@PathParam("videodigitalid") Long videodigitalid)
+     @Path("{videosdigitalesid: \\d+}")
+    public void eliminarVideoDigital(@PathParam("videosdigitalesid") Long videodigitalid)
     {
        LOGGER.log(Level.INFO, "VideoDigitalResource deleteVideoDigital: input: {0}", videodigitalid);
         if (videoDigitalLogic.getVideoDigital(videodigitalid) == null) {
@@ -119,8 +119,8 @@ public class VideoDigitalResource {
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el video digital.
      */
-    @Path("{videodigitalid: \\d+}/usuarios")
-    public Class<VideoDigitalUsuarioResource> getVideoDigitalUsuarioResource(@PathParam("videodigitalid") Long videodigitalid) {
+    @Path("{videosdigitalesid: \\d+}/usuarios")
+    public Class<VideoDigitalUsuarioResource> getVideoDigitalUsuarioResource(@PathParam("videosdigitalesid") Long videodigitalid) {
         if (videoDigitalLogic.getVideoDigital(videodigitalid) == null) {
             throw new WebApplicationException("El recurso /videoDigital/" + videodigitalid + " no existe.", 404);
         }

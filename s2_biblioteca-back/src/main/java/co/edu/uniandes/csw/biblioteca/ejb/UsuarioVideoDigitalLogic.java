@@ -48,7 +48,7 @@ public class UsuarioVideoDigitalLogic {
     }
 
     /**
-     * Obtiene una colección de instancias de BookEntity asociadas a una
+     * Obtiene una colección de instancias de VideoDigitalEntity asociadas a una
      * instancia de Usuario
      *
      * @param usuariosId Identificador de la instancia de Usuario

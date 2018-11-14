@@ -91,9 +91,9 @@ public class UsuarioVideoDigitalResource {
      * Error de lógica que se genera cuando no se encuentra el video digital.
      */
     @GET
-    @Path("{videodigitaldd: \\d+}")
-    public VideoDigitalDetailDTO getVideoDigital(@PathParam("usuariosId") Long usuariosId, @PathParam("videodigitalid") Long videodigitalid) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "UsuarioVideoDigitalResource getVideoDigital: input: usuariosId {0} , videodigitalid {1}", new Object[]{usuariosId, videodigitalid});
+    @Path("{videosdigitalesid: \\d+}")
+    public VideoDigitalDetailDTO getVideoDigital(@PathParam("usuariosId") Long usuariosId, @PathParam("videosdigitalesid") Long videodigitalid) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "UsuarioVideoDigitalResource getVideoDigital: input: usuariosId {0} , videosdigitalesid {1}", new Object[]{usuariosId, videodigitalid});
         if (videoDigitalLogic.getVideoDigital(videodigitalid) == null) {
             throw new WebApplicationException("El recurso /videoDigital/" + videodigitalid + " no existe.", 404);
         }
@@ -115,7 +115,7 @@ public class UsuarioVideoDigitalResource {
      */
     @PUT
     public List<VideoDigitalDetailDTO> replaceVideosDigitales(@PathParam("usuariosId") Long usuariosId, List<VideoDigitalDetailDTO> videosDigitales) {
-        LOGGER.log(Level.INFO, "UsuarioVideoDigitalResource replaceVideosDigitales: input: usuariosId {0} , videosDigitales {1}", new Object[]{usuariosId, videosDigitales.toString()});
+        LOGGER.log(Level.INFO, "UsuarioVideoDigitalResource replaceVideosDigitales: input: usuariosId {0} , videosdigitales {1}", new Object[]{usuariosId, videosDigitales.toString()});
         for (VideoDigitalDetailDTO videoDigital : videosDigitales) {
             if (videoDigitalLogic.getVideoDigital(videoDigital.getId()) == null) {
                 throw new WebApplicationException("El recurso /videoDigital/" + videoDigital.getId() + " no existe.", 404);
@@ -135,9 +135,9 @@ public class UsuarioVideoDigitalResource {
      * Error de lógica que se genera cuando no se encuentra el video digital.
      */
     @DELETE
-    @Path("{videosDigitalesId: \\d+}")
-    public void removeVideoDigital(@PathParam("usuariosId") Long usuariosId, @PathParam("videodigitalid") Long videodigitalid) {
-        LOGGER.log(Level.INFO, "UsuarioVideoDigitalResource deleteVideoDigital: input: usuariosId {0} , videodigitalid {1}", new Object[]{usuariosId, videodigitalid});
+    @Path("{videosdigitalesId: \\d+}")
+    public void removeVideoDigital(@PathParam("usuariosId") Long usuariosId, @PathParam("videosdigitalesid") Long videodigitalid) {
+        LOGGER.log(Level.INFO, "UsuarioVideoDigitalResource deleteVideoDigital: input: usuariosId {0} , videosdigitalesid {1}", new Object[]{usuariosId, videodigitalid});
         if (videoDigitalLogic.getVideoDigital(videodigitalid) == null) {
             throw new WebApplicationException("El recurso /videoDigital/" + videodigitalid + " no existe.", 404);
         }

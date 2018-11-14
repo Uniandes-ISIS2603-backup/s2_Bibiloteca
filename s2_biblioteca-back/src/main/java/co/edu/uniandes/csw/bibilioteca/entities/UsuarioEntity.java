@@ -44,7 +44,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     
     @PodamExclude
     @ManyToMany(mappedBy = "usuarios")
-    private List<VideoDigitalEntity> videosDigitales = new ArrayList<>();
+    private List<VideoDigitalEntity> videoDigitalEntity = new ArrayList<>();
 
     /**
      * Relación con el usuario.
@@ -108,7 +108,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
      * @return colección videos digitales.
      */
     public List<VideoDigitalEntity> getVideosDigitales() {
-        return videosDigitales;
+        return videoDigitalEntity;
     }
 
     /**
@@ -117,7 +117,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
      * @param videosDigitales nuevo valor de la colección.
      */
     public void setVideosDigitales(List<VideoDigitalEntity> videosDigitales) {
-        this.videosDigitales = videosDigitales;
+        this.videoDigitalEntity = videosDigitales;
     }
     
 }

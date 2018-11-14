@@ -38,13 +38,13 @@ public class VideoDigitalDTO implements Serializable {
     }
     public VideoDigitalEntity toEntity()
     {
-        VideoDigitalEntity videoDigitalEntity = new VideoDigitalEntity();
-        videoDigitalEntity.setId(this.id);
-        videoDigitalEntity.setNombre(this.nombre);
-        videoDigitalEntity.setDirector(this.director);
-        videoDigitalEntity.setIdioma(this.idioma);
-        videoDigitalEntity.setSubtitulos(this.subtitulos);       
-        return videoDigitalEntity;
+        VideoDigitalEntity videoDigital = new VideoDigitalEntity();
+        videoDigital.setId(this.id);
+        videoDigital.setNombre(this.nombre);
+        videoDigital.setDirector(this.director);
+        videoDigital.setIdioma(this.idioma);
+        videoDigital.setSubtitulos(this.subtitulos);       
+        return videoDigital;
     }
 
     public Long getId() {

@@ -86,7 +86,7 @@ public class UsuarioResource {
         }
         usuarioLogica.deleteUsuario(usuariosId);
     }
-    @Path("{usuariosId: \\d+}/videosDigitales")
+    @Path("{usuariosId: \\d+}/videosdigitales")
     public Class<UsuarioVideoDigitalResource> getUsuarioVideosDiggitalesResource(@PathParam("usuariosId") Long usuariosId) {
         if (usuarioLogica.getUsuario(usuariosId) == null) {
             throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);

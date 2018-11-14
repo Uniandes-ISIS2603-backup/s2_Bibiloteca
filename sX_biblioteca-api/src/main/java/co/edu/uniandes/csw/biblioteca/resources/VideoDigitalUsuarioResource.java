@@ -91,7 +91,7 @@ public class VideoDigitalUsuarioResource
     @GET
     @Path("{usuariosId: \\d+}")
     public UsuarioDetailDTO getUsuario(@PathParam("videosdigitalesid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
-        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuario: input: videodigitalid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
+        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuario: input: videosdigitalesid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
             throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
         }
