@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.csw.biblioteca.ejb;
 
+import javax.ejb.Stateless;
+
 /**
  *
  * @author Daniel Preciado
  */
+@Stateless
 public class ServicioLogic {
     
 }

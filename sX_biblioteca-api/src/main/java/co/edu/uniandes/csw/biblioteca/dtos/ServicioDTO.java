@@ -63,7 +63,7 @@ public class ServicioDTO implements Serializable{
     /**
      * constructor A
      */
-    public void ServicioDTO ()
+    public ServicioDTO ()
     {
         
     }
