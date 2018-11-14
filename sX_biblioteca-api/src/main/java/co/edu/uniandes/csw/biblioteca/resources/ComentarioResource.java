@@ -81,6 +81,10 @@ public class ComentarioResource {
  @Path("{comentarioId: \\d+}")
  public ComentarioDTO getComentarioLibro (@PathParam("librosId") Long libroId, @PathParam("comentarioId") Long comentarioId){
      ComentarioEntity entity = comentarioLogic.getComentarioLibro(libroId, comentarioId);
+     if(entity==null)
+     {
+         throw new WebApplicationException("Comentario con id: "+comentarioId+" no existe",404);
+     }
      ComentarioDTO comentarioDTO = new ComentarioDTO(entity);
      return comentarioDTO;
  }
@@ -96,7 +100,13 @@ public class ComentarioResource {
  @GET
  @Path("{comentarioId: \\d+}")
  public ComentarioDTO getComentarioUsuario (@PathParam("usuariosId") Long usuarioId, @PathParam("comentarioId") Long comentarioId){
+    
      ComentarioEntity entity = comentarioLogic.getComentarioUsuario(usuarioId, comentarioId);
+     if(entity==null)
+     {
+         throw new WebApplicationException("Comentario con id: "+comentarioId+" no existe",404);
+     }
+     
      ComentarioDTO comentarioDTO = new ComentarioDTO(entity);
      return comentarioDTO;
  }
