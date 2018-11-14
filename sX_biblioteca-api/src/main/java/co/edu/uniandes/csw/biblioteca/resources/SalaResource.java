@@ -60,6 +60,10 @@ public class SalaResource {
  @Path("{salaId: \\d+}")
  public SalaDTO getSalaBiblioteca (@PathParam("librosId") Long bibliotecaId, @PathParam("salaId") Long salaId){
      SalaEntity entity = salaLogic.getSalaBiblioteca(bibliotecaId, salaId);
+     if(entity==null)
+     {
+         throw new WebApplicationException("Sala con id: "+salaId+" no existe",404);
+     }
      SalaDTO salaDTO = new SalaDTO(entity);
      return salaDTO;
  }

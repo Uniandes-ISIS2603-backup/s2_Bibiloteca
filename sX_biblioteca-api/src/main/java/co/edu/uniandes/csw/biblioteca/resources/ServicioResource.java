@@ -5,11 +5,15 @@
  */
 package co.edu.uniandes.csw.biblioteca.resources;
 
+import co.edu.uniandes.csw.bibilioteca.entities.ServicioEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
 import co.edu.uniandes.csw.biblioteca.dtos.ServicioDTO;
+import co.edu.uniandes.csw.biblioteca.ejb.ServicioLogic;
 import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +22,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  * clase que implementa el recurso servicio
@@ -37,6 +42,8 @@ public class ServicioResource {
      */
     private static final Logger LOGGER = Logger.getLogger(ServicioResource.class.getName());
     
+     @Inject
+    private ServicioLogic servicioLogica;
     //__________________________________________________________________________
     //Metodos
     //__________________________________________________________________________
@@ -101,6 +108,11 @@ public class ServicioResource {
     @Path("{serviciosId: \\d+}")
     public ServicioDTO deleteServicio(@PathParam("servicioId") Long servicioId) throws BusinessLogicException
     {
-       return null; 
+        return null;
+    //   ServicioEntity entity = servicioLogica.getServicio(servicioId);
+     //   if (entity == null) {
+    //        throw new WebApplicationException("El recurso /servicios/" + servicioId + " no existe.", 404);
+   //     }
+       // servicioLogica.deleteUsuario(servicioId);
     }
 }
