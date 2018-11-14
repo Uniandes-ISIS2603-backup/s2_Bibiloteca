@@ -28,6 +28,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Daniel Montoya
  */
+@Path("comentarios")
 @Produces("application/json")
 @Consumes("application/json")
 
