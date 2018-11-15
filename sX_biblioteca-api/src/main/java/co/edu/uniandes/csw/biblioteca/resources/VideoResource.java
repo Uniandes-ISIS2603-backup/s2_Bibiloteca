@@ -10,7 +10,9 @@ import co.edu.uniandes.csw.bibilioteca.entities.ReservaEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.VideoEntity;
 import co.edu.uniandes.csw.biblioteca.dtos.PrestamoDTO;
 import co.edu.uniandes.csw.biblioteca.dtos.ReservaDTO;
+import co.edu.uniandes.csw.biblioteca.dtos.ReservaDetailDTO;
 import co.edu.uniandes.csw.biblioteca.dtos.VideoDTO;
+import co.edu.uniandes.csw.biblioteca.dtos.VideoDetailDTO;
 import co.edu.uniandes.csw.biblioteca.ejb.PrestamoLogic;
 import co.edu.uniandes.csw.biblioteca.ejb.ReservaLogic;
 import co.edu.uniandes.csw.biblioteca.ejb.VideoLogic;
@@ -49,20 +51,20 @@ public class VideoResource {
 
     @GET
     //@Produces({MediaType.APPLICATION_JSON})
-    public ArrayList<VideoDTO> getVideos(){
-        ArrayList<VideoDTO> listVideo = listVEntity2DetailDTO(videoLogic.getVideos());
+    public ArrayList<VideoDetailDTO> getVideos(){
+        ArrayList<VideoDetailDTO> listVideo = listVEntity2DetailDTO(videoLogic.getVideos());
         return listVideo;
     }
     
     @GET
     //@Produces({MediaType.APPLICATION_JSON})
     @Path("{videosId: \\d+}")
-    public VideoDTO getVideo(@PathParam("videosId") Long videosId){
+    public VideoDetailDTO getVideo(@PathParam("videosId") Long videosId){
         VideoEntity ve = videoLogic.getVideo(videosId);
         if(ve == null){
             throw new WebApplicationException("El video no existe ",404);
         }
-        VideoDTO vd = new VideoDTO(ve);
+        VideoDetailDTO vd = new VideoDetailDTO(ve);
         return vd;
     }
     
@@ -132,8 +134,8 @@ public class VideoResource {
     
     @GET
     @Path("{videoId: \\d+}/reservas")
-    public List<ReservaDTO> getReservas(@PathParam("videoId") Long videosId){
-        List<ReservaDTO> listR = listREntity2DetailDTO(videoReservaL.getReservas(videosId));
+    public List<ReservaDetailDTO> getReservas(@PathParam("videoId") Long videosId){
+        List<ReservaDetailDTO> listR = listREntity2DetailDTO(videoReservaL.getReservas(videosId));
         if(listR == null){
             throw new WebApplicationException("El video no existe",404);
         }
@@ -142,12 +144,12 @@ public class VideoResource {
     
     @GET
     @Path("{videosId: \\d+}/reservas/{reservaId: \\d+}")
-    public ReservaDTO getReserva(@PathParam("videosId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
+    public ReservaDetailDTO getReserva(@PathParam("videosId") Long pVideoId, @PathParam("reservaId") Long pReservaId){
         ReservaEntity re = reservaLogic.getReserva(pReservaId);
         if(re == null){
             throw new WebApplicationException("La reserva no existe",404);
         }
-        ReservaDTO rdto = new ReservaDTO(videoReservaL.getReserva(pVideoId, pReservaId));
+        ReservaDetailDTO rdto = new ReservaDetailDTO(videoReservaL.getReserva(pVideoId, pReservaId));
         return rdto;
     }
     
@@ -171,10 +173,18 @@ public class VideoResource {
         videoReservaL.removeReserva(pVideoId, pReservaId);
     }
     
-    private ArrayList<VideoDTO> listVEntity2DetailDTO(List<VideoEntity> entityList) {
+    private ArrayList<VideoDTO> listVEntity2DTO(List<VideoEntity> entityList) {
         ArrayList<VideoDTO> list = new ArrayList<>();
         for (VideoEntity entity : entityList) {
             list.add(new VideoDTO(entity));
+        }
+        return list;
+    }
+    
+        private ArrayList<VideoDetailDTO> listVEntity2DetailDTO(List<VideoEntity> entityList) {
+        ArrayList<VideoDetailDTO> list = new ArrayList<>();
+        for (VideoEntity entity : entityList) {
+            list.add(new VideoDetailDTO(entity));
         }
         return list;
     }
@@ -187,10 +197,10 @@ public class VideoResource {
         return list;
     }
         
-    private ArrayList<ReservaDTO> listREntity2DetailDTO(List<ReservaEntity> entityList) {
-        ArrayList<ReservaDTO> list = new ArrayList<>();
+    private ArrayList<ReservaDetailDTO> listREntity2DetailDTO(List<ReservaEntity> entityList) {
+        ArrayList<ReservaDetailDTO> list = new ArrayList<>();
         for (ReservaEntity entity : entityList) {
-            list.add(new ReservaDTO(entity));
+            list.add(new ReservaDetailDTO(entity));
         }
         return list;
     }
