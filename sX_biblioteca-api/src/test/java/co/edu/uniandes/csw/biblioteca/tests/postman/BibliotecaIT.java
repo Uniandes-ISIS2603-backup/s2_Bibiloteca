@@ -53,7 +53,7 @@ public class BibliotecaIT {
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "frontstepbystep-api.war")//War del modulo api
+        return ShrinkWrap.create(WebArchive.class, "s3_biblioteca-api.war")//War del modulo api
                 // Se agrega las dependencias
                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
                         .importRuntimeDependencies().resolve()
@@ -87,8 +87,6 @@ public class BibliotecaIT {
                 Assert.assertEquals("Error en Requests de: " + nombre, desiredResult, tp.getRequests_failed());
 
                 Assert.assertEquals("Error en Test-Scripts de: " + nombre, desiredResult, tp.getTest_scripts_failed());
-
-                Assert.assertEquals("Error en Prerequest-Scripts de: " + nombre, desiredResult, tp.getPrerequest_scripts_failed());
 
                 Assert.assertEquals("Error en Assertions de: " + nombre, desiredResult, tp.getAssertions_failed());
 
