@@ -7,6 +7,21 @@
 	"item": [
 		{
 			"name": "CrearVideoDigital",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d4b7064c-9716-4558-908d-f6b2140a9286",
+						"type": "text/javascript",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;",
+							"console.log(data.id);"
+						]
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
@@ -17,15 +32,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"nombre\": \"BIBLIOTECA\", \"director\": \"Quentin Jerome Tarantino\", \"idioma\": \"español\", \"subtitulos\": \"False\"}"
+					"raw": "{\"nombre\": \"BIBLIOTESTCA\", \"director\": \"Quentin Jerome Tarantino\", \"subtitulos\": \"False\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/videosdigitales",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
@@ -47,15 +62,15 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"nombre\" : \"Cien anos de soledad\",\n\t\"email\" : \"prueba@postman.com\",\n\t\"telefono\" : \"3333333333\",\n\t\"multa\" : 0,\n\t\"id\":1\t\n}"
+					"raw": "{\n\t\"nombre\" : \"Cien ans de soledad\",\n\t\"email\" : \"prueba@postman.com\",\n\t\"telefono\" : \"3333333333\",\n\t\"multa\" : 0\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/usuarios",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/usuarios",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
@@ -69,10 +84,18 @@
 			"name": "agregarUsuarioAVideoDigital",
 			"request": {
 				"method": "POST",
-				"header": [],
-				"body": {},
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/videosdigitales/3/usuarios/1",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/videosdigitales/4/usuarios/3",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -82,9 +105,9 @@
 						"sX_biblioteca-api",
 						"api",
 						"videosdigitales",
-						"3",
+						"4",
 						"usuarios",
-						"1"
+						"3"
 					]
 				}
 			},
@@ -100,12 +123,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/videosdigitales",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
@@ -137,16 +160,17 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales/1",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/videosdigitales//1",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
 						"videosdigitales",
+						"",
 						"1"
 					]
 				},
@@ -169,17 +193,17 @@
 					"raw": "{\"nombre\": \"BIBLIOTECA\", \"director\": \"Quentin Jerome Tarantino\", \"idioma\": \"ingles\", \"subtitulos\": \"True\"}"
 				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales/1",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/videosdigitales/3",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
 						"videosdigitales",
-						"1"
+						"3"
 					]
 				}
 			},
@@ -195,17 +219,17 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://localhost:8080/sX_biblioteca-api/api/videosdigitales/1",
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/videosdigitales/2",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{ip}}"
 					],
-					"port": "8080",
+					"port": "{{puerto}}",
 					"path": [
 						"sX_biblioteca-api",
 						"api",
 						"videosdigitales",
-						"1"
+						"2"
 					]
 				},
 				"description": "Se espera null"
@@ -219,7 +243,19 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": ""
+					"raw": "http://{{ip}}:{{puerto}}/sX_biblioteca-api/api/usuarios/3/videosdigitales",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"sX_biblioteca-api",
+						"api",
+						"usuarios",
+						"3",
+						"videosdigitales"
+					]
 				}
 			},
 			"response": []
