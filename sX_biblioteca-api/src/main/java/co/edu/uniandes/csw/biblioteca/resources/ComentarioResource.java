@@ -31,7 +31,6 @@ import javax.ws.rs.WebApplicationException;
 @Path("comentarios")
 @Produces("application/json")
 @Consumes("application/json")
-
 public class ComentarioResource {
     
     @Inject
@@ -49,7 +48,7 @@ public class ComentarioResource {
      * Error de lógica que se genera cuando ya existe la reseña.
      */    
  @POST
- public ComentarioDTO createComentario(@PathParam("librosId") Long libroId , ComentarioDTO comentario, Long usuarioId) throws BusinessLogicException
+ public ComentarioDTO createComentario(@PathParam("librosId") Long libroId , ComentarioDTO comentario,@PathParam("usuariosId") Long usuarioId) throws BusinessLogicException
  {
      ComentarioDTO nuevoComentario = new ComentarioDTO(comentarioLogic.createComentario(libroId, comentario.toEntity(), usuarioId));
      return nuevoComentario;
@@ -97,6 +96,7 @@ public class ComentarioResource {
   * @return
   * @throws Exception 
   */
+ /*
  @GET
  @Path("{comentarioId: \\d+}")
  public ComentarioDTO getComentarioUsuario (@PathParam("usuariosId") Long usuarioId, @PathParam("comentarioId") Long comentarioId){
@@ -110,6 +110,7 @@ public class ComentarioResource {
      ComentarioDTO comentarioDTO = new ComentarioDTO(entity);
      return comentarioDTO;
  }
+*/
 /**
  * Actualiza una reseña con la informacion que se recibe en el cuerpo de la
  * petición y se regresa el objeto actualizado.
