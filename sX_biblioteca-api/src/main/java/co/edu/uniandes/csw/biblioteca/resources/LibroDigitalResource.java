@@ -8,7 +8,9 @@ package co.edu.uniandes.csw.biblioteca.resources;
 import co.edu.uniandes.csw.bibilioteca.entities.LibroDigitalEntity;
 import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
 import co.edu.uniandes.csw.biblioteca.dtos.LibroDigitalDTO;
+import co.edu.uniandes.csw.biblioteca.dtos.LibroDigitalDetailDTO;
 import co.edu.uniandes.csw.biblioteca.dtos.UsuarioDTO;
+import co.edu.uniandes.csw.biblioteca.dtos.UsuarioDetailDTO;
 import co.edu.uniandes.csw.biblioteca.ejb.LibroDigitalLogic;
 import co.edu.uniandes.csw.biblioteca.ejb.LibroDigitalUsuarioLogic;
 import co.edu.uniandes.csw.biblioteca.ejb.UsuarioLogic;
@@ -46,20 +48,20 @@ public class LibroDigitalResource {
     
     @GET
     @Path("{librosDigitalesId: \\d+}")
-    public LibroDigitalDTO getLibroDigitalById(@PathParam("librosDigitalesId") Long librosdigitalesId)
+    public LibroDigitalDetailDTO getLibroDigitalById(@PathParam("librosDigitalesId") Long librosdigitalesId)
     {
        LibroDigitalEntity lde = ldl.getLibroDigital(librosdigitalesId);
        if(lde == null){
            throw new WebApplicationException("En libro no existe",404);
        }
-       LibroDigitalDTO lddto = new LibroDigitalDTO(lde);
+       LibroDigitalDetailDTO lddto = new LibroDigitalDetailDTO(lde);
        return lddto;
     }
     
     @GET
-    public ArrayList<LibroDigitalDTO> getLibrosDigitales()
+    public ArrayList<LibroDigitalDetailDTO> getLibrosDigitales()
     {
-       ArrayList<LibroDigitalDTO> listLibros = listLDEntity2DetailDTO(ldl.getLibrosDigitales());
+       ArrayList<LibroDigitalDetailDTO> listLibros = listLDEntity2DetailDTO(ldl.getLibrosDigitales());
        return listLibros;
     }
     
@@ -99,8 +101,8 @@ public class LibroDigitalResource {
     
     @GET
     @Path("{libroDigitalId: \\d+}/usuarios")
-    public List<UsuarioDTO> getUsuarios(@PathParam("libroDigitalId") Long libroId){
-        List<UsuarioDTO> listUDTO = listUEntity2DetailDTO(ldul.getUsuarios(libroId));
+    public List<UsuarioDetailDTO> getUsuarios(@PathParam("libroDigitalId") Long libroId){
+        List<UsuarioDetailDTO> listUDTO = listUEntity2DetailDTO(ldul.getUsuarios(libroId));
         if(listUDTO == null){
             throw new WebApplicationException("El libro no existe",404);
         }
@@ -109,12 +111,12 @@ public class LibroDigitalResource {
     
     @GET
     @Path("{librosDigitalesId: \\d+}/{usuariosId: \\d+}")
-    public UsuarioDTO getUsuario(@PathParam("librosDigitalesId") Long libroId, @PathParam("usuariosId") Long usuarioId){
+    public UsuarioDetailDTO getUsuario(@PathParam("librosDigitalesId") Long libroId, @PathParam("usuariosId") Long usuarioId){
         UsuarioEntity ue = ul.getUsuario(usuarioId);
         if(ue == null){
             throw new WebApplicationException("El usuario no existe",404);
         }
-        UsuarioDTO udto = new UsuarioDTO(ldul.getUsuario(libroId, usuarioId));
+        UsuarioDetailDTO udto = new UsuarioDetailDTO(ldul.getUsuario(libroId, usuarioId));
         return udto;
     }
     
@@ -128,18 +130,18 @@ public class LibroDigitalResource {
         ldul.deleteUsuario(libroId, usuarioId);
     }
     
-    private ArrayList<LibroDigitalDTO> listLDEntity2DetailDTO(List<LibroDigitalEntity> entityList) {
-        ArrayList<LibroDigitalDTO> list = new ArrayList<>();
+    private ArrayList<LibroDigitalDetailDTO> listLDEntity2DetailDTO(List<LibroDigitalEntity> entityList) {
+        ArrayList<LibroDigitalDetailDTO> list = new ArrayList<>();
         for (LibroDigitalEntity entity : entityList) {
-            list.add(new LibroDigitalDTO(entity));
+            list.add(new LibroDigitalDetailDTO(entity));
         }
         return list;
     }
     
-    private ArrayList<UsuarioDTO> listUEntity2DetailDTO(List<UsuarioEntity> entityList) {
-        ArrayList<UsuarioDTO> list = new ArrayList<>();
+    private ArrayList<UsuarioDetailDTO> listUEntity2DetailDTO(List<UsuarioEntity> entityList) {
+        ArrayList<UsuarioDetailDTO> list = new ArrayList<>();
         for (UsuarioEntity entity : entityList) {
-            list.add(new UsuarioDTO(entity));
+            list.add(new UsuarioDetailDTO(entity));
         }
         return list;
     }

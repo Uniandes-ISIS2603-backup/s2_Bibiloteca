@@ -109,7 +109,7 @@ public class ReservaResource {
      */
     @GET
     @Path("{reservasId: \\d+}")
-    public ReservaDTO getReserva (@PathParam("reservasId") Long reservasId) throws WebApplicationException
+    public ReservaDetailDTO getReserva (@PathParam("reservasId") Long reservasId) throws WebApplicationException
     {
         LOGGER.log(Level.INFO, "ReservaResource getEditorial: input: {0}", reservasId);
         ReservaEntity reservaEntity = reservaLogic.getReserva(reservasId);

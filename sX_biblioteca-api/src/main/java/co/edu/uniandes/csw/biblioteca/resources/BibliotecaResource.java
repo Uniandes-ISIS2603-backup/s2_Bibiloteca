@@ -90,7 +90,7 @@ public class BibliotecaResource {
      */
     @GET
     @Path("{bibliotecasId: \\d+}")
-    public BibliotecaDTO getBiblioteca(@PathParam("bibliotecasId") Long bibliotecaId) throws WebApplicationException
+    public BibliotecaDetailDTO getBiblioteca(@PathParam("bibliotecasId") Long bibliotecaId) throws WebApplicationException
     {
        LOGGER.log(Level.INFO, "BibliotecaResource getBiblioteca: input: {0}", bibliotecaId);
         BibliotecaEntity bibliotecaEntity = bibliotecaLogic.getBiblioteca(bibliotecaId);

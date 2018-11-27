@@ -61,7 +61,7 @@ public class VideoDigitalResource {
     }
     @GET
     @Path("{videosdigitalesid: \\d+}")
-    public VideoDigitalDTO getVideoDigital(@PathParam("videosdigitalesid") Long videodigitalid)
+    public VideoDigitalDetailDTO getVideoDigital(@PathParam("videosdigitalesid") Long videodigitalid)
     {
         LOGGER.log(Level.INFO, "VideoDigitalResource getVideoDigital: input: {0}", videodigitalid);
         VideoDigitalEntity videoDigitalEntity = videoDigitalLogic.getVideoDigital(videodigitalid);
