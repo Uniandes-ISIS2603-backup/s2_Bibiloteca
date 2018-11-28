@@ -27,7 +27,7 @@ public class VideoPersistence {
     }
     
     public List<VideoEntity> findAll(){
-        TypedQuery querty = em.createQuery("select u from VideoEntity u", VideoEntity.class);
+        Query querty = em.createQuery("select u from VideoEntity u");
         return querty.getResultList();
     }
     
@@ -50,7 +50,7 @@ public class VideoPersistence {
     }
     
     public void delete(Long videoID){
-        VideoEntity v = find(videoID);
+        VideoEntity v = em.find(VideoEntity.class, videoID);
         em.remove(v);
     }
 }

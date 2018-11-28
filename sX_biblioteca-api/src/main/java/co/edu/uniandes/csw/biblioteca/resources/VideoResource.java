@@ -59,7 +59,7 @@ public class VideoResource {
     @GET
     //@Produces({MediaType.APPLICATION_JSON})
     @Path("{videosId: \\d+}")
-    public VideoDetailDTO getVideo(@PathParam("videosId") Long videosId){
+    public VideoDetailDTO getVideo(@PathParam("videosId") Long videosId) throws BusinessLogicException{
         VideoEntity ve = videoLogic.getVideo(videosId);
         if(ve == null){
             throw new WebApplicationException("El video no existe ",404);
@@ -70,12 +70,12 @@ public class VideoResource {
     
     @PUT
     @Path("{videosid: \\d+}")
-    public VideoDTO updateVideo(@PathParam("videosid") Long videoId, VideoDTO pvd) throws BusinessLogicException{
+    public VideoDetailDTO updateVideo(@PathParam("videosid") Long videoId, VideoDTO pvd) throws BusinessLogicException{
         pvd.setId(videoId);
         if(videoLogic.getVideo(videoId) == null){
             throw new WebApplicationException("El video no existe",404);
         }
-        VideoDTO vd = new VideoDTO(videoLogic.updateVideo(pvd.toEntity()));
+        VideoDetailDTO vd = new VideoDetailDTO(videoLogic.updateVideo(pvd.toEntity(),videoId));
         return vd;
     }
     

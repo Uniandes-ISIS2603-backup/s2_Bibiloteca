@@ -1,8 +1,14 @@
 package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
-import java.util.*;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import org.eclipse.persistence.jpa.config.Cascade;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -95,5 +101,13 @@ import uk.co.jemos.podam.common.PodamExclude;
    public void setPrestamos(ArrayList<PrestamoEntity> listPE){
        prestamos = listPE;
    }
+
+    public Integer getUnidadesDisponibles() {
+        return unidadesDisponibles;
+    }
+
+    public void setUnidadesDisponibles(Integer unidadesDisponibles) {
+        this.unidadesDisponibles = unidadesDisponibles;
+    }
    
  }

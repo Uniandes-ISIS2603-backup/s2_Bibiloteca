@@ -20,13 +20,13 @@ public class VideoDetailDTO extends VideoDTO implements Serializable {
     public VideoDetailDTO(VideoEntity ve){
         super(ve);
         if(ve.getReservas() != null){
-            reservas = new ArrayList<ReservaDTO>();
+            reservas = new ArrayList<>();
             for(ReservaEntity e : ve.getReservas()){
                 reservas.add(new ReservaDTO(e));
             }
         }
         if(ve.getPrestamos() != null){
-            prestamos = new ArrayList<PrestamoDTO>();
+            prestamos = new ArrayList<>();
             for(PrestamoEntity e : ve.getPrestamos()){
                 prestamos.add(new PrestamoDTO(e));
             }

@@ -25,7 +25,7 @@ public class VideoLogic {
         if(ve.getNombre() == null || ve.getDirector() == null || ve.getIdioma() == null){
             throw new BusinessLogicException("El nombre, director o idioma no pueden ser nulos");
         }
-        if(ve.getBiblioteca() == null || biblioPersis.find(ve.getBiblioteca().getId()) == null){
+        if(ve.getBiblioteca() == null ){//|| biblioPersis.find(ve.getBiblioteca().getId()) == null){
             throw new BusinessLogicException("El video tiene que pertenecer a una biblioteca existente");
         }
         if(videoPersis.find(ve.getId()) != null || videoPersis.findByName(ve.getNombre()) != null){
@@ -50,11 +50,11 @@ public class VideoLogic {
         return ve;
     }
     
-    public VideoEntity updateVideo(VideoEntity ve) throws BusinessLogicException{
+    public VideoEntity updateVideo(VideoEntity ve, Long videoId) throws BusinessLogicException{
         if(ve.getNombre() == null || ve.getDirector() == null || ve.getIdioma() == null){
             throw new BusinessLogicException("El nombre, director o idioma no pueden ser nulos");
         }
-        if(ve.getBiblioteca() == null || biblioPersis.find(ve.getBiblioteca().getId()) == null){
+        if(ve.getBiblioteca() == null){
             throw new BusinessLogicException("El video tiene que pertenecer a una biblioteca existente");
         }
         if(videoPersis.find(ve.getId()) != null || videoPersis.findByName(ve.getNombre()) != null){
@@ -65,14 +65,6 @@ public class VideoLogic {
     }
     
     public void deleteVideo(Long videoID) throws BusinessLogicException{
-        ArrayList<ReservaEntity> listRE = getVideo(videoID).getReservas();
-        ArrayList<PrestamoEntity> listPE = getVideo(videoID).getPrestamos();
-        if(listRE != null && !listRE.isEmpty()){
-            throw new BusinessLogicException("El video no se puede borrar porque tiene reservas");
-        }
-        if(listPE != null && !listPE.isEmpty()){
-            throw new BusinessLogicException("El video no se puede borrar porque tiene prestamos");
-        }
         videoPersis.delete(videoID);
     }
     
