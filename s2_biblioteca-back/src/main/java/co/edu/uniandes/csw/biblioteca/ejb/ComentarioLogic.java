@@ -38,9 +38,9 @@ public class ComentarioLogic {
     private UsuarioPersistence usuarioPersistencia;
 
     public ComentarioEntity createComentario(Long libroId, ComentarioEntity comentario, Long usuarioId) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia el proceso de crear un comentario");
-        LibroEntity libroParaComentario = libroPersistencia.find(libroId);
-        UsuarioEntity usuarioCreador = usuarioPersistencia.find(usuarioId);
+        LOGGER.log(Level.INFO, "Inicia el proceso de crear un comentario del libro con id = " + comentario.getLibro().getId());
+        LibroEntity libroParaComentario = libroPersistencia.find(comentario.getLibro().getId());
+        UsuarioEntity usuarioCreador = usuarioPersistencia.find(comentario.getUsuario().getId());
         boolean devuelto = false;
         for (PrestamoEntity prestamo : usuarioCreador.getPrestamos()) {
             if (prestamo.getLibro().getId().equals(libroId) && prestamo.getRetornado() == true) {

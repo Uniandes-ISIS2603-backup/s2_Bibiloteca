@@ -28,7 +28,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Daniel Montoya
  */
-@Path("comentarios")
+//@Path("comentarios")
 @Produces("application/json")
 @Consumes("application/json")
 public class ComentarioResource {

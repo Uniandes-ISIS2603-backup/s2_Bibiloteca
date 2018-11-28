@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.biblioteca.dtos;
 
 import co.edu.uniandes.csw.bibilioteca.entities.SalaEntity;
 import java.io.Serializable;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  *
@@ -18,6 +20,7 @@ public class SalaDTO implements Serializable {
     private String ubicacion;
     private Boolean disponibilidad;
     private Integer capacidad;
+    private BibliotecaDTO biblioteca;
 
     /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
@@ -31,6 +34,15 @@ public class SalaDTO implements Serializable {
             this.disponibilidad = salaEntity.getDisponibilidad();
             this.ubicacion = salaEntity.getUbicacion();
             this.id = salaEntity.getId();
+            if(salaEntity.getBiblioteca() != null)
+            {
+                this.biblioteca = new BibliotecaDTO(salaEntity.getBiblioteca());
+            }
+            else
+            {
+                this.biblioteca = null;
+            }
+
         }
     }
 
@@ -50,6 +62,10 @@ public class SalaDTO implements Serializable {
         sala.setCapacidad(this.capacidad);
         sala.setDisponibilidad(this.disponibilidad);
         sala.setUbicacion(this.ubicacion);
+        if(this.biblioteca != null)
+        {
+            sala.setBiblioteca(this.biblioteca.toEntity());
+        }
 
         return sala;
     }
@@ -75,5 +91,17 @@ public class SalaDTO implements Serializable {
 
     public void setCapacidad(Integer pCapacidad) {
         capacidad = pCapacidad;
+    }
+
+    public BibliotecaDTO getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(BibliotecaDTO biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+     @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

@@ -35,9 +35,10 @@ public class SalaLogic {
      * @return La entidad de la sala luego de persistirla.
      * @throws BusinessLogicException Si la sala a persistir ya existe.
      */
-     public SalaEntity createSala(Long bibliotecaId, SalaEntity sala) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia el proceso de crear un comentario");
-        BibliotecaEntity bibliotecaDeSala = bibliotecaPersistence.find(bibliotecaId);
+     public SalaEntity createSala(Long bibliotecaId,SalaEntity sala) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia el proceso de crear una sala de la biblioteca con id " + sala.getBiblioteca().getId());
+        BibliotecaEntity bibliotecaDeSala = bibliotecaPersistence.find(sala.getBiblioteca().getId());
+        LOGGER.log(Level.INFO,"Encuentra la biblioteca" + bibliotecaDeSala);
 	boolean existe = false;
         for (SalaEntity salaEx : bibliotecaDeSala.getSalas()) {
             if(salaEx.getUbicacion().equals(sala.getUbicacion()))
