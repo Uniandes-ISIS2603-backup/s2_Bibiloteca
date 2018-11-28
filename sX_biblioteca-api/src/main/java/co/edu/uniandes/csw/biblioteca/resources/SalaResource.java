@@ -43,7 +43,7 @@ public class SalaResource {
      * Error de lógica que se genera cuando ya existe la sala.
      */    
  @POST
- public SalaDTO createComentario(@PathParam("bibliotecasId") Long bibliotecaId , SalaDTO sala) throws BusinessLogicException
+ public SalaDTO createSala(@PathParam("bibliotecasId") Long bibliotecaId , SalaDTO sala) throws BusinessLogicException
  {
      SalaDTO nuevaSala = new SalaDTO(salaLogic.createSala(bibliotecaId, sala.toEntity()));
      return nuevaSala;

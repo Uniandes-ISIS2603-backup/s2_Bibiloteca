@@ -68,7 +68,7 @@ public class PrestamoResource {
      * encontrados en la aplicación. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    public Collection<PrestamoDTO> getPrestamos() {
+    public List<PrestamoDTO> getPrestamos() {
         LOGGER.info("PrestamoResource getPrestamos: input: void");
         List<PrestamoDTO> listaDTOs = listEntity2DTO(prestamoLogic.getPrestamos());
         LOGGER.log(Level.INFO, "EditorialResource getReviews: output: {0}", listaDTOs.toString());

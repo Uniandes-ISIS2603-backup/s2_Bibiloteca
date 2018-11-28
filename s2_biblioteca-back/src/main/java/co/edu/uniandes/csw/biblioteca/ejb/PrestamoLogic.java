@@ -106,7 +106,7 @@ public class PrestamoLogic
             Integer disponible = video.getUnidadesDis();
             if ( disponible == 0)
             {
-                 throw new BusinessLogicException("La el video con id \"" + video.getId() + "\"no está disponible  dado que no tiene unidades que prestar");
+                 throw new BusinessLogicException("El video con id \"" + video.getId() + "\"no está disponible  dado que no tiene unidades que prestar");
             }
             else if( reservaPersistence.findByIdRecursoReservado(video.getId(), "VIDEO") != null)
             {
@@ -120,7 +120,7 @@ public class PrestamoLogic
         }
         else
         {
-             throw new BusinessLogicException("Algo está mal estupido  \""  + prestamoEntity.getLibro()+"\" está reservado ");
+             throw new BusinessLogicException("Algo está mal  \""  + prestamoEntity.getLibro()+"\" está reservado ");
         }
         
         // Invoca la persistencia para crear el prestamo

@@ -81,7 +81,7 @@ public class ReservaResource {
         ReservaEntity reservaEntityAux = reservaLogic.createReserva(reservaEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         ReservaDTO reservaDTO = new ReservaDTO(reservaEntityAux);
-        LOGGER.log(Level.INFO, "ReservaResource createEditorial: output: {0}", reservaDTO.toString());
+        LOGGER.log(Level.INFO, "ReservaResource createReserva: output: {0}", reservaDTO.toString());
         return reservaDTO;
     }
     

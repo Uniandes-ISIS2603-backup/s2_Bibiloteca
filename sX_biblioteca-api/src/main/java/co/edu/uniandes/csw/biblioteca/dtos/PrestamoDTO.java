@@ -60,11 +60,6 @@ public class PrestamoDTO implements Serializable
     private VideoDTO video;
     
      /**
-     * Relacion con el videoDigital 
-     */
-     private VideoDigitalDTO videoDigital;
-        
-     /**
      * Relacion con la Sala.
      */
     private SalaDTO sala;
@@ -113,7 +108,6 @@ public class PrestamoDTO implements Serializable
                 this.sala = null;
                 this.libro = null;
                 this.video = null;
-                this.videoDigital = null;
                 
             }
         }
@@ -294,22 +288,7 @@ public class PrestamoDTO implements Serializable
         this.video = pVideo;
     }
 
-    /**
-     * Método que da el video digital del prestamo. 
-     * @return Video digital 
-     */
-    public VideoDigitalDTO getVideoDigital() {
-        return videoDigital;
-    }
-
-    /**
-     * Método para cambiar el video digital del libro. 
-     * @param pVideoDigital VideoDigitalDTO con el valor para videoDigital
-     */
-    public void setVideoDigital(VideoDigitalDTO pVideoDigital) {
-        this.videoDigital = pVideoDigital;
-    }
-
+  
     /**
      * Método que da la sala del prestamo. 
      * @return Sala
