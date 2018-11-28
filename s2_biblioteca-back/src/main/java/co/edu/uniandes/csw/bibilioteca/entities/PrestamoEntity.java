@@ -54,14 +54,14 @@ public class PrestamoEntity extends BaseEntity implements Serializable
      * Relacion con el libro. 
      */
     @PodamExclude
-    @OneToOne
+    @ManyToOne
     private LibroEntity libro;
     
      /**
      * Relacion con el video. 
      */
     @PodamExclude
-    @OneToOne
+    @ManyToOne
     private VideoEntity video;
     
            
@@ -69,12 +69,12 @@ public class PrestamoEntity extends BaseEntity implements Serializable
      * Relacion con la Sala.
      */
     @PodamExclude
-    @OneToOne
+    @ManyToOne
     private SalaEntity sala;
     
      
      /**
-     * id del recurso reservado
+     * id del recurso prestado
      */
     private Long idRecursoPrestado; 
     

@@ -228,13 +228,13 @@ public class PrestamoDTO implements Serializable
     }
     
    
-    public Long getIdDRecursoReservado() {
+    public Long getIdRecursoPrestado() {
         return idRecursoPrestado;
     }
     
   
-    public void setIdDRecursoReservado(Long pIdDRecursoReservado) {
-        this.idRecursoPrestado = pIdDRecursoReservado;
+    public void setIdRecursoPrestado(Long pIdRecursoPrestado) {
+        this.idRecursoPrestado = pIdRecursoPrestado;
     }
  /**
      * obtiene el tipo del recurso que se esta reservando 

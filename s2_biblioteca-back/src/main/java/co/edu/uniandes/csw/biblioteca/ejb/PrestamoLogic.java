@@ -61,10 +61,15 @@ public class PrestamoLogic
     public PrestamoEntity createPrestamo(PrestamoEntity prestamoEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del prestamo");
         // Verifica la regla de negocio que dice que no puede haber un prestamo si el libro no está disponible o está reservado. 
-        System.out.println(prestamoEntity.getLibro());
-        if( prestamoEntity.getLibro() != null)
+          if(prestamoEntity.getTipoRecurso()==null || prestamoEntity.getIdRecursoPrestado()==null){
+          throw new BusinessLogicException("El libro \"" + prestamoEntity.getIdRecursoPrestado()+"lo otro"+ prestamoEntity.getTipoRecurso()+ "\"no tiene unidades disponibles ");
+       }
+          PrestamoEntity validacion = persistence.findByIdRecursoPrestado(prestamoEntity.getIdRecursoPrestado(), prestamoEntity.getTipoRecurso());
+         if( validacion == null)
         {
-            LibroEntity libro = prestamoEntity.getLibro();
+          String tipo = prestamoEntity.getTipoRecurso();
+           if(tipo.equals("LIBRO")){
+               LibroEntity libro= libroPersistence.find(prestamoEntity.getIdRecursoPrestado());
            
             Integer unidadesDisponibles = libro.getUnidadesDisponibles();
             if ( unidadesDisponibles == 0)
@@ -80,11 +85,11 @@ public class PrestamoLogic
                 libro.setUnidadesDisponibles(unidadesDisponibles -1);
                 libroPersistence.update(libro);
             }
-                
-        }
-        else if ( prestamoEntity.getSala() != null)
+           }     
+         else if ( tipo.equals("SALA"))
         {
-            SalaEntity sala = prestamoEntity.getSala();
+            
+            SalaEntity sala = salaPersistence.find(Long.MIN_VALUE, prestamoEntity.getIdRecursoPrestado());
             Boolean disponible = sala.getDisponibilidad();
             if ( !disponible)
             {
@@ -100,9 +105,9 @@ public class PrestamoLogic
                 salaPersistence.update(sala);
             }
         }
-        else if ( prestamoEntity.getVideo()!= null)
+        else if ( tipo.equals("VIDEO"))
         {
-            VideoEntity video = prestamoEntity.getVideo();
+            VideoEntity video = videoPersistence.find(prestamoEntity.getIdRecursoPrestado());
             Integer disponible = video.getUnidadesDis();
             if ( disponible == 0)
             {
@@ -118,9 +123,11 @@ public class PrestamoLogic
                 videoPersistence.update(video);
             }
         }
+        }
+       
         else
         {
-             throw new BusinessLogicException("Algo está mal  \""  + prestamoEntity.getLibro()+"\" está reservado ");
+             throw new BusinessLogicException("Algo está mal  el elemento ya esta prestado ");
         }
         
         // Invoca la persistencia para crear el prestamo

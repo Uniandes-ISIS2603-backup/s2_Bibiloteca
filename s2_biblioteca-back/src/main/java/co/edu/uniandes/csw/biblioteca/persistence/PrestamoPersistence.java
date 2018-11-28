@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.biblioteca.persistence;
 
 import co.edu.uniandes.csw.bibilioteca.entities.PrestamoEntity;
+import co.edu.uniandes.csw.bibilioteca.entities.ReservaEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,6 +14,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  * Clase que maneja la persistencia para Prestamo. Se conecta a través del Entity
@@ -102,5 +104,56 @@ public class PrestamoPersistence
          Es similar a "delete from PrestamoEntity where id=id;" - "DELETE FROM table_name WHERE condition;" en SQL.*/
         em.remove(entity);
         LOGGER.log(Level.INFO, "Saliendo de borrar el prestamo con id = {0}", pretamoId);
+    }
+     /**
+     * Busca si hay algun prestamo con el id de un recurso que se envía por parametro
+     * @param pId: id del recurso de la reserva que se está buscando
+     * @param pTipo: tipo del recurso de la reserva que se esta buscando
+     * @return null si no existe ninguna reserva con el id dado.
+     * Si existe alguna busca la que tenga el mismo id en el tipo de recurso para
+     * retornar un dato exacto.
+     */
+    public PrestamoEntity findByIdRecursoPrestado(long pId,String pTipo  )
+    {
+        LOGGER.log(Level.INFO, "Consultando reserva por id del recurso reservado ", pId);
+        TypedQuery query = em.createQuery("Select e From PrestamoEntity e where e.idRecursoPrestado = :pId", PrestamoEntity.class);
+        query = query.setParameter("pId", pId);
+        List<PrestamoEntity> sameId = query.getResultList();
+        PrestamoEntity result = null;
+        
+        if (sameId == null) 
+        {
+            result = null;
+        } 
+        else if (sameId.isEmpty()) 
+        {
+            result = null;
+        } 
+        else 
+        {
+            boolean termine = false;
+            int cont = 0;
+            while(!termine)
+            {
+
+                if(sameId.get(cont).getTipoRecurso().equals(pTipo))
+                {
+                    result = sameId.get(cont);
+                    termine = true;
+                }
+                else if(cont >= sameId.size())
+                {
+                    termine = true;
+                }
+                else
+                {
+                    cont ++;
+                }
+                
+            }
+        }
+
+        LOGGER.log(Level.INFO, "Saliendo de consultar reserva por id de recurso ", pId);
+        return result;
     }
 }

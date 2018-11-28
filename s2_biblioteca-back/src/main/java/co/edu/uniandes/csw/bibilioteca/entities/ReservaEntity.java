@@ -68,12 +68,7 @@ public class ReservaEntity extends BaseEntity implements Serializable {
     @ManyToOne
     private VideoEntity video;
     
-     /**
-     * Relacion con el videoDigital 
-     */
-    @PodamExclude
-    @ManyToOne
-    private VideoDigitalEntity videoDigital;
+     
         
      /**
      * Relacion con la Sala
@@ -227,24 +222,7 @@ public class ReservaEntity extends BaseEntity implements Serializable {
         this.video = video;
     }
 
-    /**
-     * obtiene el video digital asociado a una reserva
-     * @return null si no hay ningun videoDigital asociado a la reserva
-     * & videoDigital en caso de haber uno
-     */
-    public VideoDigitalEntity getVideoDigital() 
-    {
-        return videoDigital;
-    }
-    
-    /**
-     * asigna un videoDigital a la reserva
-     * @param videoDigital 
-     */
-    public void setVideoDigital(VideoDigitalEntity videoDigital) 
-    {
-        this.videoDigital = videoDigital;
-    }
+   
     
     /**
      * obtiene la sala asociada a una reserva
