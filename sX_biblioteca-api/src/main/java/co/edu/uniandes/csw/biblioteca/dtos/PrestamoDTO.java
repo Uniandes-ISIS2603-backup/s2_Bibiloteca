@@ -46,23 +46,15 @@ public class PrestamoDTO implements Serializable
     */
     private UsuarioDTO usuario;
     
-    // Las siguientes relaciones son exclusivas sólo se puede tener relación con una de las siguientes. 
+      /**
+     * identificador del recurso que se quiere prestar
+     */
+    private Long idRecursoPrestado;
+    
     /**
-     * Relacion con el libro. 
+     * tipo del recurso prestado
      */
-     private LibroDTO libro;
-
-    
-    
-     /**
-     * Relacion con el video. 
-     */
-    private VideoDTO video;
-    
-     /**
-     * Relacion con la Sala.
-     */
-    private SalaDTO sala;
+    private String tipoRecurso;
     //----------------------------------------------
     // CONSTRUCTOR
     //----------------------------------------------
@@ -86,30 +78,15 @@ public class PrestamoDTO implements Serializable
             this.fechaDeSalida = prestamoEntity.getFechaDeSalida();
             this.retornado = prestamoEntity.getRetornado();
             this.id = prestamoEntity.getId();
+            this.idRecursoPrestado = prestamoEntity.getIdRecursoPrestado();
+            this.tipoRecurso = prestamoEntity.getTipoRecurso();
             if (prestamoEntity.getUsuario()!= null) {
                 this.usuario = new UsuarioDTO(prestamoEntity.getUsuario());
             } else {
                 this.usuario = null;
             }
-            if( prestamoEntity.getLibro() != null)
-            {
-                this.libro = new LibroDTO(prestamoEntity.getLibro());
-            }
-            else if ( prestamoEntity.getVideo() != null)
-            {
-                this.video = new VideoDTO(prestamoEntity.getVideo());    
-            }
-            else if ( prestamoEntity.getSala() != null)
-            {
-                this.sala = new SalaDTO(prestamoEntity.getSala());    
-            }
-            else
-            {
-                this.sala = null;
-                this.libro = null;
-                this.video = null;
-                
-            }
+            
+            
         }
     }
     
@@ -128,21 +105,15 @@ public class PrestamoDTO implements Serializable
         prestamoEntity.setFechaDeEntrega(this.fechaDeEntrega);
         prestamoEntity.setFechaDeSalida(this.fechaDeSalida);
         prestamoEntity.setRetornado(this.retornado);
-        if (this.usuario != null) {
+         prestamoEntity.setIdRecursoPrestado(this.idRecursoPrestado);
+        prestamoEntity.setTipoRecurso(this.tipoRecurso);
+        if(this.usuario != null)
+        {
             prestamoEntity.setUsuario(this.usuario.toEntity());
         }
-        if( prestamoEntity.getLibro() != null)
+        else
         {
-            prestamoEntity.setLibro(this.libro.toEntity());
-        }
-        else if ( prestamoEntity.getVideo() != null)
-        {
-            prestamoEntity.setVideo(this.video.toEntity());    
-        }
-        
-        else if ( prestamoEntity.getSala() != null)
-        {
-            prestamoEntity.setSala(this.sala.toEntity());   
+            prestamoEntity.setUsuario(null);
         }
         
         return prestamoEntity;
@@ -256,53 +227,40 @@ public class PrestamoDTO implements Serializable
         return retornado;
     }
     
-    /**
-     * Método que da la fecha de entrega del libro
-     * @return Libro Fisico
-     */
-    public LibroDTO getLibro() {
-        return libro;
+   
+    public Long getIdDRecursoReservado() {
+        return idRecursoPrestado;
     }
     
-    /**
-     * Método para cambiar si el libro ha sido prestado. 
-     * @param pLibro LibroDTO con el nuevo libro. 
-     */
-    public void setLibro(LibroDTO pLibro) {
-        this.libro = pLibro;
-    }
-
-    /**
-     * Método que da el video del prestamo
-     * @return Video
-     */
-    public VideoDTO getVideo() {
-        return video;
-    }
-
-    /**
-     * Método para cambiar el video del prestamo. 
-     * @param pVideo VideoDTO con el nuevo video. 
-     */
-    public void setVideo(VideoDTO pVideo) {
-        this.video = pVideo;
-    }
-
   
-    /**
-     * Método que da la sala del prestamo. 
-     * @return Sala
+    public void setIdDRecursoReservado(Long pIdDRecursoReservado) {
+        this.idRecursoPrestado = pIdDRecursoReservado;
+    }
+ /**
+     * obtiene el tipo del recurso que se esta reservando 
+     * @return el tipoRecurso
      */
-    public SalaDTO getSala() {
-        return sala;
+    public String getTipoRecurso() 
+    {
+        return tipoRecurso;
     }
 
     /**
-     * Método para cambiar la sala del prestamo. 
-     * @param pSala SalaEntity con el valor sala.
+     * asigna el tipo del recurso que se esta reservando
+     * @param tipoRecurso el tipoRecurso a asignar
+     * este debe corresponde a uno de los identificadores
      */
-    public void setSala(SalaDTO pSala) {
-        this.sala = pSala;
+    public void setTipoRecurso(String tipoRecurso) 
+    {
+        if(tipoRecurso.equals("LIBRO") || tipoRecurso.equals("VIDEO")|| tipoRecurso.equals("SALA"))
+        {
+            this.tipoRecurso = tipoRecurso;
+        }
+        else
+        {
+             this.tipoRecurso = "";
+        }
+        
     }
     
    

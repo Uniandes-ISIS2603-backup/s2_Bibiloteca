@@ -71,9 +71,70 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     @PodamExclude
     @OneToOne
     private SalaEntity sala;
+    
+     
+     /**
+     * id del recurso reservado
+     */
+    private Long idRecursoPrestado; 
+    
+    /**
+     * tipo del recurso resservado
+     */
+    private String tipoRecurso;
     //-------------------------------------------------------------------------
     // MÉTODOS  
     //-------------------------------------------------------------------------
+    
+    /**
+     * obtiene el id del recurso prestado
+     * @return 
+     */    
+    public Long getIdRecursoPrestado() 
+    {
+        return idRecursoPrestado;
+    }
+    
+    /**
+     * asigna el id del recurso asociado al prestamo
+     * @param getIdRecursoPrestado
+     */
+        public void setIdRecursoPrestado(Long getIdRecursoPrestado)
+    {
+        this.idRecursoPrestado = getIdRecursoPrestado;
+    }
+    
+    /**
+     * @return tipoRecurso
+     */
+    public String getTipoRecurso() 
+    {
+        return tipoRecurso;
+    }
+
+    /**
+     * asigna el tipo del recurso que se esta prestando
+     * @param tipoRecurso el tipoRecurso a asignar
+     * este debe corresponde a uno de los identificadores
+     */
+    public void setTipoRecurso(String tipoRecurso) 
+    {
+        /*
+        if(tipoRecurso.equals("LIBRO") || tipoRecurso.equals("VIDEO")|| tipoRecurso.equals("SALA")|| tipoRecurso.equals("VIDEODIGITAL")|| tipoRecurso.equals("LIBRODIGITAL"))
+        {
+            */
+            this.tipoRecurso = tipoRecurso;
+       
+        /*
+        else
+        {
+             this.tipoRecurso = "";
+        }
+        */
+    }
+    
+    
+    
     /**
      * Método que da el usuario del prestamo
      * @return Usuario del prestamo

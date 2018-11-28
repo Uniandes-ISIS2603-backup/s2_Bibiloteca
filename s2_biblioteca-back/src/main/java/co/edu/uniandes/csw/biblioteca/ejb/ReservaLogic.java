@@ -56,7 +56,7 @@ public class ReservaLogic {
      */
     public ReservaEntity createReserva(ReservaEntity reservaEntity) throws BusinessLogicException 
     {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación de la resserva");
+        LOGGER.log(Level.INFO, "Inicia proceso de creación de la reserva");
         
         // se pregunta a la persistencia si existe una reserva para el recurso dado
         ReservaEntity validacion = persistencia.findByIdRecursoReservado(reservaEntity.getIdRecursoReservado(), reservaEntity.getTipoRecurso());
