@@ -120,7 +120,7 @@ public class PrestamoLogic
         }
         else
         {
-             throw new BusinessLogicException("Algo está mal estupido  \""  + "\" está reservado ");
+             throw new BusinessLogicException("Algo está mal estupido  \""  + prestamoEntity.getLibro()+"\" está reservado ");
         }
         
         // Invoca la persistencia para crear el prestamo
