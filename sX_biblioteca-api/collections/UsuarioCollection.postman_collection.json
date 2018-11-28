@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "3e5ef115-9e42-4986-8d54-c7e50702b486",
+		"_postman_id": "eba2fa12-eda8-4d6b-8f9b-2b6ade01a2ea",
 		"name": "UsuarioCollection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -40,7 +40,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/usuarios/1",
 					"protocol": "http",
@@ -63,7 +66,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/usuarios",
 					"protocol": "http",
@@ -116,7 +122,10 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/usuarios/1",
 					"protocol": "http",

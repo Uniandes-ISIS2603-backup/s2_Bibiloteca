@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "22c6b9e0-2820-4351-b35a-3da3e93812c5",
+		"_postman_id": "88d4681e-d037-458d-8531-73f4c6104748",
 		"name": "SalaCollection",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -42,7 +42,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1/salas",
 					"protocol": "http",
@@ -66,7 +69,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1/salas/1",
 					"protocol": "http",
@@ -124,7 +130,10 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/bibliotecas/1/salas/1",
 					"protocol": "http",

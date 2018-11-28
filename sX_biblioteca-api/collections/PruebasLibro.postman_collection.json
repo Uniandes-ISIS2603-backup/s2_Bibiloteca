@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "97078dfa-6076-4276-9899-a66e093c0189",
+		"_postman_id": "55c40666-34ec-4a1f-8a05-c4bb60f2eeb1",
 		"name": "PruebasLibro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -40,7 +40,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros/1",
 					"protocol": "http",
@@ -63,7 +66,10 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "http://localhost:8080/sX_biblioteca-api/api/libros",
 					"protocol": "http",
