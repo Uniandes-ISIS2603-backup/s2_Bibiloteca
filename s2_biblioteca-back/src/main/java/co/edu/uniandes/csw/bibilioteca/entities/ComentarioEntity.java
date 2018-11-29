@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -85,5 +86,45 @@ public class ComentarioEntity extends BaseEntity implements Serializable {
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ComentarioEntity other = (ComentarioEntity) obj;
+        if (!Objects.equals(this.texto, other.texto)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombreUsuario, other.nombreUsuario)) {
+            return false;
+        }
+        if (!Objects.equals(this.numeroEstrellas, other.numeroEstrellas)) {
+            return false;
+        }
+        if (!Objects.equals(this.fecha, other.fecha)) {
+            return false;
+        }
+        if (!Objects.equals(this.libro, other.libro)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        return true;
+    }
+    
 
 }

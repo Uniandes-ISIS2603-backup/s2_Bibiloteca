@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -245,6 +246,55 @@ public class BibliotecaEntity extends BaseEntity implements Serializable {
      */
     public void setSalas(List<SalaEntity> pSalas) {
         this.salas = pSalas;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    //Hace el equals de la clase
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BibliotecaEntity other = (BibliotecaEntity) obj;
+        if (!Objects.equals(this.zona, other.zona)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.direccion, other.direccion)) {
+            return false;
+        }
+        if (!Objects.equals(this.horaApertura, other.horaApertura)) {
+            return false;
+        }
+        if (!Objects.equals(this.horaCierre, other.horaCierre)) {
+            return false;
+        }
+        if (!Objects.equals(this.libros, other.libros)) {
+            return false;
+        }
+        if (!Objects.equals(this.videos, other.videos)) {
+            return false;
+        }
+        if (!Objects.equals(this.salas, other.salas)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuarios, other.usuarios)) {
+            return false;
+        }
+        return true;
     }
     
 }
