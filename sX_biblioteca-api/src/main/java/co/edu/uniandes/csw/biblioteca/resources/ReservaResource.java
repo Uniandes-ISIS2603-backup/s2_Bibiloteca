@@ -132,7 +132,7 @@ public class ReservaResource {
      */
     @PUT
     @Path("{reservasId: \\d+}")
-    public ReservaDTO updateReserva(@PathParam("reservaId") Long reservaId, ReservaDTO reserva) {
+    public ReservaDTO updateReserva(@PathParam("reservasId") Long reservaId, ReservaDTO reserva) {
         LOGGER.log(Level.INFO, "ReservaResource updateReserva: input: id:{0} , reserva: {1}", new Object[]{reservaId, reserva});
         reserva.setId(reservaId);
         if (reservaLogic.getReserva(reservaId) == null) {
