@@ -22,7 +22,6 @@ import java.util.*;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
 
 @Path("videos")
 @Produces("application/json")
@@ -177,25 +176,25 @@ public class VideoResource {
 
     private ArrayList<VideoDetailDTO> listVEntity2DetailDTO(List<VideoEntity> entityList) {
         ArrayList<VideoDetailDTO> list = new ArrayList<>();
-        for (VideoEntity entity : entityList) {
+        entityList.forEach((entity) -> {
             list.add(new VideoDetailDTO(entity));
-        }
+        });
         return list;
     }
 
     private ArrayList<PrestamoDTO> listPEntity2DetailDTO(List<PrestamoEntity> entityList) {
         ArrayList<PrestamoDTO> list = new ArrayList<>();
-        for (PrestamoEntity entity : entityList) {
+        entityList.forEach((entity) -> {
             list.add(new PrestamoDTO(entity));
-        }
+        });
         return list;
     }
 
     private ArrayList<ReservaDetailDTO> listREntity2DetailDTO(List<ReservaEntity> entityList) {
         ArrayList<ReservaDetailDTO> list = new ArrayList<>();
-        for (ReservaEntity entity : entityList) {
+        entityList.forEach((entity) -> {
             list.add(new ReservaDetailDTO(entity));
-        }
+        });
         return list;
     }
 }
