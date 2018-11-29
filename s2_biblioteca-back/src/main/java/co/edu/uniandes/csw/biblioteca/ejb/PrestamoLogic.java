@@ -64,9 +64,7 @@ public class PrestamoLogic
           if(prestamoEntity.getTipoRecurso()==null || prestamoEntity.getIdRecursoPrestado()==null){
           throw new BusinessLogicException("El libro \"" + prestamoEntity.getIdRecursoPrestado()+"lo otro"+ prestamoEntity.getTipoRecurso()+ "\"no tiene unidades disponibles ");
        }
-          PrestamoEntity validacion = persistence.findByIdRecursoPrestado(prestamoEntity.getIdRecursoPrestado(), prestamoEntity.getTipoRecurso());
-         if( validacion == null)
-        {
+        
           String tipo = prestamoEntity.getTipoRecurso();
            if(tipo.equals("LIBRO")){
                LibroEntity libro= libroPersistence.find(prestamoEntity.getIdRecursoPrestado());
@@ -123,7 +121,7 @@ public class PrestamoLogic
                 videoPersistence.update(video);
             }
         }
-        }
+        
        
         else
         {
