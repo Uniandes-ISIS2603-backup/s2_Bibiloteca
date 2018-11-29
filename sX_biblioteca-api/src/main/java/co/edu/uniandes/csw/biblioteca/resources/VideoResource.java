@@ -44,14 +44,12 @@ public class VideoResource {
     private VideoReservaLogic videoReservaL;
 
     @POST
-    //@Consumes({MediaType.APPLICATION_JSON})
     public VideoDTO createVideo(VideoDTO video) throws BusinessLogicException {
         return new VideoDTO(videoLogic.createVideo(video.toEntity()));
 
     }
 
     @GET
-    //@Produces({MediaType.APPLICATION_JSON})
     public List<VideoDetailDTO> getVideos() {
         return listVEntity2DetailDTO(videoLogic.getVideos());
 
