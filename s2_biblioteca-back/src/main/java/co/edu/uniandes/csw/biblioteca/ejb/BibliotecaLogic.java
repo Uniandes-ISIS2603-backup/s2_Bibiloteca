@@ -111,15 +111,9 @@ public class BibliotecaLogic
         List<LibroEntity> books = getBiblioteca(bibliotecaId).getLibros();
         List<SalaEntity> salas = getBiblioteca(bibliotecaId).getSalas();
         List<VideoEntity> videos = getBiblioteca(bibliotecaId).getVideos();
-        if (books != null && !books.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar la biblioteca con id = " + bibliotecaId + " porque tiene libros asociados");
-        }         
-        else if (salas != null && !salas.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar la biblioteca con id = " + bibliotecaId + " porque tiene salas asociados");
-        }
-         else if (videos!= null && !videos.isEmpty()) {
-            throw new BusinessLogicException("No se puede borrar la biblioteca con id = " + bibliotecaId + " porque tiene videos asociados");
-        }
+        if ((books != null && !books.isEmpty())||(salas != null && !salas.isEmpty())||(videos!= null && !videos.isEmpty()) ) {
+            throw new BusinessLogicException("No se puede borrar la biblioteca con id = " + bibliotecaId + " porque tiene libros, salas o videos asociados");
+        } 
         persistence.delete(bibliotecaId);
         LOGGER.log(Level.INFO, "Termina proceso de borrar la biblioteca con id = {0}", bibliotecaId);
     }

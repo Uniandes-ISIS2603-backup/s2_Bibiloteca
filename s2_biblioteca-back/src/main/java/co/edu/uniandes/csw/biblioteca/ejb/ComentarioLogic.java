@@ -43,11 +43,11 @@ public class ComentarioLogic {
         UsuarioEntity usuarioCreador = usuarioPersistencia.find(comentario.getUsuario().getId());
         boolean devuelto = false;
         for (PrestamoEntity prestamo : usuarioCreador.getPrestamos()) {
-            if (prestamo.getLibro().getId().equals(libroId) && prestamo.getRetornado() == true) {
+            if (prestamo.getLibro().getId().equals(libroId) && prestamo.getRetornado()) {
                 devuelto = true;
             }
         }
-        if (devuelto = true) {
+        if (devuelto) {
             comentario.setLibro(libroParaComentario);
             comentario.setUsuario(usuarioCreador);
             comentario.setNombreUsuario(usuarioCreador.getNombre());

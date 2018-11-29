@@ -36,17 +36,20 @@ public class VideoLogic {
     }
     
     public List<VideoEntity> getVideos(){
-        List<VideoEntity> listVE = videoPersis.findAll();
+        List<VideoEntity> listVE;
+        listVE = videoPersis.findAll();
         return listVE;
     }
     
     public VideoEntity getVideo(Long videoID){
-        VideoEntity ve = videoPersis.find(videoID);
+        VideoEntity ve;
+        ve = videoPersis.find(videoID);
         return ve;
     }
     
     public VideoEntity getVideoNombre(String pNombre){
-        VideoEntity ve = videoPersis.findByName(pNombre);
+        VideoEntity ve;
+        ve = videoPersis.findByName(pNombre);
         return ve;
     }
     
@@ -60,7 +63,8 @@ public class VideoLogic {
         if(videoPersis.find(ve.getId()) != null || videoPersis.findByName(ve.getNombre()) != null){
             throw new BusinessLogicException("El video ya existe");
         }
-        VideoEntity newVE = videoPersis.update(ve);
+        VideoEntity newVE;
+        newVE = videoPersis.update(ve);
         return newVE;
     }
     

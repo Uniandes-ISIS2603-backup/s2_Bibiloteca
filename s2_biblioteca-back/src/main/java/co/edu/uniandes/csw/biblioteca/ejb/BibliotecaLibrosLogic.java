@@ -75,7 +75,8 @@ public class BibliotecaLibrosLogic
         List<LibroEntity> books = bibliotecaPersistence.find(bibliotecaId).getLibros();
         LibroEntity libroEntity = libroPersistence.find(libroId);
         int index = books.indexOf(libroEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el libro con id = {0} de la biblioteca con id = " + bibliotecaId, libroId);
+        
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el libro con id =  {0} de la biblioteca con id =  " + bibliotecaId, libroId);
         if (index >= 0) {
             return books.get(index);
         }

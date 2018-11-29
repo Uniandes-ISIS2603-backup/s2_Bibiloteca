@@ -42,10 +42,12 @@ public class SalaLogic {
 	boolean existe = false;
         for (SalaEntity salaEx : bibliotecaDeSala.getSalas()) {
             if(salaEx.getUbicacion().equals(sala.getUbicacion()))
+            {
 		existe = true;
             }
+            }
         
-        if (existe == false) {
+        if (!existe) {
             sala.setBiblioteca(bibliotecaDeSala);
             LOGGER.log(Level.INFO, "La sala fue creado exitosamente");
             return salaPersistence.create(sala);

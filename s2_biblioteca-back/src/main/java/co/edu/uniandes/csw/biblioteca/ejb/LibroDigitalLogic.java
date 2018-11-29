@@ -30,17 +30,20 @@ public class LibroDigitalLogic {
     }
     
     public List<LibroDigitalEntity> getLibrosDigitales(){
-        List<LibroDigitalEntity> listVDE = ldp.findAll();
+        List<LibroDigitalEntity> listVDE;
+        listVDE = ldp.findAll();
         return listVDE;
     }
     
     public LibroDigitalEntity getLibroDigital(Long ldId){
-        LibroDigitalEntity lde = ldp.find(ldId);
+        LibroDigitalEntity lde;
+        lde = ldp.find(ldId);
         return lde;
     }
     
     public LibroDigitalEntity getLibroDigitalNombre(String ldn){
-        LibroDigitalEntity lde = ldp.findByServiceName(ldn);
+        LibroDigitalEntity lde;
+        lde = ldp.findByServiceName(ldn);
         return lde;
     }
     
@@ -51,7 +54,8 @@ public class LibroDigitalLogic {
         if(ldp.find(lde.getId()) != null){
             throw new BusinessLogicException("El libro ya existe");
         }
-        LibroDigitalEntity lde2 = ldp.update(lde);
+        LibroDigitalEntity lde2;
+        lde2 = ldp.update(lde);
         return lde2;
     }
     

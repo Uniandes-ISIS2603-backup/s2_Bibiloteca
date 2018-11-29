@@ -29,7 +29,6 @@ public class ReservaSalaLogic {
     /**
      * constante para dejar huella y registro
      */
-     private static final Logger LOGGER = Logger.getLogger(ReservaLibroLogic.class.getName());
 
     //__________________________________________________________________________
     //Atributos
