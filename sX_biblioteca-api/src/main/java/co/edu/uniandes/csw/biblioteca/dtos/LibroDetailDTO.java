@@ -19,11 +19,11 @@ import java.util.List;
  */
 public class LibroDetailDTO extends LibroDTO implements Serializable {
     
-    List<ComentarioDTO> comentarios;
+    private List<ComentarioDTO> comentarios;
     
-    List<PrestamoDTO> prestamos;
+    private List<PrestamoDTO> prestamos;
     
-    List<ReservaDTO> reservas;
+    private List<ReservaDTO> reservas;
     
     public LibroDetailDTO(){
         super();

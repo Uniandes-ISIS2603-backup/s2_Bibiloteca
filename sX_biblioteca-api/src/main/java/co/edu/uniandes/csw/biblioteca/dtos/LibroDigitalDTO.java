@@ -11,9 +11,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- *OBJETO DE TRANSFERENCIA DE UN LibroDigital
- * @author Daniel Preciado
- * * Al serializarse como JSON esta clase implementa el siguiente modelo: <br>
+ * OBJETO DE TRANSFERENCIA DE UN LibroDigital
+ *
+ * @author Daniel Preciado * Al serializarse como JSON esta clase implementa el
+ * siguiente modelo: <br>
  * <pre>
  *   {
  *      "id": number,
@@ -37,73 +38,68 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * </pre>
  */
 public class LibroDigitalDTO implements Serializable {
-    
+
     //__________________________________________________________________________
     //Atributos
     //__________________________________________________________________________
-    
     /**
      * id del libro digital
      */
-     private Long id;
+    private Long id;
 
     /**
      * Nombre del libro
      */
-    private String nombre; 
-    
+    private String nombre;
+
     /**
      * Codigo identificador del libro
      */
-    private String isbn; 
-    
+    private String isbn;
+
     /**
      * Autor del libro
      */
     private String autor;
-    
+
     /**
      * Editorial del libro
      */
     private String editorial;
-    
+
     /**
      * Edicion del libro
      */
     private String edicion;
-    
+
     /**
      * Idioma del libro
      */
     private String idioma;
-      
+
     /**
      * Calificacion promedio de los review
      */
     private Integer calificacionPromedio;
-    
+
     //__________________________________________________________________________
     //Constructores
     //__________________________________________________________________________
-    
     /**
      * constructor vacio
      */
-    public LibroDigitalDTO()
-    {
-        
+    public LibroDigitalDTO() {
+
     }
-    
-     /**
+
+    /**
      * Conviertir Entity a DTO (Crea un nuevo DTO con los valores que recibe en
      * la entidad que viene de argumento.
      *
      * @param libroDigitalEntity: Es la entidad que se va a convertir a DTO
      */
-    public LibroDigitalDTO (LibroDigitalEntity libroDigitalEntity)
-    {
-        if (libroDigitalEntity != null)
-        {
+    public LibroDigitalDTO(LibroDigitalEntity libroDigitalEntity) {
+        if (libroDigitalEntity != null) {
             this.id = libroDigitalEntity.getId();
             this.nombre = libroDigitalEntity.getNombre();
             this.isbn = libroDigitalEntity.getIsbn();
@@ -112,165 +108,164 @@ public class LibroDigitalDTO implements Serializable {
             this.edicion = libroDigitalEntity.getEdicion();
             this.idioma = libroDigitalEntity.getIdioma();
             this.calificacionPromedio = libroDigitalEntity.getCalificacionPromedio();
-            
+
         }
-        
+
     }
 
     //__________________________________________________________________________
     //Metodos
     //__________________________________________________________________________
-    
     /**
      * obtiene el ID de un libro digital
+     *
      * @return id
      */
-    public Long getId() 
-    {
+    public Long getId() {
         return id;
     }
-    
+
     /**
      * asigna un Id al libro digital
-     * @param id 
+     *
+     * @param id
      */
-    public void setId(Long id) 
-    {
+    public void setId(Long id) {
         this.id = id;
     }
-    
+
     /**
      * obtiene el nombre de un libro digital
+     *
      * @return nombre
      */
-    public String getNombre()
-    {
+    public String getNombre() {
         return nombre;
     }
 
     /**
      * asigna el nombre al librodigital
-     * @param nombre 
+     *
+     * @param nombre
      */
-    public void setNombre(String nombre) 
-    {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
      * ontiene el isbn de un libro digital
+     *
      * @return isbn
      */
-    public String getIsbn()
-    {
+    public String getIsbn() {
         return isbn;
     }
-    
+
     /**
      * asigna el isbn al libro digital
-     * @param isbn 
+     *
+     * @param isbn
      */
-    public void setIsbn(String isbn) 
-    {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
     /**
      * obtiene el nombre del autor del libro digital
+     *
      * @return autor
      */
-    public String getAutor() 
-    {
+    public String getAutor() {
         return autor;
     }
-   
+
     /**
      * asigna el autor del libro digital
-     * @param autor 
+     *
+     * @param autor
      */
-    public void setAutor(String autor) 
-    {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
-    
+
     /**
      * obtiene la editorial de ub libro digital
+     *
      * @return editorial
      */
-    public String getEditorial() 
-    {
+    public String getEditorial() {
         return editorial;
     }
-    
+
     /**
      * asigna la editorial a un libro digital
-     * @param editorial 
+     *
+     * @param editorial
      */
-    public void setEditorial(String editorial)
-    {
+    public void setEditorial(String editorial) {
         this.editorial = editorial;
     }
-    
+
     /**
      * obtiene la edición de un libro digital
+     *
      * @return edicion
      */
-    public String getEdicion() 
-    {
+    public String getEdicion() {
         return edicion;
     }
-    
+
     /**
      * asigna la edición ee un libro digital
-     * @param edicion 
+     *
+     * @param edicion
      */
-    public void setEdicion(String edicion)
-    {
+    public void setEdicion(String edicion) {
         this.edicion = edicion;
     }
-    
+
     /**
      * devuelve el idioma del libro digital
+     *
      * @return idioma
      */
-    public String getIdioma() 
-    {
+    public String getIdioma() {
         return idioma;
     }
-    
+
     /**
      * asigna el idioma en el cual se encuentra el libro digital
-     * @param idioma 
+     *
+     * @param idioma
      */
-    public void setIdioma(String idioma)
-    {
+    public void setIdioma(String idioma) {
         this.idioma = idioma;
     }
-    
+
     /**
      * obtiene la calificación promedio de un libro digital
+     *
      * @return calificacionPromedio
      */
-    public Integer getCalificacionPromedio()
-    {
+    public Integer getCalificacionPromedio() {
         return calificacionPromedio;
     }
-    
+
     /**
      * asigna una calificacionPromedio ql libro digital
-     * @param calificacionPromedio 
+     *
+     * @param calificacionPromedio
      */
-    public void setCalificacionPromedio(Integer calificacionPromedio)
-    {
+    public void setCalificacionPromedio(Integer calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
-    
+
     /**
      * Convertir el DTO LibroDigital a Entity
+     *
      * @return Un Entity con los valores del DTO
      */
-    public LibroDigitalEntity toEntity()
-    {
+    public LibroDigitalEntity toEntity() {
         LibroDigitalEntity libro = new LibroDigitalEntity();
         libro.setAutor(autor);
         libro.setCalificacionPromedio(calificacionPromedio);
@@ -282,5 +277,9 @@ public class LibroDigitalDTO implements Serializable {
         libro.setNombre(nombre);
         return libro;
     }
-    
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 }

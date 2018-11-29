@@ -7,7 +7,8 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import javax.persistence.CascadeType;
+import java.util.List;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -61,7 +62,7 @@ public class LibroDigitalEntity extends BaseEntity implements Serializable  {
     
     @PodamExclude
     @OneToMany
-    private ArrayList<UsuarioEntity> usuarios = new ArrayList<>();
+    private List<UsuarioEntity> usuarios = new ArrayList<>();
     
     //__________________________________________________________________________
     //Metodos
@@ -193,12 +194,57 @@ public class LibroDigitalEntity extends BaseEntity implements Serializable  {
         this.calificacionPromedio = calificacionPromedio;
     }
     
-    public ArrayList<UsuarioEntity> getUsuarios(){
+    public List<UsuarioEntity> getUsuarios(){
         return usuarios;
     }
     
-    public void setUsuarios(ArrayList<UsuarioEntity> listUE){
+    public void setUsuarios(List<UsuarioEntity> listUE){
         usuarios = listUE;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LibroDigitalEntity other = (LibroDigitalEntity) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.isbn, other.isbn)) {
+            return false;
+        }
+        if (!Objects.equals(this.autor, other.autor)) {
+            return false;
+        }
+        if (!Objects.equals(this.editorial, other.editorial)) {
+            return false;
+        }
+        if (!Objects.equals(this.edicion, other.edicion)) {
+            return false;
+        }
+        if (!Objects.equals(this.idioma, other.idioma)) {
+            return false;
+        }
+        if (!Objects.equals(this.calificacionPromedio, other.calificacionPromedio)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuarios, other.usuarios)) {
+            return false;
+        }
+        return true;
     }
      
 }

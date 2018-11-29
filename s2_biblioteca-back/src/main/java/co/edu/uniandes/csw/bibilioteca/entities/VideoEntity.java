@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -31,11 +32,11 @@ import uk.co.jemos.podam.common.PodamExclude;
    
    @PodamExclude
    @OneToMany(mappedBy = "video", cascade = CascadeType.PERSIST, orphanRemoval = true)
-   private ArrayList<ReservaEntity> reservas = new ArrayList<>();
+   private List<ReservaEntity> reservas = new ArrayList<>();
    
    @PodamExclude
    @OneToOne
-   private ArrayList<PrestamoEntity> prestamos = new ArrayList<>();
+   private List<PrestamoEntity> prestamos = new ArrayList<>();
 
    public BibliotecaEntity getBiblioteca() {
      return biblioteca;
@@ -61,11 +62,11 @@ import uk.co.jemos.podam.common.PodamExclude;
      return subtitulos;
    }
    
-   public ArrayList<ReservaEntity> getReservas(){
+   public List<ReservaEntity> getReservas(){
        return reservas;
    }
    
-   public ArrayList<PrestamoEntity> getPrestamos(){
+   public List<PrestamoEntity> getPrestamos(){
        return prestamos;
    }
 
@@ -94,11 +95,11 @@ import uk.co.jemos.podam.common.PodamExclude;
        biblioteca = pbiblioteca;
    }
    
-   public void setReservas(ArrayList<ReservaEntity> listaRE){
+   public void setReservas(List<ReservaEntity> listaRE){
        reservas = listaRE;
    }
    
-   public void setPrestamos(ArrayList<PrestamoEntity> listPE){
+   public void setPrestamos(List<PrestamoEntity> listPE){
        prestamos = listPE;
    }
 
@@ -109,5 +110,52 @@ import uk.co.jemos.podam.common.PodamExclude;
     public void setUnidadesDisponibles(Integer unidadesDisponibles) {
         this.unidadesDisponibles = unidadesDisponibles;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    //El equals del video 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final VideoEntity other = (VideoEntity) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.director, other.director)) {
+            return false;
+        }
+        if (!Objects.equals(this.idioma, other.idioma)) {
+            return false;
+        }
+        if (!Objects.equals(this.unidadesDisponibles, other.unidadesDisponibles)) {
+            return false;
+        }
+        if (!Objects.equals(this.subtitulos, other.subtitulos)) {
+            return false;
+        }
+        if (!Objects.equals(this.biblioteca, other.biblioteca)) {
+            return false;
+        }
+        if (!Objects.equals(this.reservas, other.reservas)) {
+            return false;
+        }
+        if (!Objects.equals(this.prestamos, other.prestamos)) {
+            return false;
+        }
+        return true;
+    }
    
+    
  }

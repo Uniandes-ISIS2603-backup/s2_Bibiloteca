@@ -8,12 +8,11 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import org.eclipse.persistence.jpa.config.Cascade;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -168,6 +167,66 @@ public class LibroEntity extends BaseEntity implements Serializable {
 
     public void setReservas(List<ReservaEntity> reservas) {
         this.reservas = reservas;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LibroEntity other = (LibroEntity) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.isbn, other.isbn)) {
+            return false;
+        }
+        if (!Objects.equals(this.autor, other.autor)) {
+            return false;
+        }
+        if (!Objects.equals(this.editorial, other.editorial)) {
+            return false;
+        }
+        if (!Objects.equals(this.edicion, other.edicion)) {
+            return false;
+        }
+        if (!Objects.equals(this.idioma, other.idioma)) {
+            return false;
+        }
+        if (!Objects.equals(this.unidadesDisponibles, other.unidadesDisponibles)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuariosListaEspera, other.usuariosListaEspera)) {
+            return false;
+        }
+        if (!Objects.equals(this.calificacionPromedio, other.calificacionPromedio)) {
+            return false;
+        }
+        if (!Objects.equals(this.comentarios, other.comentarios)) {
+            return false;
+        }
+        if (!Objects.equals(this.biblioteca, other.biblioteca)) {
+            return false;
+        }
+        if (!Objects.equals(this.prestamos, other.prestamos)) {
+            return false;
+        }
+        if (!Objects.equals(this.reservas, other.reservas)) {
+            return false;
+        }
+        return true;
     }
 
     

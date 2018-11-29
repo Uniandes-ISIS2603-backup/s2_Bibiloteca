@@ -56,21 +56,21 @@ public class BibliotecaEntity extends BaseEntity implements Serializable {
      */
     @PodamExclude
     @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = false)
-    private List<LibroEntity> libros = new ArrayList<LibroEntity>();
+    private List<LibroEntity> libros = new ArrayList<>();
     
     /**
      * representa los videos que tiene la biblioteca
      */
     @PodamExclude
     @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = false)
-    private List<VideoEntity> videos = new ArrayList<VideoEntity>();
+    private List<VideoEntity> videos = new ArrayList<>();
     
     /**
      * representa las salas que tiene la biblioteca
      */
     @PodamExclude
     @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = false)
-    private List<SalaEntity> salas = new ArrayList<SalaEntity>();
+    private List<SalaEntity> salas = new ArrayList<>();
 
     
     /**
@@ -78,7 +78,7 @@ public class BibliotecaEntity extends BaseEntity implements Serializable {
      */
     @PodamExclude
     @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.PERSIST, orphanRemoval = false)
-    private List<UsuarioEntity> usuarios = new ArrayList<UsuarioEntity>();
+    private List<UsuarioEntity> usuarios = new ArrayList<>();
   //----------------------------------------------------------
   // METODOS
   //----------------------------------------------------------

@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -32,15 +33,15 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     
     @PodamExclude
     @OneToMany (mappedBy = "usuario" , cascade = CascadeType.PERSIST )
-    private ArrayList<ReservaEntity> reservas; 
+    private List<ReservaEntity> reservas; 
     
     @PodamExclude
     @OneToMany (mappedBy = "usuario" , cascade = CascadeType.PERSIST )
-    private ArrayList<PrestamoEntity> prestamos;
+    private List<PrestamoEntity> prestamos;
     
     @PodamExclude
     @OneToMany(mappedBy = "usuario" , cascade = CascadeType.PERSIST )
-    private ArrayList<ComentarioEntity> comentarios;
+    private List<ComentarioEntity> comentarios;
     
     @PodamExclude
     @ManyToMany(mappedBy = "usuarios")
@@ -52,27 +53,27 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @ManyToOne
     private BibliotecaEntity biblioteca;
-    public ArrayList<ReservaEntity> getReservas() {
+    public List<ReservaEntity> getReservas() {
         return reservas;
     }
 
-    public void setReservas(ArrayList<ReservaEntity> reservas) {
+    public void setReservas(List<ReservaEntity> reservas) {
         this.reservas = reservas;
     }
 
-    public ArrayList<PrestamoEntity> getPrestamos() {
+    public List<PrestamoEntity> getPrestamos() {
         return prestamos;
     }
 
-    public void setPrestamos(ArrayList<PrestamoEntity> prestamos) {
+    public void setPrestamos(List<PrestamoEntity> prestamos) {
         this.prestamos = prestamos;
     }
 
-    public ArrayList<ComentarioEntity> getComentarios() {
+    public List<ComentarioEntity> getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(ArrayList<ComentarioEntity> comentarios) {
+    public void setComentarios(List<ComentarioEntity> comentarios) {
         this.comentarios = comentarios;
     }
     
@@ -119,5 +120,55 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     public void setVideosDigitales(List<VideoDigitalEntity> videosDigitales) {
         this.videoDigitalEntity = videosDigitales;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    //El equals de la clase usuario
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UsuarioEntity other = (UsuarioEntity) obj;
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefono, other.telefono)) {
+            return false;
+        }
+        if (!Objects.equals(this.multa, other.multa)) {
+            return false;
+        }
+        if (!Objects.equals(this.reservas, other.reservas)) {
+            return false;
+        }
+        if (!Objects.equals(this.prestamos, other.prestamos)) {
+            return false;
+        }
+        if (!Objects.equals(this.comentarios, other.comentarios)) {
+            return false;
+        }
+        if (!Objects.equals(this.videoDigitalEntity, other.videoDigitalEntity)) {
+            return false;
+        }
+        if (!Objects.equals(this.biblioteca, other.biblioteca)) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

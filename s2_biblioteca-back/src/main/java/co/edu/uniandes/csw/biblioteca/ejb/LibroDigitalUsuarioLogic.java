@@ -6,6 +6,7 @@ import co.edu.uniandes.csw.biblioteca.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.biblioteca.persistence.LibroDigitalPersistence;
 import co.edu.uniandes.csw.biblioteca.persistence.UsuarioPersistence;
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -22,14 +23,14 @@ public class LibroDigitalUsuarioLogic {
     @Inject
     private UsuarioPersistence up;
     
-    public ArrayList<UsuarioEntity> getUsuarios(Long ldId){
+    public List<UsuarioEntity> getUsuarios(Long ldId){
         return ldp.find(ldId).getUsuarios();
     }
     
     public UsuarioEntity addUsuario(Long uId, Long ldId) throws BusinessLogicException{
         LibroDigitalEntity lde = ldp.find(ldId);
         UsuarioEntity ue = up.find(uId);
-        ArrayList<UsuarioEntity> listUE = getUsuarios(ldId);
+        List<UsuarioEntity> listUE = getUsuarios(ldId);
         for(UsuarioEntity ue2 : listUE){
             if(ue == ue2){
                 throw new BusinessLogicException("El usuario ya esta el la lista");
@@ -40,7 +41,7 @@ public class LibroDigitalUsuarioLogic {
     }
     
     public UsuarioEntity getUsuario(Long ldId,Long uId){
-        ArrayList<UsuarioEntity> listUE = getUsuarios(ldId);
+        List<UsuarioEntity> listUE = getUsuarios(ldId);
         UsuarioEntity ue = up.find(uId);
         int i = listUE.indexOf(ue);
         if(i >= 0){

@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.biblioteca.ejb;
 import co.edu.uniandes.csw.bibilioteca.entities.*;
 import co.edu.uniandes.csw.biblioteca.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -27,12 +28,12 @@ public class VideoReservaLogic {
         return re;
     }
     
-    public ArrayList<ReservaEntity> getReservas(Long videoID){
+    public List<ReservaEntity> getReservas(Long videoID){
         return videoPersis.find(videoID).getReservas();
     }
     
     public ReservaEntity getReserva(Long videoID, Long reservaID){
-        ArrayList<ReservaEntity> listRE = getReservas(videoID);
+        List<ReservaEntity> listRE = getReservas(videoID);
         ReservaEntity re = reservaPersis.find(reservaID);
         int i = listRE.indexOf(re);
         if(i >= 0){

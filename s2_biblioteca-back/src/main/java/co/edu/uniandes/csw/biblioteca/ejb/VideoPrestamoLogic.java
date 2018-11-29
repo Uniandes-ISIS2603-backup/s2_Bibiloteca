@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.biblioteca.ejb;
 import co.edu.uniandes.csw.bibilioteca.entities.*;
 import co.edu.uniandes.csw.biblioteca.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -27,12 +28,12 @@ public class VideoPrestamoLogic {
         return pe;
     }
     
-    public ArrayList<PrestamoEntity> getPrestamos(Long videoID){
+    public List<PrestamoEntity> getPrestamos(Long videoID){
         return videoPersis.find(videoID).getPrestamos();
     }
     
     public PrestamoEntity getPrestamo(Long videoID, Long prestamoID){
-        ArrayList<PrestamoEntity> listPE = getPrestamos(videoID);
+        List<PrestamoEntity> listPE = getPrestamos(videoID);
         PrestamoEntity pe = prestamoPersis.find(prestamoID);
         int i = listPE.indexOf(pe);
         if(i >= 0){

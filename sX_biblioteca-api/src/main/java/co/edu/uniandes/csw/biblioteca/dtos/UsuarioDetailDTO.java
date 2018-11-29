@@ -20,108 +20,107 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  *
  * @author Juan Nicolás García
  */
-public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
-    ArrayList<ComentarioDTO> comentarios;
-    ArrayList<PrestamoDTO> prestamos;
-    ArrayList<ReservaDTO> reservas;
+public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
+
+    private List<ComentarioDTO> comentarios;
+    private List<PrestamoDTO> prestamos;
+    private List<ReservaDTO> reservas;
     private List<VideoDigitalDTO> videosDigitales;
-    public UsuarioDetailDTO(){
+
+    public UsuarioDetailDTO() {
         super();
     }
-    
-    public UsuarioDetailDTO(UsuarioEntity usuario){
+
+    public UsuarioDetailDTO(UsuarioEntity usuario) {
         super(usuario);
-         if (usuario != null) {
+        if (usuario != null) {
             videosDigitales = new ArrayList<>();
             for (VideoDigitalEntity entityVideoDigital : usuario.getVideosDigitales()) {
                 videosDigitales.add(new VideoDigitalDTO(entityVideoDigital));
             }
-        comentarios = new ArrayList<>();
-            for(ComentarioEntity comentario : usuario.getComentarios())
-            {
+            comentarios = new ArrayList<>();
+            for (ComentarioEntity comentario : usuario.getComentarios()) {
                 comentarios.add(new ComentarioDTO(comentario));
             }
-       
+
             prestamos = new ArrayList<>();
-            for(PrestamoEntity prestamo : usuario.getPrestamos())
-            {
+            for (PrestamoEntity prestamo : usuario.getPrestamos()) {
                 prestamos.add(new PrestamoDTO(prestamo));
             }
-       
+
             reservas = new ArrayList<>();
-            for(ReservaEntity reserva : usuario.getReservas())
-            {
+            for (ReservaEntity reserva : usuario.getReservas()) {
                 reservas.add(new ReservaDTO(reserva));
             }
         }
-         }
+    }
 
-    public ArrayList<ComentarioDTO> getComentarios() {
+    public List<ComentarioDTO> getComentarios() {
         return comentarios;
     }
-    public ArrayList<PrestamoDTO> getPrestamos() {
+
+    public List<PrestamoDTO> getPrestamos() {
         return prestamos;
     }
-    public ArrayList<ReservaDTO> getReservas() {
+
+    public List<ReservaDTO> getReservas() {
         return reservas;
     }
-public void setComentarios(ArrayList<ComentarioDTO> comentarios) {
+
+    public void setComentarios(List<ComentarioDTO> comentarios) {
         this.comentarios = comentarios;
     }
-    public void setPrestamos(ArrayList<PrestamoDTO> prestamos) {
+
+    public void setPrestamos(List<PrestamoDTO> prestamos) {
         this.prestamos = prestamos;
     }
-    public void setReservas(ArrayList<ReservaDTO> reservas) {
+
+    public void setReservas(List<ReservaDTO> reservas) {
         this.reservas = reservas;
     }
-     public List<VideoDigitalDTO> getVideosDigitales() {
+
+    public List<VideoDigitalDTO> getVideosDigitales() {
         return videosDigitales;
     }
 
-   
     public void setVideosDigitales(List<VideoDigitalDTO> videosDigitales) {
         this.videosDigitales = videosDigitales;
     }
+
     @Override
-    public UsuarioEntity toEntity()
-    {
+    public UsuarioEntity toEntity() {
         UsuarioEntity usuarioEntity = super.toEntity();
-      if (videosDigitales != null) {
+        if (videosDigitales != null) {
             List<VideoDigitalEntity> videosDigitalesEntity = new ArrayList<>();
             for (VideoDigitalDTO dtoVideoDigital : videosDigitales) {
                 videosDigitalesEntity.add(dtoVideoDigital.toEntity());
             }
             usuarioEntity.setVideosDigitales(videosDigitalesEntity);
         }
-        if(comentarios != null)
-        {
-            ArrayList<ComentarioEntity> comentariosEntity = new ArrayList<>();
-            for(ComentarioDTO comentarioDto : comentarios)
-            {
+        if (comentarios != null) {
+            List<ComentarioEntity> comentariosEntity = new ArrayList<>();
+            for (ComentarioDTO comentarioDto : comentarios) {
                 comentariosEntity.add(comentarioDto.toEntity());
             }
             usuarioEntity.setComentarios(comentariosEntity);
         }
-	if(prestamos != null)
-        {
-            ArrayList<PrestamoEntity> prestamosEntity = new ArrayList<>();
-            for(PrestamoDTO prestamoDto : prestamos)
-            {
+        if (prestamos != null) {
+            List<PrestamoEntity> prestamosEntity = new ArrayList<>();
+            for (PrestamoDTO prestamoDto : prestamos) {
                 prestamosEntity.add(prestamoDto.toEntity());
             }
             usuarioEntity.setPrestamos(prestamosEntity);
         }
-	if(reservas != null)
-        {
-            ArrayList<ReservaEntity> reservasEntity = new ArrayList<>();
-            for(ReservaDTO reservaDto : reservas)
-            {
+        if (reservas != null) {
+            List<ReservaEntity> reservasEntity = new ArrayList<>();
+            for (ReservaDTO reservaDto : reservas) {
                 reservasEntity.add(reservaDto.toEntity());
             }
             usuarioEntity.setReservas(reservasEntity);
         }
         return usuarioEntity;
     }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

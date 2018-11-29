@@ -7,9 +7,10 @@ package co.edu.uniandes.csw.bibilioteca.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -119,18 +120,7 @@ public class PrestamoEntity extends BaseEntity implements Serializable
      */
     public void setTipoRecurso(String tipoRecurso) 
     {
-        /*
-        if(tipoRecurso.equals("LIBRO") || tipoRecurso.equals("VIDEO")|| tipoRecurso.equals("SALA")|| tipoRecurso.equals("VIDEODIGITAL")|| tipoRecurso.equals("LIBRODIGITAL"))
-        {
-            */
-            this.tipoRecurso = tipoRecurso;
-       
-        /*
-        else
-        {
-             this.tipoRecurso = "";
-        }
-        */
+        this.tipoRecurso = tipoRecurso;
     }
     
     
@@ -144,6 +134,7 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     }
     /**
      * Método que modifica el usuario del prestamo
+     * @param usuario
      */
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
@@ -253,5 +244,55 @@ public class PrestamoEntity extends BaseEntity implements Serializable
     public void setSala(SalaEntity pSala) {
         this.sala = pSala;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    //El equals del prestamo
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PrestamoEntity other = (PrestamoEntity) obj;
+        if (this.retornado != other.retornado) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoRecurso, other.tipoRecurso)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaDeSalida, other.fechaDeSalida)) {
+            return false;
+        }
+        if (!Objects.equals(this.fechaDeEntrega, other.fechaDeEntrega)) {
+            return false;
+        }
+        if (!Objects.equals(this.usuario, other.usuario)) {
+            return false;
+        }
+        if (!Objects.equals(this.libro, other.libro)) {
+            return false;
+        }
+        if (!Objects.equals(this.video, other.video)) {
+            return false;
+        }
+        if (!Objects.equals(this.sala, other.sala)) {
+            return false;
+        }
+        if (!Objects.equals(this.idRecursoPrestado, other.idRecursoPrestado)) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }
