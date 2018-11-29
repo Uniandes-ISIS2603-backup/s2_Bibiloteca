@@ -70,6 +70,5 @@ public class VideoLogic {
     
     public void deleteVideo(Long videoID) throws BusinessLogicException{
         videoPersis.delete(videoID);
-    }
-    
+    }    
 }
