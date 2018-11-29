@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.biblioteca.dtos;
 import co.edu.uniandes.csw.bibilioteca.entities.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -10,8 +11,8 @@ import java.util.ArrayList;
  */
 public class VideoDetailDTO extends VideoDTO implements Serializable {
     
-    ArrayList<ReservaDTO> reservas;
-    ArrayList<PrestamoDTO> prestamos;
+    private List<ReservaDTO> reservas;
+    private List<PrestamoDTO> prestamos;
     
     public VideoDetailDTO(){
         super();
@@ -53,19 +54,19 @@ public class VideoDetailDTO extends VideoDTO implements Serializable {
         return ve;
     }
     
-    public ArrayList<ReservaDTO> getReservas(){
+    public List<ReservaDTO> getReservas(){
         return reservas;
     }
     
-    public ArrayList<PrestamoDTO> getPrestamos(){
+    public List<PrestamoDTO> getPrestamos(){
         return prestamos;
     }
     
-    public void setReservas(ArrayList<ReservaDTO> listRE){
+    public void setReservas(List<ReservaDTO> listRE){
         reservas = listRE;
     }
     
-    public void setPrestamos(ArrayList<PrestamoDTO> listPE){
+    public void setPrestamos(List<PrestamoDTO> listPE){
         prestamos = listPE;
     }
     

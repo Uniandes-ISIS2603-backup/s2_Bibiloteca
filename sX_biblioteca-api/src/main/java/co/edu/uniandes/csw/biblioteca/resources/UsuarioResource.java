@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.biblioteca.resources;
+
 import co.edu.uniandes.csw.bibilioteca.entities.UsuarioEntity;
 import co.edu.uniandes.csw.biblioteca.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.biblioteca.dtos.UsuarioDetailDTO;
@@ -19,6 +20,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+
 /**
  *
  * @author Juan Nicolás García
@@ -28,10 +30,12 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class UsuarioResource {
-   @Inject
+
+    @Inject
     private UsuarioLogic usuarioLogica;
-   
-   
+
+    private static final String RUTA = "El recurso /usuarios/";
+    private static final String NO_EXISTE = " no existe.";
 
     /**
      *
@@ -41,8 +45,8 @@ public class UsuarioResource {
      */
     @POST
     public UsuarioDTO createUsuario(UsuarioDTO usuario) throws BusinessLogicException {
-        UsuarioDTO usuarioDTO = new UsuarioDTO(usuarioLogica.createUsuario(usuario.toEntity()));
-        return usuarioDTO;
+        return new UsuarioDTO(usuarioLogica.createUsuario(usuario.toEntity()));
+
     }
 
     /**
@@ -52,48 +56,52 @@ public class UsuarioResource {
      */
     @GET
     @Path("{usuariosId: \\d+}")
-    public UsuarioDetailDTO getUsuario(@PathParam("usuariosId") Long usuariosId) throws BusinessLogicException {
+    public UsuarioDetailDTO getUsuario(@PathParam("usuariosId") Long usuariosId) {
         UsuarioEntity usuarioEntity = usuarioLogica.getUsuario(usuariosId);
         if (usuarioEntity == null) {
-            throw new WebApplicationException("El recurso /usuarios/" +usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + usuariosId + NO_EXISTE, 404);
         }
         UsuarioDetailDTO usuarioDetailDTO = new UsuarioDetailDTO(usuarioEntity);
         return usuarioDetailDTO;
     }
-        @GET
-    public List<UsuarioDetailDTO> getUsuarios() throws BusinessLogicException {
-        List<UsuarioDetailDTO> listaUsuarios = listEntity2DetailDTO(usuarioLogica.getUsuarios());
-        return listaUsuarios;
+
+    @GET
+    public List<UsuarioDetailDTO> getUsuarios() {
+        return listEntity2DetailDTO(usuarioLogica.getUsuarios());
+
     }
 
     @PUT
     @Path("{usuariosId: \\d+}")
-    public UsuarioDetailDTO updateUsuario(@PathParam("usuariosId") Long usuariosId, UsuarioDTO usuario) throws BusinessLogicException {
+    public UsuarioDetailDTO updateUsuario(@PathParam("usuariosId") Long usuariosId, UsuarioDTO usuario) {
         usuario.setId(usuariosId);
         UsuarioEntity usuarioEntity = usuarioLogica.getUsuario(usuariosId);
         if (usuarioEntity == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + usuariosId + NO_EXISTE, 404);
         }
-        UsuarioDetailDTO usuarioResp = new UsuarioDetailDTO(usuarioLogica.updateUsuario(usuariosId, usuario.toEntity()));
-        return usuarioResp;
+        return new UsuarioDetailDTO(usuarioLogica.updateUsuario(usuariosId, usuario.toEntity()));
+
     }
+
     @DELETE
     @Path("{usuariosId: \\d+}")
-    public void deleteUsuario(@PathParam("usuariosId") Long usuariosId) throws BusinessLogicException {
+    public void deleteUsuario(@PathParam("usuariosId") Long usuariosId) {
         UsuarioEntity entity = usuarioLogica.getUsuario(usuariosId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + usuariosId + NO_EXISTE, 404);
         }
         usuarioLogica.deleteUsuario(usuariosId);
     }
+
     @Path("{usuariosId: \\d+}/videosdigitales")
     public Class<UsuarioVideoDigitalResource> getUsuarioVideosDiggitalesResource(@PathParam("usuariosId") Long usuariosId) {
         if (usuarioLogica.getUsuario(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + usuariosId + NO_EXISTE, 404);
         }
         return UsuarioVideoDigitalResource.class;
     }
-   private List<UsuarioDetailDTO> listEntity2DetailDTO(List<UsuarioEntity> lista) {
+
+    private List<UsuarioDetailDTO> listEntity2DetailDTO(List<UsuarioEntity> lista) {
         List<UsuarioDetailDTO> resp = new ArrayList<>();
         for (UsuarioEntity entity : lista) {
             resp.add(new UsuarioDetailDTO(entity));

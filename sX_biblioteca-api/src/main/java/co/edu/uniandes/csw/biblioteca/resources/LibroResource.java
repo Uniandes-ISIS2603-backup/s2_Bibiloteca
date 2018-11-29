@@ -34,6 +34,8 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class LibroResource {
 
+    private static final String RUTA = "El recurso /libros/";
+    private static final String NO_EXISTE = " no existe.";
     @Inject
     private LibroLogic libroLogica;
 
@@ -45,8 +47,8 @@ public class LibroResource {
      */
     @POST
     public LibroDTO createLibro(LibroDTO libro) throws BusinessLogicException {
-        LibroDTO nuevoLibroDTO = new LibroDTO(libroLogica.createLibro(libro.toEntity()));
-        return nuevoLibroDTO;
+        return new LibroDTO(libroLogica.createLibro(libro.toEntity()));
+
     }
 
     /**
@@ -56,19 +58,19 @@ public class LibroResource {
      */
     @GET
     @Path("{librosId: \\d+}")
-    public LibroDetailDTO getLibro(@PathParam("librosId") Long librosId) throws BusinessLogicException {
+    public LibroDetailDTO getLibro(@PathParam("librosId") Long librosId) {
         LibroEntity libroEntity = libroLogica.getLibro(librosId);
         if (libroEntity == null) {
-            throw new WebApplicationException("El recurso /libros/" + librosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + librosId + NO_EXISTE, 404);
         }
-        LibroDetailDTO libroDetailDTO = new LibroDetailDTO(libroEntity);
-        return libroDetailDTO;
+        return new LibroDetailDTO(libroEntity);
+
     }
 
     @GET
-    public List<LibroDetailDTO> getLibros() throws BusinessLogicException {
-        List<LibroDetailDTO> listaLibros = listEntity2DetailDTO(libroLogica.getLibros());
-        return listaLibros;
+    public List<LibroDetailDTO> getLibros() {
+        return listEntity2DetailDTO(libroLogica.getLibros());
+
     }
 
     @PUT
@@ -77,18 +79,18 @@ public class LibroResource {
         libro.setId(librosId);
         LibroEntity libroEntity = libroLogica.getLibro(librosId);
         if (libroEntity == null) {
-            throw new WebApplicationException("El recurso /libros/" + librosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + librosId + NO_EXISTE, 404);
         }
-        LibroDetailDTO libroResp = new LibroDetailDTO(libroLogica.updateLibro(libro.toEntity(), librosId));
-        return libroResp;
+        return new LibroDetailDTO(libroLogica.updateLibro(libro.toEntity(), librosId));
+
     }
 
     @DELETE
     @Path("{librosId: \\d+}")
-    public void deleteLibro(@PathParam("librosId") Long librosId) throws BusinessLogicException {
+    public void deleteLibro(@PathParam("librosId") Long librosId) {
         LibroEntity entity = libroLogica.getLibro(librosId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /libros/" + librosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + librosId + NO_EXISTE, 404);
         }
         libroLogica.deleteLibro(librosId);
     }

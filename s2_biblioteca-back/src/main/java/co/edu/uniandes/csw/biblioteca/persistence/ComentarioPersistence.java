@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -38,7 +37,7 @@ public class ComentarioPersistence {
     
     public ComentarioEntity find (Long libroId,Long comentarioId)
     {
-        LOGGER.log(Level.INFO,"Consultando comentario con id={0} del libro con id = "+libroId,comentarioId);
+        LOGGER.log(Level.INFO,"Consultando comentario con id={0} del libro",comentarioId);
         TypedQuery q = em.createQuery("select p from ComentarioEntity p where (p.libro.id = :libroId) and (p.id = :comentarioId)", ComentarioEntity.class);
         q.setParameter("libroId", libroId);
         q.setParameter("comentarioId", comentarioId);
@@ -56,7 +55,7 @@ public class ComentarioPersistence {
         {
             comentario = resultado.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar el comentario con id = {0} del libro con id =" + libroId  , comentarioId);
+        LOGGER.log(Level.INFO, "Saliendo de consultar el comentario con id = {0} del libro"  , comentarioId);
         return comentario;
     }
     
@@ -76,7 +75,7 @@ public class ComentarioPersistence {
     
         public ComentarioEntity findUsuario (Long usuarioId,Long comentarioId)
     {
-        LOGGER.log(Level.INFO,"Consultando comentario con id={0} del usuario con id = "+usuarioId,comentarioId);
+        LOGGER.log(Level.INFO,"Consultando comentario con id={0} del usuario" ,comentarioId);
         TypedQuery q = em.createQuery("select p from ComentarioEntity p where (p.usuario.id = :usuarioId) and (p.id = :comentarioId)", ComentarioEntity.class);
         q.setParameter("usuarioId", usuarioId);
         q.setParameter("comentarioId", comentarioId);
@@ -94,7 +93,7 @@ public class ComentarioPersistence {
         {
             comentario = resultado.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar el comentario con id = {0} del usuario con id =" + usuarioId  , comentarioId);
+        LOGGER.log(Level.INFO, "Saliendo de consultar el comentario con id = {0} del usuario "  , comentarioId);
         return comentario;
     }
     

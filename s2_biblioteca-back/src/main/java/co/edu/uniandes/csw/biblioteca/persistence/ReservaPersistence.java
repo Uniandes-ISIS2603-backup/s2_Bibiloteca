@@ -119,7 +119,7 @@ public class ReservaPersistence {
      */
     public ReservaEntity findByDate(Date pFechaReserva)
     {
-       // LOGGER.log(Level.INFO, "Consultando reserva por fecha ", pFechaReserva);
+       
         TypedQuery query = entityManager.createQuery("Select e From ReservaEntity e where e.fechaReserva = :pFechaReserva", ReservaEntity.class);
         query = query.setParameter("pFechaReserva", pFechaReserva);
         List<ReservaEntity> sameDate = query.getResultList();
@@ -136,7 +136,7 @@ public class ReservaPersistence {
         {
             result = sameDate.get(0);
         }
-       // LOGGER.log(Level.INFO, "Saliendo de consultar reserva por fecha ", pFechaReserva);
+       
         return result;
     }
     
@@ -150,21 +150,12 @@ public class ReservaPersistence {
      */
     public ReservaEntity findByIdRecursoReservado(long pId,String pTipo  )
     {
-        LOGGER.log(Level.INFO, "Consultando reserva por id del recurso reservado ", pId);
+        LOGGER.log(Level.INFO, "Consultando reserva por id del recurso reservado = {0}", pId);
         TypedQuery query = entityManager.createQuery("Select e From ReservaEntity e where e.idRecursoReservado = :pId", ReservaEntity.class);
         query = query.setParameter("pId", pId);
         List<ReservaEntity> sameId = query.getResultList();
         ReservaEntity result = null;
-        
-        if (sameId == null) 
-        {
-            result = null;
-        } 
-        else if (sameId.isEmpty()) 
-        {
-            result = null;
-        } 
-        else 
+        if(!sameId.isEmpty() || sameId != null) 
         {
             boolean termine = false;
             int cont = 0;
@@ -188,7 +179,7 @@ public class ReservaPersistence {
             }
         }
 
-        LOGGER.log(Level.INFO, "Saliendo de consultar reserva por id de recurso ", pId);
+        LOGGER.log(Level.INFO, "Saliendo de consultar reserva por id de recurso = {0} ", pId);
         return result;
     }
     

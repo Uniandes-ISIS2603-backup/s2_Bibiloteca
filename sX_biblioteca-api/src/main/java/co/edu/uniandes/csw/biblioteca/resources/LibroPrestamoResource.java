@@ -30,7 +30,9 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class LibroPrestamoResource {
-     
+    
+    private static final String RUTA = "El recurso /prestamos/";
+    private static final String NO_EXISTE = " no existe.";
     @Inject
     private LibroPrestamoLogic libroPrestamo;
     
@@ -43,17 +45,17 @@ public class LibroPrestamoResource {
     {
         if(prestamoLogic.getPrestamo(prestamosId)==null)
         {
-            throw new WebApplicationException("El recurso /prestamos/" + prestamosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + prestamosId + NO_EXISTE, 404);
         }
-        PrestamoDTO resp = new PrestamoDTO(libroPrestamo.addPrestamo(librosId, prestamosId));
-        return resp;
+        return new PrestamoDTO(libroPrestamo.addPrestamo(librosId, prestamosId));
+        
     }
     
     @GET
     public List<PrestamoDTO> getPrestamos(@PathParam("librosId") Long librosId) throws BusinessLogicException
     {
-        List<PrestamoDTO> lista = prestamoListEntity2DTO(libroPrestamo.getPrestamos(librosId));
-        return lista; 
+        return prestamoListEntity2DTO(libroPrestamo.getPrestamos(librosId));
+        
     }
     
     @GET
@@ -62,10 +64,10 @@ public class LibroPrestamoResource {
     {
         if(prestamoLogic.getPrestamo(prestamosId)==null)
         {
-            throw new WebApplicationException("El recurso /prestamos/" + prestamosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + prestamosId + NO_EXISTE, 404);
         }
-        PrestamoDTO prestamo = new PrestamoDTO(libroPrestamo.getPrestamo(librosId, prestamosId));
-        return prestamo;
+        return new PrestamoDTO(libroPrestamo.getPrestamo(librosId, prestamosId));
+        
     }
     
     @DELETE
@@ -74,7 +76,7 @@ public class LibroPrestamoResource {
     {
         if(prestamoLogic.getPrestamo(prestamosId)==null)
         {
-            throw new WebApplicationException("El recurso /prestamos/" + prestamosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + prestamosId + NO_EXISTE, 404);
         }
         libroPrestamo.deletePrestamo(librosId, prestamosId);
     }
@@ -90,13 +92,5 @@ public class LibroPrestamoResource {
         }
         return resp;
     }
-    private List<PrestamoEntity> prestamoListDTO2Entity(List<PrestamoDTO> lista)
-    {
-        List<PrestamoEntity> resp = new ArrayList<>();
-        for(PrestamoDTO prestamo : lista)
-        {
-            resp.add(prestamo.toEntity());
-        }
-        return resp;
-    }   
+
 }

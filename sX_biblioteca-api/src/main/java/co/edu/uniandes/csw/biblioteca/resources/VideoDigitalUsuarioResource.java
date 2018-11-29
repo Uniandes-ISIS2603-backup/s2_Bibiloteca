@@ -26,14 +26,17 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 
 /**
- *Clase que implementa el recurso "videosdigitales/{id}/usuarios".
+ * Clase que implementa el recurso "videosdigitales/{id}/usuarios".
+ *
  * @author Juan Bautista
  */
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class VideoDigitalUsuarioResource 
-{
-        private static final Logger LOGGER = Logger.getLogger(VideoDigitalUsuarioResource.class.getName());
+public class VideoDigitalUsuarioResource {
+
+    private static final Logger LOGGER = Logger.getLogger(VideoDigitalUsuarioResource.class.getName());
+    private static final String RUTA = "El recurso /usuarios/";
+    private static final String NO_EXISTE = " no existe.";
 
     @Inject
     private VideoDigitalUsuarioLogic videoDigitalUsuarioLogic;
@@ -45,7 +48,8 @@ public class VideoDigitalUsuarioResource
      * Asocia un usuario existente con un videoDigital existente
      *
      * @param usuariosId El ID del usuario que se va a asociar
-     * @param videoDigitalid El ID del videoDigital al cual se le va a asociar el usuario
+     * @param videoDigitalid El ID del videoDigital al cual se le va a asociar
+     * el usuario
      * @return JSON {@link UsuarioDetailDTO} - El usuario asociado.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el usuario.
@@ -55,26 +59,27 @@ public class VideoDigitalUsuarioResource
     public UsuarioDetailDTO addUsuario(@PathParam("videosdigitalesid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource addUsuario: input: videodigitalid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + usuariosId + NO_EXISTE, 404);
         }
         UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(videoDigitalUsuarioLogic.addUsuario(videodigitalid, usuariosId));
-        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource addUsuario: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource addUsuario: output: {0}", detailDTO);
         return detailDTO;
     }
 
     /**
      * Busca y devuelve todos los usuarios que existen en un videoDigital.
      *
-     * @param videodigitalid El ID del videoDigital del cual se buscan los usuarioes
-     * @return JSONArray {@link UsuarioDetailDTO} - Los usuarioes encontrados en el
-     * videoDigital. Si no hay ninguno retorna una lista vacía.
+     * @param videodigitalid El ID del videoDigital del cual se buscan los
+     * usuarioes
+     * @return JSONArray {@link UsuarioDetailDTO} - Los usuarioes encontrados en
+     * el videoDigital. Si no hay ninguno retorna una lista vacía.
      */
     @GET
-    
+
     public List<UsuarioDetailDTO> getUsuarios(@PathParam("videosdigitalesid") Long videodigitalid) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuarios: input: {0}", videodigitalid);
         List<UsuarioDetailDTO> lista = usuariosListEntity2DTO(videoDigitalUsuarioLogic.getUsuarios(videodigitalid));
-        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuarios: output: {0}", lista.toString());
+        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuarios: output: {0}", lista);
         return lista;
     }
 
@@ -84,7 +89,8 @@ public class VideoDigitalUsuarioResource
      *
      * @param usuariosId El ID del usuario que se busca
      * @param videodigitalid El ID del videoDigital del cual se busca el usuario
-     * @return {@link UsuarioDetailDTO} - El usuario encontrado en el videoDigital.
+     * @return {@link UsuarioDetailDTO} - El usuario encontrado en el
+     * videoDigital.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
      * Error de lógica que se genera cuando no se encuentra el usuario.
      */
@@ -93,42 +99,44 @@ public class VideoDigitalUsuarioResource
     public UsuarioDetailDTO getUsuario(@PathParam("videosdigitalesid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuario: input: videosdigitalesid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + usuariosId + NO_EXISTE, 404);
         }
         UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(videoDigitalUsuarioLogic.getUsuario(videodigitalid, usuariosId));
-        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuario: output: {0}", detailDTO.toString());
+        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource getUsuario: output: {0}", detailDTO);
         return detailDTO;
     }
 
     /**
-     * Actualiza la lista de usuarios de un videoDigital con la lista que se recibe en
-     * el cuerpo.
+     * Actualiza la lista de usuarios de un videoDigital con la lista que se
+     * recibe en el cuerpo.
      *
-     * @param videodigitalid El ID del videoDigital al cual se le va a asociar la lista de
-     * usuarioes
-     * @param usuarios JSONArray {@link UsuarioDetailDTO} - La lista de usuarioes
-     * que se desea guardar.
+     * @param videodigitalid El ID del videoDigital al cual se le va a asociar
+     * la lista de usuarioes
+     * @param usuarios JSONArray {@link UsuarioDetailDTO} - La lista de
+     * usuarioes que se desea guardar.
      * @return JSONArray {@link UsuarioDetailDTO} - La lista actualizada.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
      * Error de lógica que se genera cuando no se encuentra el usuario.
      */
     @PUT
     public List<UsuarioDetailDTO> replaceUsuarios(@PathParam("videosdigitalesid") Long videodigitalid, List<UsuarioDetailDTO> usuarios) {
-        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource replaceUsuarios: input: videodigitalid {0} , usuarios {1}", new Object[]{videodigitalid, usuarios.toString()});
+        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource replaceUsuarios: input: videodigitalid {0} , usuarios {1}", new Object[]{videodigitalid, usuarios});
         for (UsuarioDetailDTO usuario : usuarios) {
             if (usuarioLogic.getUsuario(usuario.getId()) == null) {
-                throw new WebApplicationException("El recurso /usuarios/" + usuario.getId() + " no existe.", 404);
+                throw new WebApplicationException(RUTA + usuario.getId() + NO_EXISTE, 404);
             }
         }
         List<UsuarioDetailDTO> lista = usuariosListEntity2DTO(videoDigitalUsuarioLogic.replaceUsuarios(videodigitalid, usuariosListDTO2Entity(usuarios)));
-        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource replaceUsuarios: output:{0}", lista.toString());
+        LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource replaceUsuarios: output:{0}", lista);
         return lista;
     }
 
     /**
-     * Elimina la conexión entre el usuario y el videoDigital recibidos en la URL.
+     * Elimina la conexión entre el usuario y el videoDigital recibidos en la
+     * URL.
      *
-     * @param videodigitalid El ID del videoDigital al cual se le va a desasociar el usuario
+     * @param videodigitalid El ID del videoDigital al cual se le va a
+     * desasociar el usuario
      * @param usuariosId El ID del usuario que se desasocia
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
      * Error de lógica que se genera cuando no se encuentra el usuario.
@@ -138,7 +146,7 @@ public class VideoDigitalUsuarioResource
     public void removeUsuario(@PathParam("videosdigitalesid") Long videodigitalid, @PathParam("usuariosId") Long usuariosId) {
         LOGGER.log(Level.INFO, "VideoDigitalUsuarioResource removeUsuario: input: videodigitalid {0} , usuariosId {1}", new Object[]{videodigitalid, usuariosId});
         if (usuarioLogic.getUsuario(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+            throw new WebApplicationException(RUTA + usuariosId + NO_EXISTE, 404);
         }
         videoDigitalUsuarioLogic.removeUsuario(videodigitalid, usuariosId);
         LOGGER.info("VideoDigitalUsuarioResource removeUsuario: output: void");
@@ -172,6 +180,4 @@ public class VideoDigitalUsuarioResource
         return list;
     }
 
-  
 }
-

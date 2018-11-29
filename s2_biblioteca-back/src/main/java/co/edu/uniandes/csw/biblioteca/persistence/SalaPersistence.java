@@ -41,7 +41,7 @@ public class SalaPersistence {
     }
 
     public SalaEntity find(Long bibliotecaId, Long salaId) {
-        LOGGER.log(Level.INFO, "Consultando sala con id={0} de la biblioteca con id = " + bibliotecaId, salaId);
+        LOGGER.log(Level.INFO, "Consultando sala con id={0} de la biblioteca", salaId);
         TypedQuery q = em.createQuery("select p from SalaEntity p where (p.biblioteca.id = :bibliotecaId) and (p.id = :salaId)", SalaEntity.class);
         q.setParameter("bibliotecaId", bibliotecaId);
         q.setParameter("salaId", salaId);
@@ -54,7 +54,7 @@ public class SalaPersistence {
         } else {
             sala = resultado.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar la sala con id = {0} de la biblioteca con id =" + bibliotecaId, salaId);
+        LOGGER.log(Level.INFO, "Saliendo de consultar la sala con id = {0} de la biblioteca ", salaId);
         return sala;
     }
 
@@ -70,7 +70,7 @@ public class SalaPersistence {
     }
 
     public SalaEntity findUbicacion(String ubicacion) {
-        LOGGER.log(Level.INFO, "Consultando salas con la ubicacion", ubicacion);
+        LOGGER.log(Level.INFO, "Consultando salas con la ubicacion = {0}", ubicacion);
 
         TypedQuery query = em.createQuery("Select e From SalaEntity e where e.ubicacion = :ubicacion", SalaEntity.class);
 

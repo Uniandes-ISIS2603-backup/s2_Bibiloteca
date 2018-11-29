@@ -51,7 +51,7 @@ import javax.persistence.TypedQuery;
     }
       public VideoDigitalEntity findNombre(String nombre)
     {
-        LOGGER.log(Level.INFO,"Consultando videos digitales con el nombre",nombre);
+        LOGGER.log(Level.INFO,"Consultando videos digitales con el nombre = {0}",nombre);
         
         TypedQuery query = eman.createQuery("Select e From VideoDigitalEntity e where e.nombre = :nombre", VideoDigitalEntity.class);
         
@@ -73,7 +73,7 @@ import javax.persistence.TypedQuery;
         {
             resultado = videosDigitalesConMismoNombre.get(0);
         }
-        LOGGER.log(Level.INFO,"Saliendo de consultar videos digitales por nombre ", nombre);
+        LOGGER.log(Level.INFO,"Saliendo de consultar videos digitales por nombre = {0} ", nombre);
         return resultado;
     }
       public VideoDigitalEntity update(VideoDigitalEntity videoDigitalEntity)

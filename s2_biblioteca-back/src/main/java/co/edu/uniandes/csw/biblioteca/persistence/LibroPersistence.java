@@ -64,7 +64,7 @@ public class LibroPersistence {
     
     public LibroEntity findISBN(String isbn)
     {
-        LOGGER.log(Level.INFO,"Consultando libros con el ISBN",isbn);
+        LOGGER.log(Level.INFO,"Consultando libros con el ISBN = {0}",isbn);
         
         TypedQuery query = em.createQuery("Select e From LibroEntity e where e.isbn = :isbn", LibroEntity.class);
         
@@ -86,7 +86,7 @@ public class LibroPersistence {
         {
             result = librosConMismoISBN.get(0);
         }
-        LOGGER.log(Level.INFO,"Saliendo de consultar libros por isbn ", isbn);
+        LOGGER.log(Level.INFO,"Saliendo de consultar libros por isbn = {0}", isbn);
         return result;
     }
 }

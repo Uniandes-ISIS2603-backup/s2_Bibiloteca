@@ -117,7 +117,7 @@ public class LibroDigitalPersistence {
      */
     public LibroDigitalEntity findByServiceName(String pNombreLibroDigital)
     {
-        LOGGER.log(Level.INFO, "Consultando LibroDigital por nombre ", pNombreLibroDigital);
+        LOGGER.log(Level.INFO, "Consultando LibroDigital por nombre = {0}", pNombreLibroDigital);
         TypedQuery query ;
         query = entityManager.createQuery("Select e From LibroDigitalEntity e where e.nombre = :pNombreServicio", LibroDigitalEntity.class);
         query = query.setParameter("pNombreServicio", pNombreLibroDigital);
@@ -135,7 +135,7 @@ public class LibroDigitalPersistence {
         {
             result = sameName.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar el LibroDigital por nombre ", pNombreLibroDigital);
+        LOGGER.log(Level.INFO, "Saliendo de consultar el LibroDigital por nombre = {0}", pNombreLibroDigital);
         return result;
     }
     

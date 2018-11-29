@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -57,7 +56,7 @@ public class UsuarioPersistence {
     }
      public UsuarioEntity findNombre(String nombre)
     {
-        LOGGER.log(Level.INFO,"Consultando usuarios con el nombre",nombre);
+        LOGGER.log(Level.INFO,"Consultando usuarios con el nombre = {0}",nombre);
         
         TypedQuery query = em.createQuery("Select e From UsuarioEntity e where e.nombre = :nombre", UsuarioEntity.class);
         
@@ -79,7 +78,7 @@ public class UsuarioPersistence {
         {
             result = usuariosConNombre.get(0);
         }
-        LOGGER.log(Level.INFO,"Saliendo de consultar usuarios por nombre ", nombre);
+        LOGGER.log(Level.INFO,"Saliendo de consultar usuarios por nombre = {0} ", nombre);
         return result;
     }
 }
