@@ -42,7 +42,7 @@ public class ReservaResource {
     /**
      * constante utilizada para dejar huella y registro
      */
-    private static final Logger LOGGER = Logger.getLogger(ServicioResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ReservaResource.class.getName());
     
     //__________________________________________________________________________
     // Atributo
